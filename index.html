@@ -3,1593 +3,918 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stoisch Denken – Dein Guide zum guten Leben</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Stoisch Denken</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* =========================================
-     CSS VARIABLES & RESET
-  ========================================= */
-  :root {
-    --bg-primary: #070b14;
-    --bg-secondary: #0d1424;
-    --bg-card: #111827;
-    --bg-card-hover: #162035;
-    --accent-gold: #d4a843;
-    --accent-gold-light: #f0c96a;
-    --accent-purple: #8b5cf6;
-    --accent-purple-light: #a78bfa;
-    --accent-teal: #14b8a6;
-    --accent-teal-light: #2dd4bf;
-    --text-primary: #f0ece3;
-    --text-secondary: #9aa0b4;
-    --text-muted: #5a6278;
-    --border: rgba(255,255,255,0.06);
-    --border-accent: rgba(212,168,67,0.3);
-    --shadow-gold: 0 0 40px rgba(212,168,67,0.15);
-    --shadow-card: 0 8px 32px rgba(0,0,0,0.4);
-    --radius: 16px;
-    --radius-sm: 10px;
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Outfit', sans-serif;
-  }
+:root {
+  --bg: #06080f;
+  --card: #0f1520;
+  --card2: #141d2e;
+  --border: rgba(255,255,255,0.07);
+  --r: 14px;
+  --font-d: 'Cormorant Garamond', serif;
+  --font-b: 'Outfit', sans-serif;
+  --txt: #edeae0;
+  --txt2: #8e96ae;
+  --txt3: #4a5270;
+  --gold: #d4a843; --gold2: #f0c96a; --gold-bg: rgba(212,168,67,0.07);
+  --purple: #8b5cf6; --purple2: #c4b5fd; --purple-bg: rgba(139,92,246,0.07);
+  --teal: #0ea5e9; --teal2: #7dd3fc; --teal-bg: rgba(14,165,233,0.07);
+  --green: #10b981; --green2: #6ee7b7; --green-bg: rgba(16,185,129,0.07);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--font-b);overflow-x:hidden;min-height:100vh}
+#cv{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.45}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ─── TOP NAV ─── */
+#topnav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:rgba(6,8,15,0.94);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:stretch;
+  height:64px;
+  padding:0 10px;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:8px;
+  padding:0 18px 0 10px;
+  font-family:var(--font-d);font-size:16px;color:var(--gold);
+  border-right:1px solid var(--border);
+  white-space:nowrap;flex-shrink:0;letter-spacing:.02em;
+}
+.nav-logo .nl-icon{font-size:20px}
+.nav-tabs{display:flex;flex:1;align-items:stretch;gap:3px;padding:8px 6px}
+.nav-tab{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;border:none;background:none;cursor:pointer;
+  border-radius:10px;padding:5px 8px;
+  color:var(--txt3);font-family:var(--font-b);
+  transition:all .22s;position:relative;min-width:64px;
+  border:1px solid transparent;
+}
+.nav-tab .ti{font-size:18px;line-height:1;transition:transform .2s}
+.nav-tab .tl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;line-height:1}
+.nav-tab .td{position:absolute;bottom:5px;width:4px;height:4px;border-radius:50%;opacity:0;transition:opacity .2s}
 
-  html { scroll-behavior: smooth; }
+/* Active state */
+.nav-tab.act-learn  {background:var(--gold-bg);color:var(--gold);border-color:rgba(212,168,67,.22)}
+.nav-tab.act-learn  .ti{transform:scale(1.15)}
+.nav-tab.act-learn  .td{background:var(--gold);opacity:1}
+.nav-tab.act-practice{background:var(--purple-bg);color:var(--purple2);border-color:rgba(139,92,246,.22)}
+.nav-tab.act-practice .ti{transform:scale(1.15)}
+.nav-tab.act-practice .td{background:var(--purple);opacity:1}
+.nav-tab.act-quiz   {background:var(--teal-bg);color:var(--teal2);border-color:rgba(14,165,233,.22)}
+.nav-tab.act-quiz   .ti{transform:scale(1.15)}
+.nav-tab.act-quiz   .td{background:var(--teal);opacity:1}
+.nav-tab.act-result {background:var(--green-bg);color:var(--green2);border-color:rgba(16,185,129,.22)}
+.nav-tab.act-result .ti{transform:scale(1.15)}
+.nav-tab.act-result .td{background:var(--green);opacity:1}
+.nav-tab.act-hero   {background:rgba(212,168,67,.06);color:var(--gold);border-color:rgba(212,168,67,.15)}
 
-  body {
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+.nav-tab:not([class*="act-"]):not(.locked):hover{background:rgba(255,255,255,.05);color:var(--txt2)}
+.nav-tab.locked{cursor:not-allowed;opacity:.28}
+.nav-tab.locked:hover{background:none;color:var(--txt3)}
 
-  /* =========================================
-     CANVAS BACKGROUND
-  ========================================= */
-  #starfield {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.6;
-  }
+/* Tooltip for locked */
+.nav-tab.locked::after{
+  content:'🔒 Noch nicht freigeschaltet';
+  position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  background:#1a2236;border:1px solid var(--border);border-radius:8px;
+  font-size:11px;color:var(--txt2);white-space:nowrap;padding:6px 12px;
+  opacity:0;pointer-events:none;transition:opacity .2s;z-index:99;
+}
+.nav-tab.locked:hover::after{opacity:1}
 
-  /* =========================================
-     PROGRESS BAR
-  ========================================= */
-  #progress-bar-wrapper {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    z-index: 1000;
-    background: rgba(255,255,255,0.05);
-  }
-  #progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent-gold), var(--accent-purple));
-    width: 0%;
-    transition: width 0.5s ease;
-    box-shadow: 0 0 12px var(--accent-gold);
-  }
+/* ─── PAGES ─── */
+.page{position:relative;z-index:1;display:none;padding-top:64px;min-height:100vh}
+.page.show{display:block}
 
-  /* =========================================
-     NAVIGATION
-  ========================================= */
-  nav {
-    position: fixed;
-    top: 8px; left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
-    background: rgba(13,20,36,0.85);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
-    border-radius: 50px;
-    padding: 10px 24px;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-  nav.visible { opacity: 1; }
-  .nav-btn {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 6px 14px;
-    border-radius: 50px;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
-  }
-  .nav-btn:hover, .nav-btn.active {
-    color: var(--text-primary);
-    background: rgba(212,168,67,0.12);
-  }
-  .nav-logo {
-    font-family: var(--font-display);
-    font-size: 15px;
-    color: var(--accent-gold);
-    margin-right: 8px;
-    letter-spacing: 0.05em;
-  }
+/* Section stripe */
+.stripe{height:4px;width:100%;position:sticky;top:64px;z-index:50}
+.stripe-gold{background:linear-gradient(90deg,#b8860e,var(--gold),var(--gold2))}
+.stripe-purple{background:linear-gradient(90deg,#5b21b6,var(--purple),var(--purple2))}
+.stripe-teal{background:linear-gradient(90deg,#0369a1,var(--teal),var(--teal2))}
+.stripe-green{background:linear-gradient(90deg,#065f46,var(--green),var(--green2))}
 
-  /* =========================================
-     SECTIONS
-  ========================================= */
-  .section {
-    position: relative;
-    z-index: 1;
-    display: none;
-    min-height: 100vh;
-    padding: 0 20px;
-  }
-  .section.active { display: block; }
+/* Mode badge */
+.mode-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  padding:6px 16px;border-radius:50px;margin-bottom:18px;
+}
+.mb-g{background:rgba(212,168,67,.1);color:var(--gold);border:1px solid rgba(212,168,67,.22)}
+.mb-p{background:rgba(139,92,246,.1);color:var(--purple2);border:1px solid rgba(139,92,246,.22)}
+.mb-t{background:rgba(14,165,233,.1);color:var(--teal2);border:1px solid rgba(14,165,233,.22)}
+.mb-green{background:rgba(16,185,129,.1);color:var(--green2);border:1px solid rgba(16,185,129,.22)}
 
-  /* =========================================
-     HERO / LANDING
-  ========================================= */
-  #section-hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 100vh;
-    padding: 80px 20px;
-  }
-  .hero-eyebrow {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--accent-gold);
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.2s forwards;
-  }
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.4s forwards;
-  }
-  .hero-title span {
-    background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero-subtitle {
-    font-size: 18px;
-    font-weight: 300;
-    color: var(--text-secondary);
-    max-width: 480px;
-    margin-bottom: 48px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.6s forwards;
-  }
-  .hero-cta {
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.8s forwards;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent-gold), #c9921a);
-    color: #0d0a04;
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 700;
-    border: none;
-    padding: 16px 40px;
-    border-radius: 50px;
-    cursor: pointer;
-    letter-spacing: 0.05em;
-    transition: all 0.3s;
-    box-shadow: 0 4px 24px rgba(212,168,67,0.4);
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(212,168,67,0.5); }
-  .btn-primary:hover::before { opacity: 1; }
+/* ─── HERO ─── */
+#pg-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;min-height:100vh;padding:80px 24px 80px}
+.h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:22px;opacity:0;animation:fu .8s .1s forwards}
+.h-title{font-family:var(--font-d);font-size:clamp(3.4rem,9vw,7rem);font-weight:700;
+  line-height:1.04;margin-bottom:22px;opacity:0;animation:fu .8s .3s forwards}
+.h-title em{background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal}
+.h-sub{font-size:17px;font-weight:300;color:var(--txt2);max-width:500px;
+  margin-bottom:44px;line-height:1.75;opacity:0;animation:fu .8s .5s forwards}
+.h-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
+  opacity:0;animation:fu .8s .7s forwards}
+.btn-hero{background:linear-gradient(135deg,var(--gold),#b8861e);color:#0a0700;
+  font-family:var(--font-b);font-size:15px;font-weight:700;border:none;
+  padding:16px 40px;border-radius:50px;cursor:pointer;letter-spacing:.04em;
+  box-shadow:0 4px 28px rgba(212,168,67,.35);transition:all .3s}
+.btn-hero:hover{transform:translateY(-3px);box-shadow:0 8px 36px rgba(212,168,67,.5)}
 
-  .hero-quote {
-    font-family: var(--font-display);
-    font-size: 13px;
-    font-style: italic;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
-  }
+.h-chips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
+  margin-top:60px;opacity:0;animation:fu .8s 1s forwards}
+.chip{background:var(--card);border:1px solid var(--border);border-radius:50px;
+  padding:10px 20px;font-size:13px;color:var(--txt2);display:flex;align-items:center;gap:8px}
+.chip strong{color:var(--txt);font-weight:600}
 
-  .hero-pillars {
-    display: flex;
-    gap: 16px;
-    margin-top: 80px;
-    flex-wrap: wrap;
-    justify-content: center;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 1.1s forwards;
-  }
-  .pillar-chip {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 50px;
-    padding: 8px 18px;
-    font-size: 13px;
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s;
-  }
-  .pillar-chip .chip-icon { font-size: 15px; }
-  .pillar-chip:hover {
-    border-color: var(--border-accent);
-    color: var(--text-primary);
-    background: var(--bg-card-hover);
-  }
+.h-qblock{max-width:580px;margin:56px auto 0;padding:28px 36px;
+  background:linear-gradient(135deg,rgba(212,168,67,.05),rgba(139,92,246,.04));
+  border:1px solid rgba(212,168,67,.14);border-radius:var(--r);
+  opacity:0;animation:fu .8s 1.2s forwards;text-align:center}
+.h-qblock blockquote{font-family:var(--font-d);font-size:1.3rem;font-style:italic;
+  line-height:1.55;margin-bottom:8px;color:var(--txt)}
+.h-qblock cite{font-size:11px;color:var(--gold);letter-spacing:.15em;
+  text-transform:uppercase;font-weight:600;font-style:normal}
 
-  /* =========================================
-     SECTION HEADERS
-  ========================================= */
-  .section-header {
-    text-align: center;
-    padding: 100px 20px 60px;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  .section-tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 50px;
-    margin-bottom: 20px;
-  }
-  .tag-gold { background: rgba(212,168,67,0.1); color: var(--accent-gold); border: 1px solid rgba(212,168,67,0.2); }
-  .tag-purple { background: rgba(139,92,246,0.1); color: var(--accent-purple-light); border: 1px solid rgba(139,92,246,0.2); }
-  .tag-teal { background: rgba(20,184,166,0.1); color: var(--accent-teal-light); border: 1px solid rgba(20,184,166,0.2); }
+/* ─── SECTION LAYOUT ─── */
+.sw{max-width:1080px;margin:0 auto;padding:56px 20px 80px}
+.sh{text-align:center;margin-bottom:48px}
+.s-title{font-family:var(--font-d);font-size:clamp(2.3rem,5vw,3.8rem);font-weight:700;line-height:1.1;margin-bottom:12px}
+.s-desc{font-size:15px;color:var(--txt2);font-weight:300;max-width:560px;margin:0 auto;line-height:1.7}
 
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-  .section-desc {
-    font-size: 16px;
-    color: var(--text-secondary);
-    font-weight: 300;
-  }
+/* ─── LEARN ─── */
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;margin-bottom:32px}
+.lc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(18px)}
+.lc.in{opacity:1;transform:translateY(0)}
+.lc::after{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;
+  pointer-events:none;border-radius:var(--r)}
+.lc:hover{transform:translateY(-4px) !important;box-shadow:0 12px 36px rgba(0,0,0,.5)}
+.lc.gc::after{background:radial-gradient(ellipse at top left,rgba(212,168,67,.08),transparent 65%)}
+.lc.pc::after{background:radial-gradient(ellipse at top left,rgba(139,92,246,.08),transparent 65%)}
+.lc.tc::after{background:radial-gradient(ellipse at top left,rgba(14,165,233,.08),transparent 65%)}
+.lc:hover::after{opacity:1}
+.lc.gc:hover{border-color:rgba(212,168,67,.28)}
+.lc.pc:hover{border-color:rgba(139,92,246,.28)}
+.lc.tc:hover{border-color:rgba(14,165,233,.28)}
 
-  /* =========================================
-     LEARNING CARDS
-  ========================================= */
-  .cards-grid {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-    padding: 0 20px 80px;
-  }
-  .learn-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    cursor: pointer;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  .learn-card.revealed { opacity: 1; transform: translateY(0); }
-  .learn-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.4s;
-    border-radius: var(--radius);
-  }
-  .learn-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); border-color: rgba(212,168,67,0.2); }
-  .learn-card:hover::before { opacity: 1; }
-  .learn-card.gold::before { background: radial-gradient(ellipse at top left, rgba(212,168,67,0.06), transparent 60%); }
-  .learn-card.purple::before { background: radial-gradient(ellipse at top left, rgba(139,92,246,0.06), transparent 60%); }
-  .learn-card.teal::before { background: radial-gradient(ellipse at top left, rgba(20,184,166,0.06), transparent 60%); }
+.li{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;
+  justify-content:center;font-size:19px;margin-bottom:14px}
+.ig{background:rgba(212,168,67,.13)}.ip{background:rgba(139,92,246,.13)}.it{background:rgba(14,165,233,.13)}
 
-  .card-icon-wrap {
-    width: 48px; height: 48px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    margin-bottom: 18px;
-  }
-  .icon-gold { background: rgba(212,168,67,0.12); }
-  .icon-purple { background: rgba(139,92,246,0.12); }
-  .icon-teal { background: rgba(20,184,166,0.12); }
+.ln{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--txt3);margin-bottom:5px}
+.lt{font-family:var(--font-d);font-size:1.4rem;font-weight:600;margin-bottom:7px}
+.lp{font-size:13.5px;color:var(--txt2);line-height:1.65;margin-bottom:12px}
 
-  .card-number {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-  }
-  .card-title {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: var(--text-primary);
-  }
-  .card-preview {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
-  .card-expand-btn {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    padding: 8px 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: gap 0.2s;
-  }
-  .card-expand-btn.gold-text { color: var(--accent-gold); }
-  .card-expand-btn.purple-text { color: var(--accent-purple-light); }
-  .card-expand-btn.teal-text { color: var(--accent-teal-light); }
-  .card-expand-btn:hover { gap: 10px; }
+.ls{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;
+  letter-spacing:.07em;padding:4px 10px;border-radius:50px;margin-bottom:10px;transition:all .3s}
+.ls.unread{background:rgba(255,255,255,.04);color:var(--txt3);border:1px solid var(--border)}
+.ls.read{background:rgba(16,185,129,.1);color:var(--green2);border:1px solid rgba(16,185,129,.2)}
 
-  .card-expanded {
-    display: none;
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-  }
-  .card-expanded.open { display: block; animation: fadeIn 0.3s ease; }
-  .card-full-text {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 14px;
-  }
-  .example-box {
-    background: rgba(255,255,255,0.03);
-    border-left: 3px solid var(--accent-gold);
-    border-radius: 0 8px 8px 0;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: var(--text-secondary);
-  }
-  .example-box.purple-border { border-left-color: var(--accent-purple); }
-  .example-box.teal-border { border-left-color: var(--accent-teal); }
-  .example-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-  }
+.lb{font-size:12px;font-weight:600;letter-spacing:.05em;display:inline-flex;
+  align-items:center;gap:5px;background:none;border:none;cursor:pointer;padding:0;transition:gap .2s}
+.lb.cg{color:var(--gold)}.lb.cp{color:var(--purple2)}.lb.ct{color:var(--teal2)}
+.lb:hover{gap:9px}
+.le{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.le.open{display:block;animation:fi .3s}
+.lbody{font-size:13.5px;color:var(--txt2);line-height:1.75;margin-bottom:12px}
+.exb{border-left:3px solid var(--gold);border-radius:0 8px 8px 0;
+  background:rgba(255,255,255,.03);padding:12px 15px;font-size:13px;color:var(--txt2)}
+.exb.ep{border-left-color:var(--purple)}.exb.et{border-left-color:var(--teal)}
+.exl{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);margin-bottom:4px}
 
-  .stoic-quote-banner {
-    max-width: 700px;
-    margin: 0 auto 80px;
-    background: linear-gradient(135deg, rgba(212,168,67,0.06), rgba(139,92,246,0.06));
-    border: 1px solid var(--border-accent);
-    border-radius: var(--radius);
-    padding: 32px 40px;
-    text-align: center;
-  }
-  .quote-text {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-style: italic;
-    color: var(--text-primary);
-    line-height: 1.5;
-    margin-bottom: 8px;
-  }
-  .quote-author {
-    font-size: 12px;
-    color: var(--accent-gold);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
+/* Gate */
+.gate{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px 28px;display:flex;align-items:center;gap:20px;margin-top:4px}
+.gbar-w{flex:1;height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
+.gbar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));
+  border-radius:4px;transition:width .4s}
+.g-info{text-align:right;white-space:nowrap}
+.g-num{font-family:var(--font-d);font-size:1.6rem;font-weight:700;color:var(--gold)}
+.g-lbl{font-size:11px;color:var(--txt3);letter-spacing:.08em}
 
-  /* =========================================
-     NEXT SECTION BUTTON
-  ========================================= */
-  .section-footer {
-    display: flex;
-    justify-content: center;
-    padding: 0 20px 80px;
-  }
-  .btn-next {
-    background: transparent;
-    border: 1px solid var(--border-accent);
-    color: var(--accent-gold);
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    padding: 14px 36px;
-    border-radius: 50px;
-    cursor: pointer;
-    letter-spacing: 0.05em;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .btn-next:hover {
-    background: rgba(212,168,67,0.1);
-    box-shadow: 0 0 24px rgba(212,168,67,0.15);
-    transform: translateY(-2px);
-  }
+.qbanner{max-width:660px;margin:36px auto 0;background:linear-gradient(135deg,rgba(212,168,67,.05),rgba(139,92,246,.05));
+  border:1px solid rgba(212,168,67,.14);border-radius:var(--r);padding:28px 34px;text-align:center}
+.qbanner blockquote{font-family:var(--font-d);font-size:1.3rem;font-style:italic;line-height:1.5;margin-bottom:7px}
+.qbanner cite{font-size:11px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-style:normal;font-weight:600}
 
-  /* =========================================
-     PRACTICE SECTION
-  ========================================= */
-  .practice-container {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 20px 80px;
-  }
-  .scenario-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 36px;
-    margin-bottom: 24px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s ease;
-  }
-  .scenario-card.revealed { opacity: 1; transform: translateY(0); }
-  .scenario-number {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-  }
-  .scenario-situation {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: var(--text-primary);
-    line-height: 1.3;
-  }
-  .scenario-context {
-    font-size: 14px;
-    color: var(--text-secondary);
-    margin-bottom: 24px;
-    padding: 12px 16px;
-    background: rgba(255,255,255,0.03);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
-  }
-  .scenario-context-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent-teal);
-    margin-bottom: 4px;
-  }
-  .options-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .option-btn {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 14px 18px;
-    color: var(--text-secondary);
-    font-family: var(--font-body);
-    font-size: 14px;
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.2s;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .option-btn:hover:not(:disabled) {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(139,92,246,0.3);
-    color: var(--text-primary);
-  }
-  .option-btn:disabled { cursor: default; }
-  .option-letter {
-    width: 22px; height: 22px;
-    border-radius: 6px;
-    background: rgba(255,255,255,0.07);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
-    transition: all 0.2s;
-  }
-  .option-btn.correct { background: rgba(20,184,166,0.1); border-color: rgba(20,184,166,0.4); color: var(--text-primary); }
-  .option-btn.correct .option-letter { background: var(--accent-teal); color: #fff; }
-  .option-btn.wrong { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.3); color: var(--text-muted); }
-  .option-btn.wrong .option-letter { background: rgba(239,68,68,0.4); }
-  .option-btn.neutral-off { opacity: 0.45; }
-  .feedback-box {
-    margin-top: 16px;
-    border-radius: var(--radius-sm);
-    padding: 16px;
-    font-size: 14px;
-    line-height: 1.6;
-    display: none;
-    animation: fadeIn 0.3s ease;
-  }
-  .feedback-box.show { display: block; }
-  .feedback-box.good { background: rgba(20,184,166,0.08); border: 1px solid rgba(20,184,166,0.2); color: var(--accent-teal-light); }
-  .feedback-box.bad { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); color: #f87171; }
-  .feedback-box.ok { background: rgba(251,191,36,0.07); border: 1px solid rgba(251,191,36,0.2); color: #fbbf24; }
-  .feedback-emoji { font-size: 18px; margin-right: 6px; }
+/* Next btn */
+.sf{display:flex;justify-content:center;padding-top:44px}
+.bnn{border:1.5px solid;border-radius:50px;font-family:var(--font-b);
+  font-size:14px;font-weight:600;padding:14px 36px;cursor:pointer;
+  letter-spacing:.04em;display:inline-flex;align-items:center;gap:10px;
+  transition:all .3s;background:transparent}
+.bnn:disabled{opacity:.28;cursor:not-allowed;transform:none !important;box-shadow:none !important}
+.bnn-g{border-color:rgba(212,168,67,.38);color:var(--gold)}
+.bnn-g:not(:disabled):hover{background:rgba(212,168,67,.09);box-shadow:0 0 24px rgba(212,168,67,.15);transform:translateY(-2px)}
+.bnn-p{border-color:rgba(139,92,246,.38);color:var(--purple2)}
+.bnn-p:not(:disabled):hover{background:rgba(139,92,246,.09);transform:translateY(-2px)}
 
-  /* Practice score tracker */
-  .practice-tracker {
-    text-align: center;
-    margin-bottom: 32px;
-    padding: 16px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-  }
-  .tracker-item { text-align: center; }
-  .tracker-val {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent-gold);
-  }
-  .tracker-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+/* ─── PRACTICE ─── */
+#pg-practice{background:linear-gradient(180deg,rgba(139,92,246,.03) 0%,transparent 55%)}
+.ptrk{display:flex;background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:28px;overflow:hidden}
+.ptc{flex:1;text-align:center;padding:16px 10px;border-right:1px solid var(--border)}
+.ptc:last-child{border-right:none}
+.ptv{font-family:var(--font-d);font-size:1.9rem;font-weight:700}
+.ptv.vc{color:var(--purple2)}.ptv.vg{color:var(--green)}.ptv.vp{color:var(--gold)}
+.ptl{font-size:10px;color:var(--txt3);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
 
-  /* =========================================
-     QUIZ SECTION
-  ========================================= */
-  .quiz-container {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 0 20px 80px;
-  }
-  .quiz-progress-wrap {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 40px;
-    padding: 20px 24px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-  }
-  .quiz-progress-bar {
-    flex: 1;
-    height: 6px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .quiz-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent-purple), var(--accent-gold));
-    border-radius: 3px;
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 0 8px rgba(139,92,246,0.4);
-  }
-  .quiz-progress-text {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 500;
-    white-space: nowrap;
-  }
-  .quiz-q-container {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 40px;
-    position: relative;
-    overflow: hidden;
-  }
-  .quiz-q-container::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent-purple), var(--accent-gold), var(--accent-teal));
-  }
-  .quiz-q-number {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent-purple-light);
-    margin-bottom: 12px;
-  }
-  .quiz-q-text {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1.35;
-    margin-bottom: 32px;
-    color: var(--text-primary);
-  }
-  .quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .quiz-option {
-    background: rgba(255,255,255,0.03);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 16px 20px;
-    color: var(--text-secondary);
-    font-family: var(--font-body);
-    font-size: 14px;
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.25s;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    position: relative;
-    overflow: hidden;
-  }
-  .quiz-option::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(139,92,246,0.06), transparent);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .quiz-option:hover:not(:disabled)::before { opacity: 1; }
-  .quiz-option:hover:not(:disabled) {
-    border-color: rgba(139,92,246,0.4);
-    color: var(--text-primary);
-  }
-  .quiz-option-letter {
-    width: 28px; height: 28px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.07);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-    flex-shrink: 0;
-    transition: all 0.25s;
-  }
-  .quiz-option.selected { border-color: var(--accent-purple); color: var(--text-primary); background: rgba(139,92,246,0.08); }
-  .quiz-option.selected .quiz-option-letter { background: var(--accent-purple); color: #fff; }
-  .quiz-option:disabled { cursor: default; }
+.scc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:30px;margin-bottom:16px;opacity:0;transform:translateY(14px);transition:all .32s}
+.scc.in{opacity:1;transform:translateY(0)}
+.scc.done{border-color:rgba(139,92,246,.14)}
+.scn{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--txt3);margin-bottom:5px}
+.scs{font-family:var(--font-d);font-size:1.35rem;font-weight:600;margin-bottom:8px;line-height:1.3}
+.sctx{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;
+  padding:11px 15px;font-size:13.5px;color:var(--txt2);margin-bottom:18px}
+.sctxl{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--teal2);margin-bottom:3px}
+.olist{display:flex;flex-direction:column;gap:8px}
+.op{background:rgba(255,255,255,.03);border:1.5px solid var(--border);border-radius:10px;
+  padding:13px 15px;color:var(--txt2);font-family:var(--font-b);font-size:13.5px;
+  cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:11px;transition:all .2s}
+.op:hover:not(:disabled){background:rgba(139,92,246,.07);border-color:rgba(139,92,246,.32);color:var(--txt)}
+.op:disabled{cursor:default}
+.ol{width:24px;height:24px;border-radius:7px;background:rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:center;font-size:11px;
+  font-weight:700;flex-shrink:0;margin-top:1px;transition:all .2s;color:var(--txt2)}
+.op.correct{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.35);color:var(--txt)}
+.op.correct .ol{background:var(--green);color:#fff}
+.op.wrong{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.24);color:var(--txt3)}
+.op.wrong .ol{background:rgba(239,68,68,.38);color:#fff}
+.op.dimmed{opacity:.36}
+.fb{display:none;margin-top:12px;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;animation:fi .3s}
+.fb.show{display:block}
+.fb.good{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:var(--green2)}
+.fb.bad{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);color:#f87171}
+.fb.ok{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);color:#fbbf24}
 
-  .quiz-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 28px;
-  }
-  .btn-quiz-submit {
-    background: linear-gradient(135deg, var(--accent-purple), #6d28d9);
-    color: #fff;
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    border: none;
-    padding: 14px 32px;
-    border-radius: 50px;
-    cursor: pointer;
-    letter-spacing: 0.04em;
-    transition: all 0.3s;
-    box-shadow: 0 4px 20px rgba(139,92,246,0.35);
-  }
-  .btn-quiz-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(139,92,246,0.45); }
-  .btn-quiz-submit:disabled { opacity: 0.4; cursor: default; transform: none; }
-  .quiz-score-display {
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-  .quiz-score-pts { color: var(--accent-gold); font-weight: 700; }
+/* ─── QUIZ ─── */
+#pg-quiz{background:linear-gradient(180deg,rgba(14,165,233,.03) 0%,transparent 55%)}
+.qw{max-width:700px;margin:0 auto;padding:56px 20px 80px}
+.qhdr{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px 22px;margin-bottom:24px}
+.qhdr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.qhdr-lbl{font-size:12px;color:var(--txt3);font-weight:500}
+.qhdr-sc{font-size:13px;color:var(--teal2);font-weight:600}
+.qpb{height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
+.qpbf{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal2));
+  border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px rgba(14,165,233,.35)}
 
-  /* =========================================
-     RESULTS SECTION
-  ========================================= */
-  #section-result {
-    display: none;
-  }
-  #section-result.active { display: block; }
-  .result-container {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 80px 20px;
-    text-align: center;
-  }
-  .result-medal {
-    font-size: 72px;
-    margin-bottom: 16px;
-    animation: pulse 2s ease infinite;
-  }
-  .result-verdict {
-    font-family: var(--font-display);
-    font-size: clamp(2.4rem, 6vw, 4rem);
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .result-score-wrap {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 50px;
-    padding: 10px 24px;
-    margin-bottom: 40px;
-    font-size: 15px;
-    color: var(--text-secondary);
-  }
-  .result-score-num {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--accent-gold);
-  }
-  .result-cards-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 32px;
-    text-align: left;
-  }
-  .result-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-  }
-  .result-card-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .result-card-label.green { color: var(--accent-teal); }
-  .result-card-label.orange { color: #fb923c; }
-  .result-card-body { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:38px;position:relative;overflow:hidden}
+.qcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--teal),var(--purple),var(--gold))}
+.qn{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal2);margin-bottom:8px}
+.qt{font-family:var(--font-d);font-size:1.5rem;font-weight:600;line-height:1.35;margin-bottom:8px;color:var(--txt)}
+.qpts{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;
+  color:var(--gold);background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.2);
+  border-radius:50px;padding:3px 10px;margin-bottom:22px}
+.qopts{display:flex;flex-direction:column;gap:8px}
+.qopt{background:rgba(255,255,255,.03);border:1.5px solid var(--border);border-radius:10px;
+  padding:14px 17px;color:var(--txt2);font-family:var(--font-b);font-size:14px;
+  cursor:pointer;text-align:left;display:flex;align-items:center;gap:13px;
+  position:relative;overflow:hidden;transition:all .2s}
+.qopt::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(14,165,233,.06),transparent);opacity:0;transition:opacity .2s}
+.qopt:hover:not(:disabled)::before{opacity:1}
+.qopt:hover:not(:disabled){border-color:rgba(14,165,233,.38);color:var(--txt)}
+.qopt:disabled{cursor:default}
+.ql{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:center;font-size:12px;
+  font-weight:700;flex-shrink:0;transition:all .22s;color:var(--txt2)}
+.qopt.sel{border-color:var(--teal);color:var(--txt);background:rgba(14,165,233,.07)}
+.qopt.sel .ql{background:var(--teal);color:#fff}
+.qopt.cor{border-color:var(--green);background:rgba(16,185,129,.08);color:var(--txt)}
+.qopt.cor .ql{background:var(--green);color:#fff}
+.qopt.wrng{border-color:rgba(239,68,68,.28);background:rgba(239,68,68,.05);color:var(--txt3)}
+.qopt.wrng .ql{background:rgba(239,68,68,.35);color:#fff}
+.qopt.dim{opacity:.34}
+.qfb{display:none;margin-top:14px;padding:13px 15px;border-radius:10px;font-size:13.5px;line-height:1.6;animation:fi .3s}
+.qfb.show{display:block}
+.qfb.good{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:var(--green2)}
+.qfb.bad{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);color:#f87171}
 
-  .result-tips {
-    background: linear-gradient(135deg, rgba(212,168,67,0.05), rgba(139,92,246,0.05));
-    border: 1px solid var(--border-accent);
-    border-radius: var(--radius);
-    padding: 32px;
-    text-align: left;
-    margin-bottom: 32px;
-  }
-  .result-tips-title {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: var(--accent-gold);
-  }
-  .tip-item {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 12px;
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-  }
-  .tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-  .btn-restart {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-secondary);
-    font-family: var(--font-body);
-    font-size: 14px;
-    padding: 12px 28px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 8px;
-  }
-  .btn-restart:hover { border-color: var(--border-accent); color: var(--text-primary); background: rgba(212,168,67,0.06); }
+.qfoot{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
+.qf-hint{font-size:12px;color:var(--txt3)}
+.btn-qn{background:linear-gradient(135deg,var(--teal),#0369a1);color:#fff;
+  font-family:var(--font-b);font-size:14px;font-weight:600;border:none;
+  padding:13px 30px;border-radius:50px;cursor:pointer;letter-spacing:.04em;
+  transition:all .3s;box-shadow:0 4px 18px rgba(14,165,233,.3)}
+.btn-qn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 26px rgba(14,165,233,.4)}
+.btn-qn:disabled{opacity:.3;cursor:not-allowed;transform:none;box-shadow:none}
 
-  /* =========================================
-     ANIMATIONS
-  ========================================= */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; } to { opacity: 1; }
-  }
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-  }
+.qso{animation:sOut .26s ease forwards}.qsi{animation:sIn .26s ease forwards}
 
-  /* =========================================
-     QUIZ TRANSITION ANIMATION
-  ========================================= */
-  .quiz-slide-out {
-    animation: slideOut 0.3s ease forwards;
-  }
-  .quiz-slide-in {
-    animation: slideIn 0.3s ease forwards;
-  }
-  @keyframes slideOut {
-    to { opacity: 0; transform: translateX(-30px); }
-  }
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(30px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
+/* ─── RESULT ─── */
+#pg-result{background:linear-gradient(180deg,rgba(16,185,129,.03) 0%,transparent 50%)}
+.rw{max-width:700px;margin:0 auto;padding:56px 20px 100px;text-align:center}
+.rm{font-size:76px;margin-bottom:14px;animation:pulse 2.4s ease infinite;display:block}
+.rv{font-family:var(--font-d);font-size:clamp(2.5rem,7vw,4.2rem);font-weight:700;line-height:1;margin-bottom:10px}
+.rsp{display:inline-flex;align-items:center;gap:10px;background:var(--card);
+  border:1px solid var(--border);border-radius:50px;padding:10px 22px;
+  margin-bottom:36px;font-size:14px;color:var(--txt2)}
+.rpts{font-family:var(--font-d);font-size:2rem;font-weight:700;color:var(--gold)}
+.rpct{font-size:12px;color:var(--txt3)}
+.rrow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;text-align:left}
+.rc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.rcl{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.rcl-g{color:var(--green)}.rcl-o{color:#fb923c}
+.rcb{font-size:13.5px;color:var(--txt2);line-height:1.65}
+.rtips{background:linear-gradient(135deg,rgba(212,168,67,.05),rgba(139,92,246,.05));
+  border:1px solid rgba(212,168,67,.17);border-radius:var(--r);padding:28px;text-align:left;margin-bottom:20px}
+.rth{font-family:var(--font-d);font-size:1.3rem;font-weight:600;color:var(--gold);margin-bottom:16px}
+.tip{display:flex;gap:11px;margin-bottom:11px;font-size:13.5px;color:var(--txt2);line-height:1.5}
+.tic{font-size:15px;flex-shrink:0;margin-top:2px}
+.rbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.btn-rm{background:linear-gradient(135deg,var(--gold),#b8861e);color:#0a0700;
+  font-family:var(--font-b);font-size:14px;font-weight:700;border:none;
+  padding:13px 30px;border-radius:50px;cursor:pointer;transition:all .3s;
+  box-shadow:0 4px 18px rgba(212,168,67,.3)}
+.btn-rm:hover{transform:translateY(-2px)}
+.btn-rs{background:transparent;border:1.5px solid var(--border);color:var(--txt2);
+  font-family:var(--font-b);font-size:14px;padding:12px 26px;border-radius:50px;cursor:pointer;transition:all .3s}
+.btn-rs:hover{border-color:rgba(212,168,67,.28);color:var(--txt);background:rgba(212,168,67,.05)}
 
-  /* =========================================
-     RESPONSIVE
-  ========================================= */
-  @media (max-width: 600px) {
-    .cards-grid { grid-template-columns: 1fr; padding: 0 12px 60px; }
-    .result-cards-row { grid-template-columns: 1fr; }
-    .quiz-q-container { padding: 28px 20px; }
-    .scenario-card { padding: 24px 20px; }
-    nav { padding: 8px 14px; gap: 2px; }
-    .nav-btn { font-size: 11px; padding: 5px 10px; }
-    .nav-logo { display: none; }
-  }
+/* ─── ANIMS ─── */
+@keyframes fu{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes sOut{to{opacity:0;transform:translateX(-24px)}}
+@keyframes sIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
 
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg-primary); }
-  ::-webkit-scrollbar-thumb { background: rgba(212,168,67,0.3); border-radius: 3px; }
+/* ─── MOBILE ─── */
+@media(max-width:600px){
+  .lgrid{grid-template-columns:1fr}
+  .rrow{grid-template-columns:1fr}
+  .qcard{padding:24px 16px}
+  .scc{padding:22px 16px}
+  .nav-logo{display:none}
+  .nav-tab .tl{font-size:9px}
+  .nav-tab{min-width:50px}
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:rgba(212,168,67,.22);border-radius:3px}
 </style>
 </head>
 <body>
+<canvas id="cv"></canvas>
 
-<canvas id="starfield"></canvas>
-
-<div id="progress-bar-wrapper">
-  <div id="progress-bar"></div>
-</div>
-
-<nav id="main-nav">
-  <span class="nav-logo">⚖ Stoizismus</span>
-  <button class="nav-btn" onclick="showSection('hero')">Start</button>
-  <button class="nav-btn" onclick="showSection('learn')">Lernen</button>
-  <button class="nav-btn" onclick="showSection('practice')">Übungen</button>
-  <button class="nav-btn" onclick="showSection('quiz')">Quiz</button>
+<!-- ═══ NAV ═══ -->
+<nav id="topnav">
+  <div class="nav-logo"><span class="nl-icon">⚖</span>Stoisch Denken</div>
+  <div class="nav-tabs">
+    <button class="nav-tab" id="nt-hero" onclick="go('hero')">
+      <span class="ti">🏠</span><span class="tl">Start</span><span class="td"></span>
+    </button>
+    <button class="nav-tab locked" id="nt-learn" onclick="go('learn')">
+      <span class="ti">📖</span><span class="tl">Lernen</span><span class="td"></span>
+    </button>
+    <button class="nav-tab locked" id="nt-practice" onclick="go('practice')">
+      <span class="ti">⚡</span><span class="tl">Übungen</span><span class="td"></span>
+    </button>
+    <button class="nav-tab locked" id="nt-quiz" onclick="go('quiz')">
+      <span class="ti">🎯</span><span class="tl">Quiz</span><span class="td"></span>
+    </button>
+    <button class="nav-tab locked" id="nt-result" style="display:none" onclick="go('result')">
+      <span class="ti">🏆</span><span class="tl">Ergebnis</span><span class="td"></span>
+    </button>
+  </div>
 </nav>
 
-<!-- ===================== HERO ===================== -->
-<section id="section-hero" class="section active">
-  <div class="hero-eyebrow">Antike Weisheit · Modernes Leben</div>
-  <h1 class="hero-title">Stoisch Denken –<br><span>Dein Guide zum</span><br>guten Leben</h1>
-  <p class="hero-subtitle">Lerne, was Stoizismus ist, übe dein Denken in echten Situationen und teste dich selbst im Quiz.</p>
-  <div class="hero-cta">
-    <button class="btn-primary" onclick="showSection('learn')">🏛 Jetzt lernen</button>
-    <span class="hero-quote">„Sorge dich nicht um das, was du nicht kontrollieren kannst." – Epiktet</span>
-  </div>
-  <div class="hero-pillars">
-    <div class="pillar-chip"><span class="chip-icon">🧭</span> 5 Kernthemen</div>
-    <div class="pillar-chip"><span class="chip-icon">⚡</span> 6 Szenarien</div>
-    <div class="pillar-chip"><span class="chip-icon">🎯</span> 7 Quiz-Fragen</div>
-    <div class="pillar-chip"><span class="chip-icon">🏆</span> Persönliches Ergebnis</div>
-  </div>
-</section>
-
-<!-- ===================== LEARN ===================== -->
-<section id="section-learn" class="section">
-  <div class="section-header">
-    <span class="section-tag tag-gold">Grundlagen</span>
-    <h2 class="section-title">Was ist Stoizismus?</h2>
-    <p class="section-desc">Fünf Ideen, die dein Leben verändern können. Klicke auf eine Karte, um mehr zu erfahren.</p>
-  </div>
-  <div class="cards-grid" id="learn-cards"></div>
-
-  <div style="max-width:700px; margin:0 auto 60px; padding:0 20px;">
-    <div class="stoic-quote-banner">
-      <div class="quote-text">„Es sind nicht die Dinge, die uns beunruhigen, sondern unsere Meinungen über die Dinge."</div>
-      <div class="quote-author">– Epiktet, Enchiridion</div>
+<!-- ═══ HERO ═══ -->
+<div id="pg-hero" class="page show">
+  <div class="stripe stripe-gold"></div>
+  <div id="section-hero">
+    <div class="h-tag">Antike Weisheit · Modernes Denken</div>
+    <h1 class="h-title">Stoisch<br>Denken –<br><em>Dein Guide</em></h1>
+    <p class="h-sub">Lerne die Prinzipien des Stoizismus, teste dich in realen Situationen und finde heraus, wie stoisch du wirklich denkst.</p>
+    <div class="h-btns">
+      <button class="btn-hero" onclick="go('learn')">🏛 Jetzt lernen starten</button>
+    </div>
+    <div class="h-chips">
+      <div class="chip">📖 <strong>8</strong> Lernthemen</div>
+      <div class="chip">⚡ <strong>8</strong> Praxis-Szenarien</div>
+      <div class="chip">🎯 <strong>12</strong> Quizfragen</div>
+      <div class="chip">🔒 Abschnitte freischalten</div>
+    </div>
+    <div class="h-qblock">
+      <blockquote>„Es sind nicht die Dinge, die uns beunruhigen, sondern unsere Meinungen über die Dinge."</blockquote>
+      <cite>– Epiktet, Enchiridion</cite>
     </div>
   </div>
+</div>
 
-  <div class="section-footer">
-    <button class="btn-next" onclick="showSection('practice')">Weiter zu den Übungen <span>→</span></button>
-  </div>
-</section>
-
-<!-- ===================== PRACTICE ===================== -->
-<section id="section-practice" class="section">
-  <div class="section-header">
-    <span class="section-tag tag-purple">Praxis</span>
-    <h2 class="section-title">Stoisch handeln</h2>
-    <p class="section-desc">Echte Situationen – stoische Entscheidungen. Wähle die Antwort, die einem Stoiker entsprechen würde.</p>
-  </div>
-
-  <div class="practice-container">
-    <div class="practice-tracker">
-      <div class="tracker-item">
-        <div class="tracker-val" id="prac-correct">0</div>
-        <div class="tracker-label">Stoisch ✓</div>
+<!-- ═══ LEARN ═══ -->
+<div id="pg-learn" class="page">
+  <div class="stripe stripe-gold"></div>
+  <div class="sw">
+    <div class="sh">
+      <div class="mode-badge mb-g">📖 Modus: Lernen</div>
+      <h2 class="s-title">Die 8 Grundpfeiler des Stoizismus</h2>
+      <p class="s-desc">Öffne jede Karte und lies sie durch. Du musst alle 8 Themen lesen, um mit den Übungen fortzufahren.</p>
+    </div>
+    <div class="lgrid" id="lgrid"></div>
+    <div class="gate">
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:8px">
+          Fortschritt: <span id="g-txt">0 von 8 Themen gelesen</span>
+        </div>
+        <div class="gbar-w"><div class="gbar" id="gbar" style="width:0%"></div></div>
       </div>
-      <div style="width:1px; height:40px; background:var(--border);"></div>
-      <div class="tracker-item">
-        <div class="tracker-val" id="prac-total">0</div>
-        <div class="tracker-label">Beantwortet</div>
-      </div>
-      <div style="width:1px; height:40px; background:var(--border);"></div>
-      <div class="tracker-item">
-        <div class="tracker-val" id="prac-pct">0%</div>
-        <div class="tracker-label">Stoisch-Score</div>
+      <div class="g-info">
+        <div class="g-num" id="g-num">0/8</div>
+        <div class="g-lbl">gelesen</div>
       </div>
     </div>
-
-    <div id="scenarios-list"></div>
+    <div class="qbanner">
+      <blockquote>„Wer nicht weiß, wohin er will, für den ist kein Wind günstig."</blockquote>
+      <cite>– Seneca</cite>
+    </div>
+    <div class="sf">
+      <button class="bnn bnn-g" id="btn-tp" onclick="go('practice')" disabled>
+        Weiter zu den Übungen →
+      </button>
+    </div>
   </div>
+</div>
 
-  <div class="section-footer">
-    <button class="btn-next" onclick="showSection('quiz')">Weiter zum Quiz <span>→</span></button>
+<!-- ═══ PRACTICE ═══ -->
+<div id="pg-practice" class="page">
+  <div class="stripe stripe-purple"></div>
+  <div class="sw">
+    <div class="sh">
+      <div class="mode-badge mb-p">⚡ Modus: Übungen</div>
+      <h2 class="s-title">Stoisch handeln</h2>
+      <p class="s-desc">8 echte Situationen. Wähle die stoischste Reaktion – lies die Erklärungen genau. Beantworte alle Szenarien, um das Quiz freizuschalten.</p>
+    </div>
+    <div class="ptrk">
+      <div class="ptc"><div class="ptv vc" id="pt-a">0</div><div class="ptl">Beantwortet</div></div>
+      <div class="ptc"><div class="ptv vg" id="pt-c">0</div><div class="ptl">Stoisch ✓</div></div>
+      <div class="ptc"><div class="ptv vp" id="pt-p">–</div><div class="ptl">Stoisch-Rate</div></div>
+    </div>
+    <div id="scl"></div>
+    <div class="sf">
+      <button class="bnn bnn-p" id="btn-tq" onclick="go('quiz')" disabled>
+        Weiter zum Quiz →
+      </button>
+    </div>
   </div>
-</section>
+</div>
 
-<!-- ===================== QUIZ ===================== -->
-<section id="section-quiz" class="section">
-  <div class="section-header">
-    <span class="section-tag tag-teal">Quiz</span>
-    <h2 class="section-title">Teste dein Wissen</h2>
-    <p class="section-desc">7 Fragen über Denken, Verhalten und Lebensphilosophie.</p>
-  </div>
-
-  <div class="quiz-container">
-    <div class="quiz-progress-wrap">
-      <span style="font-size:13px; color:var(--text-muted); white-space:nowrap;">Frage</span>
-      <div class="quiz-progress-bar">
-        <div class="quiz-progress-fill" id="quiz-fill" style="width:0%"></div>
+<!-- ═══ QUIZ ═══ -->
+<div id="pg-quiz" class="page">
+  <div class="stripe stripe-teal"></div>
+  <div class="qw">
+    <div class="sh">
+      <div class="mode-badge mb-t">🎯 Modus: Quiz</div>
+      <h2 class="s-title">Teste dein Wissen</h2>
+      <p class="s-desc">12 Fragen – von einfach bis anspruchsvoll. Lies jede Frage sorgfältig. Du erhältst nach jeder Antwort eine Erklärung.</p>
+    </div>
+    <div class="qhdr">
+      <div class="qhdr-top">
+        <span class="qhdr-lbl" id="ql-lbl">Frage 1 von 12</span>
+        <span class="qhdr-sc">Punkte: <strong id="q-sc" style="color:var(--gold)">0</strong></span>
       </div>
-      <span class="quiz-progress-text" id="quiz-prog-text">0 / 7</span>
+      <div class="qpb"><div class="qpbf" id="qpbf" style="width:0%"></div></div>
     </div>
-
-    <div class="quiz-q-container" id="quiz-q-container">
-      <!-- injected by JS -->
-    </div>
-
-    <div class="quiz-nav" id="quiz-nav">
-      <div class="quiz-score-display">Punkte: <span class="quiz-score-pts" id="quiz-pts-live">0</span></div>
-      <button class="btn-quiz-submit" id="btn-next-q" onclick="nextQuestion()" disabled>Weiter →</button>
+    <div class="qcard" id="qcard"></div>
+    <div class="qfoot">
+      <span class="qf-hint" id="qhint">Wähle eine Antwort</span>
+      <button class="btn-qn" id="btn-qn" onclick="nextQ()" disabled>Weiter →</button>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ===================== RESULT ===================== -->
-<section id="section-result" class="section">
-  <div class="result-container" id="result-inner">
-    <!-- injected by JS -->
-  </div>
-</section>
+<!-- ═══ RESULT ═══ -->
+<div id="pg-result" class="page">
+  <div class="stripe stripe-green"></div>
+  <div class="rw" id="ri"></div>
+</div>
 
 <script>
-/* =========================================
-   STARFIELD
-========================================= */
-(function() {
-  const canvas = document.getElementById('starfield');
-  const ctx = canvas.getContext('2d');
-  let stars = [];
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-  for (let i = 0; i < 120; i++) {
-    stars.push({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      r: Math.random() * 1.2 + 0.2,
-      a: Math.random(),
-      speed: Math.random() * 0.003 + 0.001
-    });
-  }
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    stars.forEach(s => {
-      s.a += s.speed;
-      const alpha = (Math.sin(s.a) + 1) / 2 * 0.5 + 0.1;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(212,168,67,${alpha})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
+/* ─── CANVAS ─── */
+(()=>{
+  const c=document.getElementById('cv'),x=c.getContext('2d');
+  const rs=()=>{c.width=innerWidth;c.height=innerHeight};rs();
+  addEventListener('resize',rs);
+  const S=Array.from({length:130},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.1+.2,a:Math.random()*6.28,s:Math.random()*.003+.001}));
+  const d=()=>{x.clearRect(0,0,c.width,c.height);S.forEach(s=>{s.a+=s.s;const al=(Math.sin(s.a)+1)/2*.42+.05;x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fillStyle=`rgba(212,168,67,${al})`;x.fill();});requestAnimationFrame(d);};d();
 })();
 
-/* =========================================
-   STATE
-========================================= */
-let currentSection = 'hero';
-let quizScore = 0;
-let currentQuestion = 0;
-let selectedAnswer = null;
-let pracCorrect = 0;
-let pracAnswered = 0;
+/* ─── STATE ─── */
+let curPage='hero';
+const unlocked=new Set(['hero']);
+let learnRead=new Set();
+let pracDone=new Set(),pracOK=0;
+let qIdx=0,qSc=0;
+const TOTAL_LEARN=8,TOTAL_PRAC=8;
 
-/* =========================================
-   NAVIGATION
-========================================= */
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById('section-' + id).classList.add('active');
-  currentSection = id;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  updateProgress();
+/* ─── NAV ─── */
+function go(id){
+  if(!unlocked.has(id))return;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+  document.getElementById('pg-'+id).classList.add('show');
+  curPage=id;
+  window.scrollTo({top:0,behavior:'smooth'});
   updateNav();
-
-  if (id === 'learn') revealCards();
-  if (id === 'practice') revealScenarios();
-  if (id === 'quiz') renderQuestion();
+  if(id==='learn')revealLearn();
+  if(id==='practice')revealPrac();
+  if(id==='quiz')renderQ();
 }
-
-function updateProgress() {
-  const steps = ['hero', 'learn', 'practice', 'quiz', 'result'];
-  const idx = steps.indexOf(currentSection);
-  const pct = Math.round((idx / (steps.length - 1)) * 100);
-  document.getElementById('progress-bar').style.width = pct + '%';
-}
-
-function updateNav() {
-  const nav = document.getElementById('main-nav');
-  nav.classList.add('visible');
-  nav.querySelectorAll('.nav-btn').forEach((btn, i) => {
-    const sections = ['hero', 'learn', 'practice', 'quiz'];
-    btn.classList.toggle('active', sections[i] === currentSection);
+function updateNav(){
+  document.querySelectorAll('.nav-tab').forEach(t=>{
+    const tid=t.id.replace('nt-','');
+    t.className='nav-tab'+(unlocked.has(tid)?'':' locked')+(tid===curPage?' act-'+tid:'');
   });
 }
+function unlock(id){
+  unlocked.add(id);
+  updateNav();
+}
 
-/* =========================================
-   LEARNING DATA
-========================================= */
-const topics = [
-  {
-    color: 'gold', iconClass: 'icon-gold', icon: '🏛', accent: 'gold-text', exClass: '',
-    number: '01',
-    title: 'Was ist Stoizismus?',
-    preview: 'Eine Philosophie aus der Antike, die uns lehrt, ruhig und klar zu denken – auch wenn es schwierig wird.',
-    full: `Stoizismus ist eine Philosophie, die um 300 v. Chr. in Griechenland entstand und von Zenon von Kition gegründet wurde. Sie wurde später von römischen Denkern wie Marc Aurel, Seneca und Epiktet weiterentwickelt. Im Kern geht es darum: Was macht ein gutes Leben aus? Die Antwort der Stoiker – Vernunft, Tugend und innere Ruhe, unabhängig von äußeren Umständen.`,
-    exLabel: '📚 Alltagsbeispiel',
-    example: 'Stell dir vor, du verpasst den Bus. Ein Stoiker ärgert sich nicht lange, sondern fragt: "Was kann ich jetzt tun?" Er nutzt die Zeit zum Nachdenken statt zum Ärgern.'
+/* ─── LEARN DATA ─── */
+const topics=[
+  {col:'gc',ico:'ig',icon:'🏛',btn:'cg',exC:'',num:'01',
+   title:'Was ist Stoizismus?',
+   preview:'Eine Philosophie aus der Antike, die lehrt, ruhig und vernünftig zu denken – besonders wenn es schwierig wird.',
+   body:'Stoizismus entstand um 300 v. Chr. in Athen, gegründet von Zenon von Kition. Der Name kommt von „Stoa Poikile" – einer bemalten Säulenhalle, wo Zenon lehrte. Später prägten Römer wie der Kaiser Marc Aurel, der Philosoph Seneca und der Sklave Epiktet diese Philosophie weiter. Ihr Kern: Nicht äußere Umstände bestimmen unser Glück, sondern wie wir mit ihnen umgehen. Stoizismus ist keine passive Philosophie des Ertragens, sondern eine aktive Praxis des vernünftigen, tugendhaften Lebens. Noch heute inspiriert sie Millionen Menschen – von Managern bis zu Sportlern.',
+   exLabel:'📚 Historischer Kontext',
+   ex:'Marc Aurel war der mächtigste Mann der Welt – römischer Kaiser. Trotzdem schrieb er täglich in ein Tagebuch über Bescheidenheit, Geduld und Selbstkritik. Seine „Selbstbetrachtungen" sind bis heute eines der meistgelesenen Bücher der Weltgeschichte.'
   },
-  {
-    color: 'purple', iconClass: 'icon-purple', icon: '🎮', accent: 'purple-text', exClass: 'purple-border',
-    number: '02',
-    title: 'Kontrolle & kein Kontrolle',
-    preview: 'Du kannst nicht alles beeinflussen – aber immer entscheiden, wie du darauf reagierst.',
-    full: `Das Herzstück des Stoizismus: Die sogenannte "Dichotomie der Kontrolle". Es gibt Dinge, die in unserer Macht stehen (unsere Gedanken, Reaktionen, Entscheidungen) und Dinge, die es nicht tun (Wetter, andere Menschen, Noten des Lehrers). Die Stoiker sagen: Fokussiere deine Energie nur auf das, was du wirklich beeinflussen kannst.`,
-    exLabel: '📱 Social-Media-Beispiel',
-    example: 'Jemand likt deinen Post nicht. Das kannst du nicht kontrollieren. Was du kontrollieren kannst: ob du dein Selbstwertgefühl von Likes abhängig machst.'
+  {col:'pc',ico:'ip',icon:'🎮',btn:'cp',exC:'ep',num:'02',
+   title:'Die Dichotomie der Kontrolle',
+   preview:'Das wichtigste Konzept: Manche Dinge hängen von dir ab – andere nicht. Dieser Unterschied ändert alles.',
+   body:'Epiktet formulierte es präzise: „Von den Dingen sind die einen in unserer Macht, die anderen nicht." In unserer Macht: Meinungen, Absichten, Reaktionen, Entscheidungen. Nicht in unserer Macht: Körper, Ruf, Besitz, Wetter, das Verhalten anderer. Das klingt einfach – ist aber eine der härtesten Übungen im Alltag. Die meisten Menschen verschwenden ihre Energie damit, das Unkontrollierbare zu kontrollieren: Was denken andere über mich? Warum war das Wetter schlecht? Stoiker stellen eine simple Frage: „Liegt das in meiner Macht?" Wenn nein: loslassen. Wenn ja: handeln.',
+   exLabel:'📱 Social Media',
+   ex:'Jemand schreibt einen gemeinen Kommentar unter deinen Post. Du kannst nicht kontrollieren, was andere schreiben – das liegt außerhalb deiner Macht. Was in deiner Macht liegt: ob du antwortest, wie du antwortest, und ob dein Selbstwertgefühl von fremden Meinungen abhängt.'
   },
-  {
-    color: 'teal', iconClass: 'icon-teal', icon: '⚖', accent: 'teal-text', exClass: 'teal-border',
-    number: '03',
-    title: 'Tugend als Lebenszweck',
-    preview: 'Nicht Reichtum oder Ruhm machen dich glücklich – sondern wer du als Person bist.',
-    full: `Für die Stoiker ist Tugend (griech. "arete") das höchste Gut. Darunter verstehen sie: Weisheit, Gerechtigkeit, Mut und Besonnenheit. Diese vier Tugenden nennt man auch die stoischen Kardinaltugenden. Geld, Schönheit oder Beliebtheit sind keine Garanten für Glück – aber ein tugendhafter Charakter ist es.`,
-    exLabel: '🏫 Schulbeispiel',
-    example: 'Wenn du in der Klasse jemandem hilfst, der gemobbt wird, handelst du tugendhaft – auch wenn niemand es sieht und du nichts dafür bekommst.'
+  {col:'tc',ico:'it',icon:'⚖',btn:'ct',exC:'et',num:'03',
+   title:'Die vier Kardinaltugenden',
+   preview:'Für Stoiker ist Tugend das einzige wirkliche Gut. Vier Tugenden bilden den Kern eines guten Charakters.',
+   body:'Die vier stoischen Kardinaltugenden: (1) Weisheit – die Fähigkeit, richtig zu urteilen und klug zu handeln. (2) Gerechtigkeit – anderen gegenüber fair, ehrlich und wohlwollend zu sein. (3) Mut – nicht nur physischer Mut, sondern der Mut, das Richtige zu tun, wenn es unbequem ist. (4) Besonnenheit – Selbstkontrolle, Maß halten, impulsive Reaktionen zügeln. Diese vier Tugenden sind laut Stoikern wertvoller als jeder äußere Erfolg. Man kann sie nicht kaufen, nicht geschenkt bekommen – man muss sie täglich üben.',
+   exLabel:'🏫 Schule',
+   ex:'Wenn du siehst, dass jemand in der Klasse gemobbt wird und du eingreifst – auch wenn du riskierst, selbst zum Ziel zu werden – zeigst du Mut (Tugend Nr. 3). Niemand sieht es, du wirst nicht belohnt. Es zählt trotzdem.'
   },
-  {
-    color: 'gold', iconClass: 'icon-gold', icon: '🧠', accent: 'gold-text', exClass: '',
-    number: '04',
-    title: 'Emotionen & Vernunft',
-    preview: 'Stoiker unterdrücken keine Gefühle – sie lernen, klug mit ihnen umzugehen.',
-    full: `Ein weit verbreiteter Irrtum: Stoiker haben keine Gefühle. Falsch! Sie haben Emotionen, aber sie lassen sich von ihnen nicht überwältigen. Sie unterscheiden zwischen automatischen Reaktionen (z. B. Schreck) und überdachten Urteilen (z. B. dauerhafter Ärger). Die Vernunft hilft, blinde emotionale Reaktionen zu hinterfragen.`,
-    exLabel: '😤 Stress-Beispiel',
-    example: 'Du kriegst eine schlechte Note. Erster Impuls: Wut. Stoische Reaktion: kurz innehalten, die Situation analysieren – was kann ich beim nächsten Mal besser machen?'
+  {col:'gc',ico:'ig',icon:'🧠',btn:'cg',exC:'',num:'04',
+   title:'Emotionen & Vernunft',
+   preview:'Stoiker sind keine Roboter. Sie haben Gefühle – aber sie lassen sich nicht von ihnen überwältigen.',
+   body:'Ein häufiges Missverständnis: Stoiker haben keine Emotionen. Falsch! Sie empfinden Freude, Trauer, Wut und Angst wie alle Menschen. Der Unterschied liegt im Umgang. Stoiker unterscheiden zwischen „erster Bewegung" (automatische Reaktion, z. B. Erschrecken) und „Urteil" (die bewusste Entscheidung, wie man damit umgeht). Die erste Bewegung ist unvermeidlich. Das Urteil – ob man sich von der Emotion mitreißen lässt – liegt in unserer Kontrolle. Viktor Frankl nannte das den „Raum zwischen Reiz und Reaktion". Diesen Raum kann man vergrößern – durch Übung.',
+   exLabel:'😤 Stresssituation',
+   ex:'Dein Lehrer kritisiert dich laut vor der Klasse. Erste Bewegung: Puls steigt, Scham, Röte im Gesicht – automatisch, unvermeidlich. Stoische Reaktion: Eine kurze Pause. Tief atmen. Frage: „Ist die Kritik berechtigt?" Das ist der trainierbare Unterschied.'
   },
-  {
-    color: 'purple', iconClass: 'icon-purple', icon: '🌊', accent: 'purple-text', exClass: 'purple-border',
-    number: '05',
-    title: 'Innerer Friede vs. Äußerer Erfolg',
-    preview: 'Wahres Glück kommt von innen – nicht von Noten, Likes oder anderen Meinungen.',
-    full: `Die Stoiker unterscheiden zwischen "inneren Gütern" (Charakter, Ruhe, Weisheit) und "äußeren Gütern" (Geld, Ruhm, Status). Äußerer Erfolg kann gut sein – aber er darf keine Voraussetzung für dein Wohlbefinden sein. Das nennt man "eudaimonia" – ein gelungenes, inneres Wohlbefinden, das nicht von Außen abhängt.`,
-    exLabel: '🎭 Schule & Anerkennung',
-    example: 'Wenn dein Selbstwert nur von guten Noten oder dem Beifall anderer abhängt, bist du nie wirklich frei. Ein Stoiker arbeitet hart – aber seine innere Ruhe hängt nicht am Ergebnis.'
+  {col:'pc',ico:'ip',icon:'🌊',btn:'cp',exC:'ep',num:'05',
+   title:'Innerer Friede vs. Äußerer Erfolg',
+   preview:'Was macht uns wirklich glücklich? Die Antwort der Stoiker ist überraschend – und bis heute revolutionär.',
+   body:'Stoiker unterscheiden zwischen „inneren Gütern" (Tugend, Weisheit, Charakter) und „äußeren Gütern" (Geld, Ruhm, Status). Äußere Güter sind „bevorzugte Gleichgültigkeiten" – schön, wenn man sie hat, aber keine Grundlage für Glück. Der Begriff dafür ist Eudaimonia – inneres Gedeihen durch ein vernünftiges, tugendhaftes Leben. Das klingt abstrakt, aber es bedeutet: Dein Wohlbefinden darf nicht davon abhängen, was andere über dich denken, wie viele Likes du bekommst oder welche Note im Zeugnis steht. Das ist echte Freiheit.',
+   exLabel:'🎭 Zwei Schüler',
+   ex:'Schüler A: Top-Noten, beliebt, Klassensprecher – aber innerlich voller Angst, das alles zu verlieren. Schüler B: mittelmäßige Noten, hilft anderen, handelt fair, kennt seine Werte. Wer lebt laut Stoizismus das bessere Leben?'
+  },
+  {col:'tc',ico:'it',icon:'🔥',btn:'ct',exC:'et',num:'06',
+   title:'Negative Visualisierung',
+   preview:'Stelle dir vor, was schiefgehen könnte – nicht aus Pessimismus, sondern um innerlich stärker zu werden.',
+   body:'„Premeditatio Malorum" bedeutet „Vorbetrachtung der Übel". Die Stoiker empfehlen, sich täglich vorzustellen: Was könnte ich verlieren? Was könnte schiefgehen? Wie würde ich damit umgehen? Das klingt negativ – ist aber das Gegenteil. Wer sich vorstellt, was er verlieren könnte, schätzt es mehr. Wer sich vorstellt, wie er mit Rückschlägen umgehen würde, ist weniger erschüttert, wenn sie eintreten. Marc Aurel tat dies täglich. Seneca schrieb: „Überlege dir jeden Abend, was du tun würdest, wenn das Schlimmste eintrifft – dann wirst du es nicht fürchten."',
+   exLabel:'🧘 Prüfungsübung',
+   ex:'Vor einer wichtigen Prüfung: Stell dir vor, du hast versagt. Wie würdest du reagieren? Was wäre der nächste Schritt? Was würdest du lernen? Diese Übung reduziert Prüfungsangst – weil du weißt, dass du damit umgehen könntest.'
+  },
+  {col:'gc',ico:'ig',icon:'⏳',btn:'cg',exC:'',num:'07',
+   title:'Memento Mori',
+   preview:'„Bedenke, dass du sterblich bist." Für Stoiker ist das keine Morbidität, sondern die kraftvollste Motivation.',
+   body:'„Memento Mori" heißt wörtlich: „Bedenke, dass du sterblich bist." Das ist keine depressive Obsession, sondern eine Einladung: Wenn alles endlich ist – was ist dann wirklich wichtig? Marc Aurel erinnerte sich täglich an seine Vergänglichkeit – nicht aus Trauer, sondern um im Jetzt präsent zu bleiben und sein Leben nicht zu verschwenden. Stoiker glaubten: Wer den Tod nicht fürchtet, fürchtet nichts. Wer weiß, dass die Zeit begrenzt ist, handelt mit mehr Absicht und weniger Prokrastination.',
+   exLabel:'💭 Denkanstoß',
+   ex:'Stell dir vor, du hast noch genau einen Monat zu leben. Welche Streitigkeiten würden plötzlich unwichtig wirken? Mit wem würdest du deine Zeit verbringen? Wem würdest du danken? Diese Fragen helfen, heute klarer zu priorisieren.'
+  },
+  {col:'pc',ico:'ip',icon:'🌐',btn:'cp',exC:'ep',num:'08',
+   title:'Kosmopolitismus & Mitgefühl',
+   preview:'Stoiker erfanden den Begriff „Weltbürger". Was das bedeutet, ist heute aktueller denn je.',
+   body:'Die Stoiker prägten den Begriff „Kosmopolit" – Weltbürger. Sie glaubten: Alle Menschen teilen die gleiche Vernunft (Logos) und sind dadurch verbunden. Daraus folgt eine radikale Schlussfolgerung: Du schuldest jedem Menschen Mitgefühl und Gerechtigkeit – nicht nur deiner Familie, nicht nur deiner Gruppe, sondern allen. Epiktet, selbst ein Sklave, lehrte: Die Seele des anderen ist genauso wertvoll wie deine. Diese Haltung widerspricht jeder Form von Diskriminierung und ist bis heute ein moralischer Kompass.',
+   exLabel:'🏫 Alltagsbeispiel',
+   ex:'Wenn du in der Klasse jemanden siehst, der ausgeschlossen wird – jemanden, der vielleicht nicht in deine Gruppe passt – dann ist die stoische Antwort klar: Auch dieser Mensch verdient Würde. Nicht weil es cool ist, sondern weil es richtig ist.'
   },
 ];
 
-function buildLearnCards() {
-  const grid = document.getElementById('learn-cards');
-  topics.forEach((t, i) => {
-    grid.innerHTML += `
-    <div class="learn-card ${t.color}" id="lcard-${i}" style="transition-delay:${i * 0.08}s">
-      <div class="card-icon-wrap ${t.iconClass}">${t.icon}</div>
-      <div class="card-number">Thema ${t.number}</div>
-      <div class="card-title">${t.title}</div>
-      <div class="card-preview">${t.preview}</div>
-      <button class="card-expand-btn ${t.accent}" onclick="toggleCard(${i})">
-        <span id="lcard-btn-${i}">Mehr erfahren</span> <span id="lcard-arrow-${i}">↓</span>
+function buildLearn(){
+  const g=document.getElementById('lgrid');
+  topics.forEach((t,i)=>{
+    g.innerHTML+=`<div class="lc ${t.col}" id="lc-${i}" style="transition-delay:${i*.06}s">
+      <div class="li ${t.ico}">${t.icon}</div>
+      <div class="ln">Thema ${t.num}</div>
+      <div class="lt">${t.title}</div>
+      <div class="lp">${t.preview}</div>
+      <div class="ls unread" id="ls-${i}">○ Noch nicht gelesen</div>
+      <button class="lb ${t.btn}" onclick="toggleLearn(${i})">
+        <span id="lb-${i}">Thema öffnen</span> <span id="la-${i}">↓</span>
       </button>
-      <div class="card-expanded" id="lcard-exp-${i}">
-        <div class="card-full-text">${t.full}</div>
-        <div class="example-box ${t.exClass}">
-          <div class="example-label">${t.exLabel}</div>
-          ${t.example}
-        </div>
+      <div class="le" id="le-${i}">
+        <div class="lbody">${t.body}</div>
+        <div class="exb ${t.exC}"><div class="exl">${t.exLabel}</div>${t.ex}</div>
       </div>
     </div>`;
   });
 }
 
-function toggleCard(i) {
-  const exp = document.getElementById('lcard-exp-' + i);
-  const btn = document.getElementById('lcard-btn-' + i);
-  const arrow = document.getElementById('lcard-arrow-' + i);
-  const isOpen = exp.classList.toggle('open');
-  btn.textContent = isOpen ? 'Weniger anzeigen' : 'Mehr erfahren';
-  arrow.textContent = isOpen ? '↑' : '↓';
+function toggleLearn(i){
+  const exp=document.getElementById('le-'+i);
+  const st=document.getElementById('ls-'+i);
+  const open=exp.classList.toggle('open');
+  document.getElementById('lb-'+i).textContent=open?'Schließen':'Thema öffnen';
+  document.getElementById('la-'+i).textContent=open?'↑':'↓';
+  if(open&&!learnRead.has(i)){
+    learnRead.add(i);
+    st.className='ls read';st.textContent='✓ Gelesen';
+    updateGate();
+  }
 }
 
-function revealCards() {
-  setTimeout(() => {
-    document.querySelectorAll('.learn-card').forEach(c => c.classList.add('revealed'));
-  }, 100);
+function updateGate(){
+  const n=learnRead.size,pct=Math.round(n/TOTAL_LEARN*100);
+  document.getElementById('gbar').style.width=pct+'%';
+  document.getElementById('g-num').textContent=n+'/'+TOTAL_LEARN;
+  document.getElementById('g-txt').textContent=n+' von '+TOTAL_LEARN+' Themen gelesen';
+  if(n>=TOTAL_LEARN){
+    document.getElementById('btn-tp').disabled=false;
+    unlock('practice');
+  }
 }
 
-/* =========================================
-   SCENARIOS DATA
-========================================= */
-const scenarios = [
-  {
-    number: '01',
-    situation: 'Schlechte Note bekommen',
-    context: 'Du hast eine 5 in Mathe bekommen, obwohl du gelernt hast. Deine Freunde fragen, wie es war.',
-    options: ['A) Wütend werden und den Lehrer beschuldigen', 'B) So tun, als wäre nichts – es einfach ignorieren', 'C) Kurz enttäuscht sein, dann analysieren was verbessert werden kann', 'D) Aufgeben und nicht mehr für Mathe lernen'],
-    correct: 2,
-    feedbacks: [
-      { type: 'bad', text: '😤 Das ist nicht stoisch. Du machst andere für etwas verantwortlich, das du beeinflussen kannst. Die Reaktion eines anderen (Lehrer, Note) zu kontrollieren liegt nicht in deiner Macht.' },
-      { type: 'ok', text: '😐 Besser als Wut – aber Ignorieren ist kein Fortschritt. Ein Stoiker denkt aktiv nach, statt wegzuschauen.' },
-      { type: 'good', text: '✅ Perfekt stoisch! Du akzeptierst das Ergebnis (es ist passiert, du kannst es nicht ändern), und fokussierst deine Energie auf das, was du kontrollieren kannst: deine Vorbereitung.' },
-      { type: 'bad', text: '😞 Aufgeben ist das Gegenteil von Stoizismus. Herausforderungen werden als Wachstumschance gesehen, nicht als Grund zum Aufgeben.' },
-    ]
-  },
-  {
-    number: '02',
-    situation: 'Ausschluss aus einer Gruppe',
-    context: 'Deine Freunde haben ohne dich etwas geplant und dich nicht eingeladen. Du erfährst es über Instagram.',
-    options: ['A) Ihnen böse sein und die Freundschaft beenden', 'B) Ruhig bleiben – vielleicht hat es einen Grund', 'C) Stundenlang über das Gefühl des Ausschlusses nachgrübeln', 'D) Sie öffentlich auf Social Media bloßstellen'],
-    correct: 1,
-    feedbacks: [
-      { type: 'bad', text: '😤 Eine extreme Reaktion auf etwas, das du nicht vollständig kennst. Stoiker handeln nicht aus einem ersten Impuls heraus.' },
-      { type: 'good', text: '✅ Stoisch! Du akzeptierst das Gefühl, ohne dich davon überwältigen zu lassen. Das Verhalten anderer liegt nicht in deiner Kontrolle – deine Reaktion darauf schon.' },
-      { type: 'bad', text: '😔 Endloses Grübeln verändert nichts und erschöpft dich. Stoiker unterscheiden zwischen kurzem Nachdenken (hilfreich) und Rumination (schädlich).' },
-      { type: 'bad', text: '😬 Das wäre impulsiv und würde die Situation verschlimmern. Ein Stoiker fragt: "Bringt das irgendetwas Gutes?"' },
-    ]
-  },
-  {
-    number: '03',
-    situation: 'Kritik vom Lehrer vor der Klasse',
-    context: 'Dein Lehrer kritisiert laut vor der ganzen Klasse deinen Vortrag. Alle schauen dich an.',
-    options: ['A) Sofort zurückargumentieren und verteidigen', 'B) Verlegen werden, aber inner­lich die Kritik abwägen', 'C) Tief durch­atmen, die Kritik annehmen und daraus lernen', 'D) Nicht mehr am Unterricht teilnehmen aus Angst vor weiterer Kritik'],
-    correct: 2,
-    feedbacks: [
-      { type: 'ok', text: '😐 Manchmal ist Verteidigung angebracht – aber impulsiv zu reagieren verschlimmert oft die Situation. Stoiker wählen den Moment bewusst.' },
-      { type: 'ok', text: '🤔 Das ist ein Schritt in die richtige Richtung! Aber du könntest noch einen Schritt weiter gehen: die Kritik aktiv als Lernchance nutzen.' },
-      { type: 'good', text: '✅ Stoisch und stark! Du kontrollierst deine Reaktion, nimmst konstruktive Kritik an und zeigst echte innere Stärke. Das erfordert Mut (eine stoische Tugend!).' },
-      { type: 'bad', text: '😟 Rückzug aus Angst ist das Gegenteil von Mut. Die Stoiker lehrten, Herausforderungen als Training für den Charakter zu sehen.' },
-    ]
-  },
-  {
-    number: '04',
-    situation: 'Sportteam-Ausscheidung',
-    context: 'Du hast beim Tryout für das Schulteam nicht den Cut gemacht. Ein Freund wurde aufgenommen.',
-    options: ['A) Eifersüchtig auf den Freund sein und Abstand halten', 'B) Dem Freund gratulieren und selbst weiter trainieren', 'C) Behaupten, das Team sei es sowieso nicht wert', 'D) Das Training komplett aufgeben'],
-    correct: 1,
-    feedbacks: [
-      { type: 'bad', text: '😔 Eifersucht entsteht, wenn man das Glück anderer mit dem eigenen vergleicht. Stoiker wissen: das Glück anderer nimmt dir nichts weg.' },
-      { type: 'good', text: '✅ Sehr stoisch! Du freust dich ehrlich für andere (Gerechtigkeit/Wohlwollen) und nimmst deine eigene Entwicklung selbst in die Hand. Beides liegt in deiner Kontrolle.' },
-      { type: 'ok', text: '😏 Das ist Rationalisierung – eine mentale Schutzstrategie, aber keine ehrliche Auseinandersetzung. Stoiker stehen zur Wahrheit, auch wenn sie schmerzt.' },
-      { type: 'bad', text: '😤 Aufgeben nach einem Rückschlag ist die unstoischste Reaktion. Schwierigkeiten sind im Stoizismus Training, keine Endurteile.' },
-    ]
-  },
-  {
-    number: '05',
-    situation: 'Stress vor einer Prüfung',
-    context: 'Morgen ist eine wichtige Prüfung. Du hast gelernt, bist aber sehr nervös und kannst nicht schlafen.',
-    options: ['A) Die ganze Nacht durch lernen und noch mehr Stress aufbauen', 'B) Akzeptieren, dass Nervosität normal ist, und bewusst abschalten', 'C) Davon ausgehen, dass du scheitern wirst – und nichts mehr tun', 'D) Andere fragen, damit sie für dich entscheiden'],
-    correct: 1,
-    feedbacks: [
-      { type: 'bad', text: '😓 Mehr Stress erzeugt mehr Chaos. Stoiker wissen, dass übermäßige Vorbereitung aus Angst kontraproduktiv ist. Der Körper braucht Ruhe.' },
-      { type: 'good', text: '✅ Stoisch! Du hast getan, was in deiner Macht stand (lernen). Jetzt bewusst loszulassen und zu schlafen ist nicht Schwäche – es ist Weisheit.' },
-      { type: 'bad', text: '🙁 Pessimismus führt zu Passivität. Stoiker denken voraus – aber sie verharren nicht in negativen Zukunftsszenarien.' },
-      { type: 'bad', text: '🤷 Entscheidungen an andere abzugeben bedeutet, die Verantwortung für das eigene Leben abzugeben. Stoiker übernehmen Eigenverantwortung.' },
-    ]
-  },
-  {
-    number: '06',
-    situation: 'Ungerechter Vorwurf',
-    context: 'Jemand beschuldigt dich vor anderen, etwas getan zu haben, das du nicht getan hast. Mehrere glauben ihr/ihm.',
-    options: ['A) Sofort und laut protestieren, wütend werden', 'B) Ruhig und klar erklären, was wirklich passiert ist', 'C) Nichts tun und hoffen, dass es sich von selbst löst', 'D) Die Person vor anderen bloßstellen zur Vergeltung'],
-    correct: 1,
-    feedbacks: [
-      { type: 'bad', text: '😤 Wut schadet deiner Glaubwürdigkeit und gibt der Situation mehr Macht über dich. Stoiker handeln mit kühlem Kopf, nicht aus Empörung.' },
-      { type: 'good', text: '✅ Perfekt stoisch! Du nutzt Vernunft statt Emotion, Klarheit statt Aggression. Was andere denken, liegt nicht in deiner Kontrolle – dein Verhalten schon.' },
-      { type: 'ok', text: '😕 Manchmal löst sich nichts von selbst. Passivität kann als Schuldgeständnis wirken. Stoiker handeln, wenn es nötig ist.' },
-      { type: 'bad', text: '😠 Vergeltung widerspricht der stoischen Tugend der Gerechtigkeit. Aggression erzeugt mehr Aggression – das löst keine Probleme.' },
-    ]
-  },
+function revealLearn(){
+  setTimeout(()=>document.querySelectorAll('.lc').forEach(c=>c.classList.add('in')),80);
+}
+
+/* ─── SCENARIOS ─── */
+const scenarios=[
+  {num:'01',sit:'Schlechte Note bekommen',ctx:'Du bekommst eine 5 in Deutsch. Du hast gelernt, aber nicht den richtigen Stoff wiederholt.',
+   opts:['Wütend werden und den Lehrer beschuldigen','Kurz enttäuscht sein, dann analysieren was du besser machen kannst','So tun, als wäre es egal, und das Heft wegwerfen','Allen erzählen, dass die Prüfung unfair war'],
+   cor:1,fbs:[
+     {t:'bad',tx:'😤 Nicht stoisch. Du machst jemand anderen für etwas verantwortlich, das du beeinflussen kannst. Die Note ist passiert – was zählt jetzt ist, was du daraus machst.'},
+     {t:'good',tx:'✅ Perfekt stoisch! Kurze Enttäuschung ist menschlich (erste Bewegung). Du fokussierst dich dann auf das, was in deiner Macht liegt: deine Vorbereitung beim nächsten Mal.'},
+     {t:'bad',tx:'😐 Ignorieren ist kein Fortschritt. Ein Stoiker schaut der Wahrheit ins Gesicht, auch wenn sie unangenehm ist.'},
+     {t:'bad',tx:'😬 Das ist Rationalisierung. Du schützt dein Ego, anstatt ehrlich mit der Situation umzugehen.'},
+   ]},
+  {num:'02',sit:'Ausschluss aus der Gruppe',ctx:'Deine Freunde haben ohne dich etwas geplant. Du siehst es auf Instagram – niemand hat dich eingeladen.',
+   opts:['Ihnen böse sein und die Freundschaft innerlich beenden','Ihnen öffentlich auf Social Media zeigen, wie verletzt du bist','Ruhig bleiben, vielleicht nachfragen – dein Wohlbefinden nicht davon abhängig machen','Stundenlang grübeln und das Schlimmste annehmen'],
+   cor:2,fbs:[
+     {t:'bad',tx:'😔 Eine extreme Reaktion auf ein Ereignis, dessen Hintergründe du nicht kennst.'},
+     {t:'bad',tx:'😬 Social-Media-Drama eskaliert fast immer. Ein Stoiker fragt: "Bringt meine Reaktion eine Verbesserung?"'},
+     {t:'good',tx:'✅ Stoisch! Du nimmst das Gefühl wahr, lässt dich aber nicht davon überwältigen. Dein Wohlbefinden hängt nicht an der Entscheidung anderer.'},
+     {t:'bad',tx:'😓 Endloses Grübeln ohne Handlung ist Energieverschwendung. Stoiker denken kurz nach – und lassen dann los.'},
+   ]},
+  {num:'03',sit:'Öffentliche Kritik vor der Klasse',ctx:'Dein Lehrer korrigiert deinen Aufsatz laut vor der Klasse und nennt ihn "oberflächlich". Alle schauen dich an.',
+   opts:['Sofort laut zurückargumentieren','Verlegen werden, aber die Kritik innerlich abwägen','Tief durchatmen, die Kritik annehmen und fragen: Was kann ich daraus lernen?','Den Lehrer nie wieder mögen und innerlich abschalten'],
+   cor:2,fbs:[
+     {t:'ok',tx:'🤔 Manchmal berechtigt – aber impulsiv zu reagieren schadet meist der Situation.'},
+     {t:'ok',tx:'😌 Schon gut! Aber du könntest weitergehen: die Kritik als Wachstumschance aktiv nutzen.'},
+     {t:'good',tx:'✅ Sehr stoisch! Du kontrollierst deine Reaktion, nimmst Kritik konstruktiv an und zeigst echten Mut.'},
+     {t:'bad',tx:'😔 Passiver Rückzug und Verbitterung lösen nichts – und schaden nur dir.'},
+   ]},
+  {num:'04',sit:'Sportteam-Tryout gescheitert',ctx:'Du hast dich für das Schulbasketball-Team beworben. Dein Freund wurde aufgenommen, du nicht.',
+   opts:['Eifersüchtig auf den Freund sein und Abstand halten','Behaupten, das Team sei sowieso nichts wert','Dem Freund ehrlich gratulieren und selbst weiter trainieren','Das Training aufgeben – "es reicht einfach nicht"'],
+   cor:2,fbs:[
+     {t:'bad',tx:'😔 Das Glück anderer nimmt dir nichts weg. Eifersucht schadet nur dir.'},
+     {t:'bad',tx:'😏 Rationalisierung – du schützt dein Ego durch Abwertung. Ehrliche Auseinandersetzung ist stoischer.'},
+     {t:'good',tx:'✅ Sehr stoisch! Du freust dich für andere (Gerechtigkeit) und nimmst deine Entwicklung selbst in die Hand. Beides liegt in deiner Kontrolle.'},
+     {t:'bad',tx:'😞 Aufgeben nach einem Rückschlag ist das Gegenteil von Stoizismus. Epiktet wurde als Sklave geboren – er gab nie auf.'},
+   ]},
+  {num:'05',sit:'Prüfungsangst die Nacht davor',ctx:'Morgen ist eine wichtige Prüfung. Du hast ausreichend gelernt, bist aber sehr nervös und schläfst schlecht.',
+   opts:['Die ganze Nacht durch lernen, um die Angst zu beruhigen','Akzeptieren, dass Nervosität normal ist – bewusst abschalten und schlafen','Davon ausgehen, dass du scheitern wirst, und nichts mehr tun','Andere um Rat bitten, damit sie entscheiden'],
+   cor:1,fbs:[
+     {t:'bad',tx:'😓 Schlafentzug + mehr Stress = weniger Leistung. Du hast getan, was du konntest.'},
+     {t:'good',tx:'✅ Stoisch und weise! Du hast gelernt (in deiner Kontrolle). Jetzt loszulassen ist keine Schwäche – es ist Vernunft.'},
+     {t:'bad',tx:'😔 Pessimismus ohne Grundlage ist kein Stoizismus. Stoiker denken realistisch, nicht negativ.'},
+     {t:'bad',tx:'🤷 Eigenverantwortung ist ein stoisches Kernprinzip. Damit gibst du Kontrolle ab, die du hast.'},
+   ]},
+  {num:'06',sit:'Ungerechter Vorwurf',ctx:'Vor deiner gesamten Klasse beschuldigt dich jemand, geschummelt zu haben. Das stimmt nicht. Mehrere glauben der Person.',
+   opts:['Sofort wütend und laut protestieren','Ruhig und klar erklären, was wirklich passiert ist','Nichts sagen und hoffen, es löst sich von selbst','Die Person zur Vergeltung vor allen bloßstellen'],
+   cor:1,fbs:[
+     {t:'bad',tx:'😤 Wut mindert deine Glaubwürdigkeit. Stoiker handeln mit kühlem Kopf – besonders wenn es wichtig ist.'},
+     {t:'good',tx:'✅ Perfekt stoisch! Vernunft statt Emotion, Klarheit statt Aggression. Deine Reaktion liegt in deiner Kontrolle.'},
+     {t:'ok',tx:'😕 Manchmal löst sich nichts. Passivität kann als Schuldgeständnis wirken.'},
+     {t:'bad',tx:'😠 Vergeltung widerspricht Gerechtigkeit. Aggression erzeugt mehr Aggression.'},
+   ]},
+  {num:'07',sit:'Freund sagt etwas sehr Verletzendes',ctx:'Dein bester Freund sagt etwas sehr Verletzendes über dich, scheinbar aus dem Nichts. Du bist wütend und verletzt.',
+   opts:['Sofort mit Gleichem zurückzahlen','Schweigen und innerlich die Freundschaft beenden','Abstand nehmen, ruhig werden, dann offen das Gespräch suchen','Allen anderen davon erzählen um Mitgefühl zu sammeln'],
+   cor:2,fbs:[
+     {t:'bad',tx:'⚡ Verletzung mit Verletzung zu beantworten eskaliert. Zwei falsche Reaktionen ergeben keine richtige.'},
+     {t:'bad',tx:'😶 Stille Verbitterung zerstört die Freundschaft langsam – keine innere Stärke, sondern vermiedene Kommunikation.'},
+     {t:'good',tx:'✅ Stoisch und mutig! Du nimmst dir Zeit (zwischen Reiz und Reaktion) und suchst echte Klärung.'},
+     {t:'bad',tx:'🗣️ Das ist soziales Drama. Stoiker suchen echte Lösungen, keine Zustimmung von außen.'},
+   ]},
+  {num:'08',sit:'Kompletter Misserfolg bei etwas Wichtigem',ctx:'Du hast monatelang an einem Schulprojekt gearbeitet. Die Präsentation läuft katastrophal schief.',
+   opts:['Alles hinwerfen – "Ich bin einfach nicht gut genug"','Alle Schuld auf externe Faktoren schieben','Den Schmerz anerkennen, analysieren was schiefging, und weitermachen','So tun als wäre es kein Problem – nach innen aber zerbrechen'],
+   cor:2,fbs:[
+     {t:'bad',tx:'😔 Ein Misserfolg definiert dich nicht. Marc Aurel scheiterte oft – er hörte nie auf.'},
+     {t:'bad',tx:'🙄 Reine externe Attribution ist eine Schutzstrategie. Was lag wirklich in deiner Kontrolle?'},
+     {t:'good',tx:'✅ Echte stoische Stärke. Du erlaubst dir den Schmerz, bleibst aber handlungsfähig. Seneca: Scheitern ist Lehrerin, nicht Richterin.'},
+     {t:'bad',tx:'🎭 Oberflächliche Coolness bei innerem Zusammenbruch ist das Gegenteil von stoischer Authentizität.'},
+   ]},
 ];
 
-let pracAnsweredSet = new Set();
-
-function buildScenarios() {
-  const list = document.getElementById('scenarios-list');
-  scenarios.forEach((sc, si) => {
-    const opts = sc.options.map((opt, oi) => `
-      <button class="option-btn" id="s${si}o${oi}" onclick="selectOption(${si},${oi})">
-        <span class="option-letter">${['A','B','C','D'][oi]}</span>
-        <span>${opt}</span>
+function buildPrac(){
+  const l=document.getElementById('scl');
+  scenarios.forEach((sc,si)=>{
+    const opts=sc.opts.map((o,oi)=>`
+      <button class="op" id="s${si}o${oi}" onclick="pickOpt(${si},${oi})">
+        <span class="ol">${['A','B','C','D'][oi]}</span><span>${o}</span>
       </button>`).join('');
-
-    list.innerHTML += `
-    <div class="scenario-card" id="sc-${si}">
-      <div class="scenario-number">Szenario ${sc.number}</div>
-      <div class="scenario-situation">${sc.situation}</div>
-      <div class="scenario-context">
-        <div class="scenario-context-label">📍 Situation</div>
-        ${sc.context}
-      </div>
-      <div class="options-grid">${opts}</div>
-      <div class="feedback-box" id="sc-fb-${si}"></div>
+    l.innerHTML+=`<div class="scc" id="sc-${si}">
+      <div class="scn">Szenario ${sc.num}</div>
+      <div class="scs">${sc.sit}</div>
+      <div class="sctx"><div class="sctxl">📍 Situation</div>${sc.ctx}</div>
+      <div class="olist">${opts}</div>
+      <div class="fb" id="fb-${si}"></div>
     </div>`;
   });
 }
 
-function selectOption(si, oi) {
-  if (pracAnsweredSet.has(si)) return;
-  pracAnsweredSet.add(si);
-  pracAnswered++;
-
-  const sc = scenarios[si];
-  const isCorrect = oi === sc.correct;
-  const fb = sc.feedbacks[oi];
-
-  // Disable all options in this scenario
-  for (let j = 0; j < sc.options.length; j++) {
-    const btn = document.getElementById(`s${si}o${j}`);
-    btn.disabled = true;
-    if (j === sc.correct) btn.classList.add('correct');
-    else if (j === oi) btn.classList.add('wrong');
-    else btn.classList.add('neutral-off');
+function pickOpt(si,oi){
+  if(pracDone.has(si))return;
+  pracDone.add(si);
+  const sc=scenarios[si];
+  if(oi===sc.cor)pracOK++;
+  for(let j=0;j<sc.opts.length;j++){
+    const b=document.getElementById(`s${si}o${j}`);
+    b.disabled=true;
+    if(j===sc.cor)b.classList.add('correct');
+    else if(j===oi)b.classList.add('wrong');
+    else b.classList.add('dimmed');
   }
-
-  // Show feedback
-  const fbEl = document.getElementById('sc-fb-' + si);
-  fbEl.className = `feedback-box show ${fb.type}`;
-  fbEl.innerHTML = fb.text;
-
-  if (isCorrect) pracCorrect++;
-
-  // Update tracker
-  document.getElementById('prac-correct').textContent = pracCorrect;
-  document.getElementById('prac-total').textContent = pracAnswered;
-  const pct = Math.round((pracCorrect / pracAnswered) * 100);
-  document.getElementById('prac-pct').textContent = pct + '%';
+  document.getElementById('sc-'+si).classList.add('done');
+  const f=sc.fbs[oi];
+  const fb=document.getElementById('fb-'+si);
+  fb.className='fb show '+f.t;fb.innerHTML=f.tx;
+  document.getElementById('pt-a').textContent=pracDone.size;
+  document.getElementById('pt-c').textContent=pracOK;
+  document.getElementById('pt-p').textContent=Math.round(pracOK/pracDone.size*100)+'%';
+  if(pracDone.size>=TOTAL_PRAC){
+    document.getElementById('btn-tq').disabled=false;
+    unlock('quiz');
+  }
 }
 
-function revealScenarios() {
-  setTimeout(() => {
-    document.querySelectorAll('.scenario-card').forEach((c, i) => {
-      setTimeout(() => c.classList.add('revealed'), i * 100);
-    });
-  }, 100);
+function revealPrac(){
+  setTimeout(()=>document.querySelectorAll('.scc').forEach((c,i)=>setTimeout(()=>c.classList.add('in'),i*70)),80);
 }
 
-/* =========================================
-   QUIZ DATA
-========================================= */
-const quizQuestions = [
-  {
-    q: 'Du kannst eine Prüfung nicht bestehen. Was ist die stoischste Reaktion?',
-    opts: [
-      'Wütend auf den Lehrer werden',
-      'Die Situation akzeptieren und aus dem Fehler lernen',
-      'Schummeln beim nächsten Mal',
-      'Die Prüfung als unfair bezeichnen'
-    ],
-    correct: 1, pts: 2
-  },
-  {
-    q: 'Was liegt nach der stoischen Dichotomie der Kontrolle in DEINER Macht?',
-    opts: [
-      'Was andere über dich denken',
-      'Dein Instagram-Follower-Count',
-      'Deine eigenen Entscheidungen und Reaktionen',
-      'Das Wetter bei deiner Klassenfahrt'
-    ],
-    correct: 2, pts: 2
-  },
-  {
-    q: 'Was ist laut Stoizismus die wichtigste Quelle von Glück?',
-    opts: [
-      'Viel Geld und Status',
-      'Tugend und ein vernünftiger Charakter',
-      'Beliebtheit in der Schule',
-      'Gute Noten in allen Fächern'
-    ],
-    correct: 1, pts: 2
-  },
-  {
-    q: 'Wie gehen Stoiker mit negativen Emotionen um?',
-    opts: [
-      'Sie unterdrücken alle Gefühle komplett',
-      'Sie reagieren sofort, ohne nachzudenken',
-      'Sie analysieren die Gefühle vernünftig, bevor sie reagieren',
-      'Sie teilen alle Gefühle sofort auf Social Media'
-    ],
-    correct: 2, pts: 2
-  },
-  {
-    q: 'Ein Freund wird unfair behandelt. Was wäre stoisch?',
-    opts: [
-      'Ignorieren, weil es dich nichts angeht',
-      'Ruhig aber klar für Gerechtigkeit eintreten',
-      'Sofort eskalieren und andere aufstacheln',
-      'Ihm raten, es einfach hinzunehmen'
-    ],
-    correct: 1, pts: 2
-  },
-  {
-    q: 'Was ist die stoische Haltung zu äußerem Erfolg (z.B. gute Noten, Beliebtheit)?',
-    opts: [
-      'Äußerer Erfolg ist das Einzige, das zählt',
-      'Äußerer Erfolg ist egal – man soll sich gar nicht anstrengen',
-      'Äußerer Erfolg kann gut sein, darf aber nicht Voraussetzung für inneres Wohlbefinden sein',
-      'Stoiker hassen Erfolg'
-    ],
-    correct: 2, pts: 2
-  },
-  {
-    q: 'Welcher antike Stoiker war römischer Kaiser und schrieb das berühmte Werk "Selbstbetrachtungen"?',
-    opts: [
-      'Julius Cäsar',
-      'Sokrates',
-      'Marc Aurel',
-      'Platon'
-    ],
-    correct: 2, pts: 1
-  }
+/* ─── QUIZ ─── */
+const qs=[
+  {q:'Was liegt laut Epiktet in unserer Macht?',
+   opts:['Unsere Gesundheit und unser Körper','Unsere Meinungen und Reaktionen','Was andere über uns denken','Das Wetter und äußere Umstände'],cor:1,pts:2,
+   fbs:['❌ Körper und Gesundheit können durch äußere Einflüsse beeinträchtigt werden.','✅ Richtig! Meinungen, Urteile und Reaktionen gehören zur ersten Gruppe – das ist der Kern der Dichotomie.','❌ Was andere denken liegt ausdrücklich nicht in unserer Macht.','❌ Äußere Umstände sind das klassische Beispiel für Dinge außerhalb unserer Kontrolle.']},
+  {q:'Welche vier Tugenden bilden die stoischen Kardinaltugenden?',
+   opts:['Liebe, Hoffnung, Glaube und Geduld','Weisheit, Gerechtigkeit, Mut und Besonnenheit','Ehrlichkeit, Fleiß, Bescheidenheit und Treue','Stärke, Ausdauer, Intelligenz und Erfolg'],cor:1,pts:2,
+   fbs:['❌ Das sind christliche Tugenden, nicht stoische.','✅ Korrekt! Weisheit, Gerechtigkeit, Mut und Besonnenheit – die vier Bausteine eines guten Charakters.','❌ Diese Eigenschaften sind positiv, aber nicht die vier stoischen Kardinaltugenden.','❌ Erfolg ist für Stoiker kein Ziel, sondern höchstens ein Nebenprodukt.']},
+  {q:'Was bedeutet „Premeditatio Malorum"?',
+   opts:['Im Alltag Freude finden und dankbar sein','Vergangene Fehler ehrlich analysieren','Das mögliche Schlimmste vorstellen – um mental vorbereitet zu sein','Anderen vergeben und inneren Frieden finden'],cor:2,pts:2,
+   fbs:['❌ Das beschreibt eher Dankbarkeitspraxis – ein anderes Konzept.','❌ Vergangenheitsanalyse ist hilfreich, aber das ist nicht Premeditatio Malorum.','✅ Richtig! „Vorbetrachtung der Übel" – nicht aus Pessimismus, sondern um mental unerschütterlich zu werden.','❌ Vergeben ist wichtig, aber eine andere Praxis.']},
+  {q:'Wer war Marc Aurel und welche stoische Verbindung hat er?',
+   opts:['Ein griechischer Sklave der den Stoizismus gründete','Ein römischer Kaiser der täglich stoische Tagebücher schrieb','Ein mittelalterlicher Mönch der Epiktet übersetzte','Ein moderner Psychologe der Stoizismus und CBT verband'],cor:1,pts:1,
+   fbs:['❌ Epiktet war ein Sklave. Marc Aurel war Kaiser.','✅ Korrekt! Römischer Kaiser (161–180 n. Chr.) und Autor der „Selbstbetrachtungen" – bis heute eines der meistgelesenen Bücher der Welt.','❌ Marc Aurel lebte in der Antike, nicht im Mittelalter.','❌ Kognitive Verhaltenstherapie wurde im 20. Jahrhundert entwickelt.']},
+  {q:'Was ist Eudaimonia im stoischen Sinne?',
+   opts:['Äußeres Glück durch Erfolg und Reichtum','Das Streben nach Unsterblichkeit und Ruhm','Inneres Gedeihen durch Tugend und ein vernünftiges Leben','Zufriedenheit durch Vermeidung aller Probleme'],cor:2,pts:2,
+   fbs:['❌ Äußerer Erfolg ist für Stoiker gerade nicht Eudaimonia.','❌ Unsterblichkeit war kein stoisches Ziel – sie akzeptierten den Tod.','✅ Richtig! Eudaimonia – inneres Gedeihen durch Tugend und Vernunft, unabhängig von äußeren Umständen.','❌ Stoiker vermeiden keine Probleme – sie begegnen ihnen mit Vernunft und Mut.']},
+  {q:'Epiktet: „Menschen werden nicht durch Dinge beunruhigt, sondern durch ihre _______ über die Dinge."',
+   opts:['Gefühle und Emotionen','Meinungen und Urteile','Erfahrungen aus der Vergangenheit','Erwartungen an die Zukunft'],cor:1,pts:2,
+   fbs:['❌ Gefühle sind ein Resultat. Ursache sind nach Epiktet unsere Urteile und Bewertungen.','✅ Korrekt! Eines der bekanntesten Zitate des Stoizismus. Unsere Reaktion hängt von unseren Urteilen ab – und die können trainiert werden.','❌ Erfahrungen formen uns, sind aber nicht das, was Epiktet hier meint.','❌ Erwartungen sind ein Teil, aber das vollständige Zitat dreht sich um Meinungen und Urteile.']},
+  {q:'Was bedeutet „Memento Mori" und warum empfahlen es die Stoiker?',
+   opts:['„Erinnere dich an Siege" – um motiviert zu bleiben','„Bedenke, dass du sterblich bist" – um im Jetzt präsent zu bleiben','„Erinnere dich an Fehler" – um sie nicht zu wiederholen','„Gedenke der Götter" – als spirituelles Gebet'],cor:1,pts:2,
+   fbs:['❌ Stoiker betonten Bescheidenheit, nicht Triumphdenken.','✅ Richtig! Memento Mori erinnert uns an die eigene Vergänglichkeit – nicht aus Morbidität, sondern damit wir die begrenzte Zeit sinnvoll nutzen.','❌ Das beschreibt Reflexion über Fehler – ein anderes Konzept.','❌ Stoiker glaubten nicht an traditionelle Götter im Sinne von Gebeten.']},
+  {q:'Du hörst, wie Freunde schlecht über eine andere Person reden. Was ist die stoischste Reaktion?',
+   opts:['Mitmachen um dazuzugehören','Schweigen und innerlich zustimmen','Ruhig eine andere Perspektive einbringen oder das Thema wechseln','Alle laut konfrontieren und einen Streit verursachen'],cor:2,pts:2,
+   fbs:['❌ Mitmachen obwohl du es falsch findest verletzt Gerechtigkeit und deine eigene Integrität.','❌ Stille Zustimmung macht dich zum Mitläufer. Stoiker handeln nach ihren Werten – auch wenn es unbequem ist.','✅ Stoisch! Du handelst mutig und gerecht, ohne unnötig zu eskalieren. Ruhige Intervention ist echte Stärke.','❌ Eskalation ist impulsiv – das Gegenteil von stoischer Besonnenheit.']},
+  {q:'Welche Aussage beschreibt die stoische Haltung zu Emotionen am besten?',
+   opts:['Stoiker unterdrücken alle Emotionen komplett','Emotionen sind schwach – ein starker Mensch hat keine','Automatische Reaktionen sind unvermeidlich, aber bewusste Urteile können trainiert werden','Man sollte alle Gefühle sofort und ungefiltert ausdrücken'],cor:2,pts:2,
+   fbs:['❌ Stoiker unterdrücken keine Gefühle. Das ist eines der häufigsten Missverständnisse.','❌ Emotionen zu haben ist menschlich und unvermeidlich.','✅ Exakt! Stoiker unterscheiden zwischen erster Bewegung (automatisch) und Urteil (trainierbar). Die Lücke zwischen Reiz und Reaktion ist der Übungsraum.','❌ Ungefilterte Emotionsäußerung ist impulsiv – das Gegenteil von stoischer Besonnenheit.']},
+  {q:'Was beschreibt stoischen Kosmopolitismus?',
+   opts:['Reisen und die Welt kennenlernen','Alle Menschen als gleichwertig durch gemeinsame Vernunft betrachten','Die eigene Kultur als die beste ansehen','Sich aus allen politischen Angelegenheiten heraushalten'],cor:1,pts:2,
+   fbs:['❌ Reisen ist schön, aber nicht das stoische Konzept des Kosmopolitismus.','✅ Richtig! Stoiker glaubten, alle Menschen teilen den Logos (Vernunft) und verdienen daher gleiche Würde und Mitgefühl.','❌ Das Gegenteil. Stoiker lehnten Ethnozentrismus ab.','❌ Marc Aurel war Kaiser. Stoiker engagierten sich aktiv für das Gemeinwohl.']},
+  {q:'Dein Projekt scheitert trotz monatelanger Arbeit vollständig. Was wäre eine stoische Reaktion?',
+   opts:['„Ich bin ein Versager – das beweist es."','„Das ist alles die Schuld von Umständen und anderen."','„Ich bin enttäuscht, aber was liegt jetzt in meiner Macht?"','„Das war sowieso kein wichtiges Projekt."'],cor:2,pts:2,
+   fbs:['❌ Ein Misserfolg definiert nicht deinen Charakter. Stoiker trennen Ereignis von Identität.','❌ Reine externe Attribution verhindert Wachstum.','✅ Stoisch! Du erlaubst dir den Schmerz, ohne dich davon definieren zu lassen. Dann richtest du den Blick nach vorne.','❌ Selbstschutz durch Abwertung – keine ehrliche Auseinandersetzung mit der Realität.']},
+  {q:'Welcher der folgenden Denker war KEIN Stoiker?',
+   opts:['Epiktet','Marc Aurel','Seneca','Epikur'],cor:3,pts:1,
+   fbs:['❌ Epiktet war ein bedeutender stoischer Philosoph (ca. 50–135 n. Chr.).','❌ Marc Aurel war Kaiser und bekennender Stoiker.','❌ Seneca war einer der einflussreichsten Stoiker Roms.','✅ Korrekt! Epikur war Begründer des Epikureismus – einer Schule, die Lust als höchstes Gut sah. Fast das Gegenteil des Stoizismus!']},
 ];
+const MAX_SC=qs.reduce((a,q)=>a+q.pts,0);
 
-function renderQuestion() {
-  if (currentQuestion >= quizQuestions.length) {
-    showResults();
-    return;
-  }
-  const q = quizQuestions[currentQuestion];
-  const pct = Math.round((currentQuestion / quizQuestions.length) * 100);
-  document.getElementById('quiz-fill').style.width = pct + '%';
-  document.getElementById('quiz-prog-text').textContent = `${currentQuestion} / ${quizQuestions.length}`;
-  document.getElementById('quiz-pts-live').textContent = quizScore;
-  document.getElementById('btn-next-q').disabled = true;
-  selectedAnswer = null;
-
-  const letters = ['A', 'B', 'C', 'D'];
-  const optsHtml = q.opts.map((o, i) => `
-    <button class="quiz-option" id="qo-${i}" onclick="selectQuizOption(${i})">
-      <span class="quiz-option-letter">${letters[i]}</span>
-      <span>${o}</span>
-    </button>`).join('');
-
-  const container = document.getElementById('quiz-q-container');
-  container.classList.add('quiz-slide-out');
-  setTimeout(() => {
-    container.classList.remove('quiz-slide-out');
-    container.innerHTML = `
-      <div class="quiz-q-number">Frage ${currentQuestion + 1} von ${quizQuestions.length}</div>
-      <div class="quiz-q-text">${q.q}</div>
-      <div class="quiz-options">${optsHtml}</div>`;
-    container.classList.add('quiz-slide-in');
-    setTimeout(() => container.classList.remove('quiz-slide-in'), 350);
-  }, 300);
+function renderQ(){
+  if(qIdx>=qs.length){showResult();return}
+  const q=qs[qIdx];
+  const pct=Math.round(qIdx/qs.length*100);
+  document.getElementById('qpbf').style.width=pct+'%';
+  document.getElementById('ql-lbl').textContent=`Frage ${qIdx+1} von ${qs.length}`;
+  document.getElementById('q-sc').textContent=qSc;
+  document.getElementById('btn-qn').disabled=true;
+  document.getElementById('qhint').textContent='Wähle eine Antwort';
+  const letters=['A','B','C','D'];
+  const opts=q.opts.map((o,i)=>`<button class="qopt" id="qo-${i}" onclick="pickQ(${i})"><span class="ql">${letters[i]}</span><span>${o}</span></button>`).join('');
+  const box=document.getElementById('qcard');
+  box.classList.add('qso');
+  setTimeout(()=>{
+    box.classList.remove('qso');
+    box.innerHTML=`<div class="qn">Frage ${qIdx+1} · ${q.pts} Punkt${q.pts>1?'e':''}</div>
+      <div class="qt">${q.q}</div>
+      <div class="qpts">⭐ ${q.pts} ${q.pts>1?'Punkte':'Punkt'}</div>
+      <div class="qopts">${opts}</div>
+      <div class="qfb" id="qfb"></div>`;
+    box.classList.add('qsi');
+    setTimeout(()=>box.classList.remove('qsi'),280);
+  },260);
 }
 
-function selectQuizOption(i) {
-  if (document.getElementById('btn-next-q').getAttribute('data-answered') === '1') return;
-
-  const q = quizQuestions[currentQuestion];
-  selectedAnswer = i;
-
-  document.querySelectorAll('.quiz-option').forEach((btn, j) => {
-    btn.classList.remove('selected');
-    btn.disabled = true;
-  });
-  document.getElementById('qo-' + i).classList.add('selected');
-  document.getElementById('btn-next-q').disabled = false;
+function pickQ(i){
+  const q=qs[qIdx];
+  const ok=i===q.cor;
+  for(let j=0;j<q.opts.length;j++){
+    const b=document.getElementById('qo-'+j);b.disabled=true;
+    if(j===q.cor)b.classList.add('cor');
+    else if(j===i)b.classList.add('wrng');
+    else b.classList.add('dim');
+  }
+  const fb=document.getElementById('qfb');
+  fb.className='qfb show '+(ok?'good':'bad');
+  fb.textContent=(ok?'✅ ':'❌ ')+q.fbs[i];
+  if(ok)qSc+=q.pts;
+  document.getElementById('q-sc').textContent=qSc;
+  document.getElementById('btn-qn').disabled=false;
+  document.getElementById('qhint').textContent=ok?'Richtig! Weiter →':'Nicht ganz. Weiter →';
 }
 
-function nextQuestion() {
-  if (selectedAnswer !== null) {
-    const q = quizQuestions[currentQuestion];
-    if (selectedAnswer === q.correct) quizScore += q.pts;
-  }
-  currentQuestion++;
-  document.getElementById('quiz-pts-live').textContent = quizScore;
-  if (currentQuestion >= quizQuestions.length) {
-    showResults();
+function nextQ(){
+  qIdx++;
+  if(qIdx>=qs.length)showResult();
+  else renderQ();
+}
+
+/* ─── RESULT ─── */
+function showResult(){
+  unlock('result');
+  const rn=document.getElementById('nt-result');rn.style.display='';
+  go('result');
+  const pct=Math.round(qSc/MAX_SC*100);
+  let medal,verdict,vc,strength,improve,tips;
+  if(pct>=75){
+    medal='🏛';verdict='Sehr Stoisch';vc='var(--gold)';
+    strength='Du hast die Kernprinzipien wirklich verinnerlicht. Du erkennst den Unterschied zwischen Kontrollierbarem und Unkontrollierbarem und weißt, dass Tugend wichtiger ist als äußerer Erfolg.';
+    improve='Die echte Herausforderung: Lebst du diese Prinzipien auch unter Druck? Theorie ist der erste Schritt – Praxis unter Stress ist die eigentliche Arbeit des Stoikers.';
+    tips=[{i:'📖',t:'Lies täglich ein kurzes Stück aus Marc Aurels Selbstbetrachtungen. Selbst eine Seite am Tag verändert die Denkweise.'},
+          {i:'✍️',t:'Führe ein stoisches Abendjournal: Was ist heute passiert? Was lag in meiner Kontrolle? Wie habe ich reagiert?'},
+          {i:'🧘',t:'Übe Premeditatio Malorum: Stelle dir morgens vor, was heute schiefgehen könnte. Dein Geist wird unerschütterbar.'},
+          {i:'🌐',t:'Versuche eine Woche, zuerst die Perspektive anderer zu verstehen, bevor du urteilst – kosmopolitisches Denken in Aktion.'}];
+  } else if(pct>=45){
+    medal='⚖';verdict='Auf dem Weg';vc='var(--purple2)';
+    strength='Du hast ein solides Grundverständnis und erkennst mehrere stoische Prinzipien. Besonders in praktischen Szenarien zeigen sich gute Instinkte.';
+    improve='Vertiefe die Dichotomie der Kontrolle und das Konzept Emotionen & Vernunft. Diese bilden das Fundament – alles andere folgt daraus.';
+    tips=[{i:'🔄',t:'Wenn du frustriert bist: Halte inne und frage laut: „Liegt das in meiner Kontrolle?" Beantworte die Frage ehrlich.'},
+          {i:'📚',t:'Gehe nochmal zu Thema 2 und 4 zurück und öffne die Beispiele. Erkennst du dich darin wieder?'},
+          {i:'⏸️',t:'Trainiere die Pause: Warte 10 Sekunden bevor du auf eine provozierende Nachricht antwortest.'},
+          {i:'🗣️',t:'Erkläre einem Freund, was Stoizismus ist. Wenn du es klar erklären kannst, hast du es wirklich verstanden.'}];
   } else {
-    renderQuestion();
+    medal='🌱';verdict='Noch nicht Stoisch';vc='var(--teal2)';
+    strength='Du hast die Reise begonnen – das ist der wichtigste Schritt. Jeder Philosoph fing bei null an.';
+    improve='Konzentriere dich zunächst auf nur ein Konzept: Die Dichotomie der Kontrolle. Dieses eine Prinzip, wirklich verstanden, verändert bereits viel.';
+    tips=[{i:'🔁',t:'Gehe zurück zur Lernsektion und lies alle 8 Themen durch – diesmal bewusst und ohne Eile.'},
+          {i:'🎯',t:'Merke dir diesen einen Satz: „Manche Dinge hängen von mir ab – andere nicht. Ich fokussiere mich auf das Erstere."'},
+          {i:'📝',t:'Schreibe heute Abend auf: Was hat mich gestört? War es in meiner Kontrolle? Was hätte ein Stoiker getan?'},
+          {i:'🌱',t:'Philosophie ist wie ein Muskel. Du brauchst kein perfektes Verständnis – tägliches Üben reicht.'}];
   }
-}
-
-/* =========================================
-   RESULTS
-========================================= */
-function showResults() {
-  const maxScore = quizQuestions.reduce((a, q) => a + q.pts, 0); // 13
-  const pct = Math.round((quizScore / maxScore) * 100);
-
-  let medal, verdict, verdictColor, strength, improve;
-  let tips;
-
-  if (pct >= 75) {
-    medal = '🏛';
-    verdict = 'Sehr Stoisch';
-    verdictColor = '#d4a843';
-    strength = 'Du verstehst die Kernprinzipien des Stoizismus gut. Du unterscheidest zwischen kontrollierbaren und unkontrollierbaren Dingen und siehst Tugend als echten Wert.';
-    improve = 'Prüfe, ob du diese Prinzipien auch im Alltag lebst – besonders in stressigen Momenten. Theorie und Praxis sind zwei verschiedene Dinge!';
-    tips = [
-      { icon: '📖', text: 'Lies jeden Morgen ein kurzes Zitat von Marc Aurel aus den "Selbstbetrachtungen".' },
-      { icon: '✍️', text: 'Führe ein Tagebuch: Was ist heute passiert? Was lag in meiner Kontrolle?' },
-      { icon: '🧘', text: 'Übe "negative Visualization": Stell dir morgens vor, was schiefgehen könnte – und dass du damit umgehen kannst.' },
-      { icon: '💪', text: 'Setze eine stoische Tugend pro Woche gezielt um: z. B. diese Woche "Besonnenheit".' },
-    ];
-  } else if (pct >= 45) {
-    medal = '⚖';
-    verdict = 'Auf dem Weg';
-    verdictColor = '#a78bfa';
-    strength = 'Du hast ein gutes Grundverständnis und erkennst einige stoische Prinzipien. Besonders bei konkreten Szenarien zeigst du gute Instinkte.';
-    improve = 'Vertiefe dein Verständnis der Dichotomie der Kontrolle und übe, zwischen Reaktion und Impuls zu unterscheiden. Lies die Grundlagen nochmal durch!';
-    tips = [
-      { icon: '🔄', text: 'Wenn du das nächste Mal frustriert bist, frage dich: "Liegt das in meiner Kontrolle?" Beantworte die Frage ehrlich.' },
-      { icon: '📚', text: 'Schau dir nochmal Thema 2 (Kontrolle) und Thema 4 (Emotionen) an – dort liegt dein größtes Wachstumspotenzial.' },
-      { icon: '🗣️', text: 'Erkläre einem Freund, was Stoizismus ist. Wenn du es erklären kannst, hast du es verstanden.' },
-      { icon: '⏸️', text: 'Übe die "Pause": Warte 10 Sekunden, bevor du auf eine provokante Nachricht antwortest.' },
-    ];
-  } else {
-    medal = '🌱';
-    verdict = 'Noch nicht Stoisch';
-    verdictColor = '#2dd4bf';
-    strength = 'Du hast diese Reise begonnen – das ist der wichtigste erste Schritt! Jeder Philosoph fing mal bei null an.';
-    improve = 'Geh zurück zu den Lernkarten und lies die Grundlagen durch. Stoizismus braucht Zeit – konzentriere dich zuerst auf das Kernprinzip der Kontrolle.';
-    tips = [
-      { icon: '🔁', text: 'Gehe zur Lern-Sektion zurück und lies jede Karte gründlich durch – besonders Thema 1 und 2.' },
-      { icon: '🎯', text: 'Merke dir diesen einen Satz: "Manche Dinge hängen von mir ab, andere nicht."' },
-      { icon: '📝', text: 'Schreibe heute Abend auf: Was hat mich heute gestört? Hätte ich es beeinflussen können?' },
-      { icon: '🌱', text: 'Philosophie ist wie ein Muskel – sie braucht Training. Beginne klein und bleib dran.' },
-    ];
-  }
-
-  showSection('result');
-
-  const inner = document.getElementById('result-inner');
-  inner.innerHTML = `
-    <div class="result-medal">${medal}</div>
-    <div class="result-verdict" style="color:${verdictColor}">${verdict}</div>
-    <div class="result-score-wrap">
-      <span>Dein Score:</span>
-      <span class="result-score-num">${quizScore}</span>
-      <span style="color:var(--text-muted)">/ ${maxScore} Punkte</span>
-      <span style="color:var(--text-muted); font-size:12px;">(${pct}%)</span>
+  const inner=document.getElementById('ri');
+  inner.innerHTML=`<span class="rm">${medal}</span>
+    <div class="rv" style="color:${vc}">${verdict}</div>
+    <div class="rsp">Quiz-Score: <span class="rpts" id="r-pts-c">0</span><span style="color:var(--txt3)">/ ${MAX_SC}</span><span class="rpct">${pct}%</span></div>
+    <div class="rrow">
+      <div class="rc"><div class="rcl rcl-g">✅ Stärken</div><div class="rcb">${strength}</div></div>
+      <div class="rc"><div class="rcl rcl-o">🎯 Wachstum</div><div class="rcb">${improve}</div></div>
     </div>
-
-    <div class="result-cards-row">
-      <div class="result-card">
-        <div class="result-card-label green">✅ Deine Stärken</div>
-        <div class="result-card-body">${strength}</div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-label orange">🎯 Verbesserungspotenzial</div>
-        <div class="result-card-body">${improve}</div>
-      </div>
+    <div class="rtips"><div class="rth">📜 Deine persönlichen Stoizismus-Übungen</div>
+      ${tips.map(t=>`<div class="tip"><span class="tic">${t.i}</span><span>${t.t}</span></div>`).join('')}
     </div>
-
-    <div class="result-tips">
-      <div class="result-tips-title">📜 Praktische Stoizismus-Tipps für dich</div>
-      ${tips.map(t => `
-        <div class="tip-item">
-          <span class="tip-icon">${t.icon}</span>
-          <span>${t.text}</span>
-        </div>`).join('')}
+    <div class="qbanner" style="margin-bottom:20px">
+      <blockquote>„Sorge dich nicht um das, was du nicht kontrollieren kannst."</blockquote>
+      <cite>– Epiktet</cite>
     </div>
-
-    <div class="stoic-quote-banner" style="margin:0 0 32px;">
-      <div class="quote-text">„Wer nicht weiß, wohin er will, für den ist kein Wind günstig."</div>
-      <div class="quote-author">– Seneca</div>
-    </div>
-
-    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-      <button class="btn-primary" onclick="showSection('learn')">📚 Nochmal lernen</button>
-      <button class="btn-restart" onclick="restartQuiz()">🔄 Quiz wiederholen</button>
+    <div class="rbtns">
+      <button class="btn-rm" onclick="go('learn')">📖 Nochmal lernen</button>
+      <button class="btn-rs" onclick="retake()">🔄 Quiz wiederholen</button>
     </div>`;
-
-  // Animate score counter
-  const scoreEl = inner.querySelector('.result-score-num');
-  let count = 0;
-  const interval = setInterval(() => {
-    count = Math.min(count + 1, quizScore);
-    scoreEl.textContent = count;
-    if (count >= quizScore) clearInterval(interval);
-  }, 60);
+  const el=document.getElementById('r-pts-c');
+  let c=0;const iv=setInterval(()=>{c=Math.min(c+1,qSc);el.textContent=c;if(c>=qSc)clearInterval(iv)},55);
 }
 
-function restartQuiz() {
-  quizScore = 0;
-  currentQuestion = 0;
-  selectedAnswer = null;
-  showSection('quiz');
-}
+function retake(){qIdx=0;qSc=0;document.getElementById('q-sc').textContent=0;go('quiz')}
 
-/* =========================================
-   INIT
-========================================= */
-buildLearnCards();
-buildScenarios();
+/* ─── INIT ─── */
+buildLearn();
+buildPrac();
+unlock('learn');
 updateNav();
-
-// Show nav after hero loads
-setTimeout(() => document.getElementById('main-nav').classList.add('visible'), 1500);
 </script>
 </body>
 </html>
