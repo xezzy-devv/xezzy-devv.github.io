@@ -4,489 +4,561 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stoisch Denken</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #06080f;
-  --card: #0f1520;
-  --card2: #141d2e;
-  --border: rgba(255,255,255,0.07);
-  --r: 14px;
-  --font-d: 'Cormorant Garamond', serif;
-  --font-b: 'Outfit', sans-serif;
-  --txt: #edeae0;
-  --txt2: #8e96ae;
-  --txt3: #4a5270;
-  --gold: #d4a843; --gold2: #f0c96a; --gold-bg: rgba(212,168,67,0.07);
-  --purple: #8b5cf6; --purple2: #c4b5fd; --purple-bg: rgba(139,92,246,0.07);
-  --teal: #0ea5e9; --teal2: #7dd3fc; --teal-bg: rgba(14,165,233,0.07);
-  --green: #10b981; --green2: #6ee7b7; --green-bg: rgba(16,185,129,0.07);
+:root{
+  --bg:#050810;
+  --bg2:#080c18;
+  --card:#0d1422;
+  --card-h:#111a2e;
+  --border:rgba(255,255,255,0.065);
+  --border-h:rgba(255,255,255,0.13);
+  --r:16px;--rs:10px;
+  --fd:'Playfair Display',serif;
+  --fb:'DM Sans',sans-serif;
+  --t:#ece8df;--t2:#8a93ad;--t3:#414d68;
+  --gold:#c9a227;--gold2:#e8c060;--gold3:rgba(201,162,39,0.12);
+  --purple:#7c3aed;--purple2:#a78bfa;--purple3:rgba(124,58,237,0.12);
+  --sky:#0284c7;--sky2:#38bdf8;--sky3:rgba(2,132,199,0.12);
+  --green:#059669;--green2:#34d399;--green3:rgba(5,150,105,0.12);
+  --red:#dc2626;--red2:#f87171;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--txt);font-family:var(--font-b);overflow-x:hidden;min-height:100vh}
-#cv{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.45}
+body{background:var(--bg);color:var(--t);font-family:var(--fb);overflow-x:hidden;min-height:100vh;font-size:15px;line-height:1.7}
 
-/* ─── TOP NAV ─── */
-#topnav{
+/* ── GRAIN OVERLAY ── */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.028;background-size:200px}
+
+/* ── CANVAS ── */
+#cv{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.55}
+
+/* ── NAVBAR ── */
+#nav{
   position:fixed;top:0;left:0;right:0;z-index:900;
-  background:rgba(6,8,15,0.94);
-  backdrop-filter:blur(24px);
+  display:flex;align-items:stretch;height:60px;
+  background:rgba(5,8,16,0.9);
+  backdrop-filter:blur(28px) saturate(180%);
   border-bottom:1px solid var(--border);
-  display:flex;align-items:stretch;
-  height:64px;
-  padding:0 10px;
 }
-.nav-logo{
-  display:flex;align-items:center;gap:8px;
-  padding:0 18px 0 10px;
-  font-family:var(--font-d);font-size:16px;color:var(--gold);
-  border-right:1px solid var(--border);
-  white-space:nowrap;flex-shrink:0;letter-spacing:.02em;
-}
-.nav-logo .nl-icon{font-size:20px}
-.nav-tabs{display:flex;flex:1;align-items:stretch;gap:3px;padding:8px 6px}
-.nav-tab{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:2px;border:none;background:none;cursor:pointer;
-  border-radius:10px;padding:5px 8px;
-  color:var(--txt3);font-family:var(--font-b);
-  transition:all .22s;position:relative;min-width:64px;
-  border:1px solid transparent;
-}
-.nav-tab .ti{font-size:18px;line-height:1;transition:transform .2s}
-.nav-tab .tl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;line-height:1}
-.nav-tab .td{position:absolute;bottom:5px;width:4px;height:4px;border-radius:50%;opacity:0;transition:opacity .2s}
+.nl{display:flex;align-items:center;gap:9px;padding:0 20px;
+  font-family:var(--fd);font-size:15px;color:var(--gold2);
+  border-right:1px solid var(--border);flex-shrink:0;letter-spacing:.01em}
+.nl-icon{font-size:18px}
+.nt-wrap{display:flex;flex:1;align-items:stretch;gap:2px;padding:7px 8px}
+.nt{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;border:none;cursor:pointer;border-radius:9px;padding:4px 6px;
+  color:var(--t3);font-family:var(--fb);font-size:10px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;background:none;
+  border:1px solid transparent;transition:all .2s;position:relative;min-width:56px}
+.nt-icon{font-size:17px;line-height:1;transition:transform .2s}
+.nt-dot{position:absolute;bottom:4px;width:3px;height:3px;border-radius:50%;opacity:0;transition:opacity .2s}
 
-/* Active state */
-.nav-tab.act-learn  {background:var(--gold-bg);color:var(--gold);border-color:rgba(212,168,67,.22)}
-.nav-tab.act-learn  .ti{transform:scale(1.15)}
-.nav-tab.act-learn  .td{background:var(--gold);opacity:1}
-.nav-tab.act-practice{background:var(--purple-bg);color:var(--purple2);border-color:rgba(139,92,246,.22)}
-.nav-tab.act-practice .ti{transform:scale(1.15)}
-.nav-tab.act-practice .td{background:var(--purple);opacity:1}
-.nav-tab.act-quiz   {background:var(--teal-bg);color:var(--teal2);border-color:rgba(14,165,233,.22)}
-.nav-tab.act-quiz   .ti{transform:scale(1.15)}
-.nav-tab.act-quiz   .td{background:var(--teal);opacity:1}
-.nav-tab.act-result {background:var(--green-bg);color:var(--green2);border-color:rgba(16,185,129,.22)}
-.nav-tab.act-result .ti{transform:scale(1.15)}
-.nav-tab.act-result .td{background:var(--green);opacity:1}
-.nav-tab.act-hero   {background:rgba(212,168,67,.06);color:var(--gold);border-color:rgba(212,168,67,.15)}
+/* per-section active styles */
+.nt.on-hero  {background:rgba(201,162,39,.08);color:var(--gold2);border-color:rgba(201,162,39,.2)}
+.nt.on-learn {background:rgba(201,162,39,.08);color:var(--gold2);border-color:rgba(201,162,39,.2)}
+.nt.on-learn .nt-dot{background:var(--gold);opacity:1}
+.nt.on-practice{background:rgba(124,58,237,.09);color:var(--purple2);border-color:rgba(124,58,237,.22)}
+.nt.on-practice .nt-dot{background:var(--purple2);opacity:1}
+.nt.on-quiz{background:rgba(2,132,199,.09);color:var(--sky2);border-color:rgba(2,132,199,.22)}
+.nt.on-quiz .nt-dot{background:var(--sky2);opacity:1}
+.nt.on-result{background:rgba(5,150,105,.09);color:var(--green2);border-color:rgba(5,150,105,.22)}
+.nt.on-result .nt-dot{background:var(--green2);opacity:1}
+.nt.on-hero  .nt-icon,.nt.on-learn .nt-icon,
+.nt.on-practice .nt-icon,.nt.on-quiz .nt-icon,.nt.on-result .nt-icon{transform:scale(1.15)}
 
-.nav-tab:not([class*="act-"]):not(.locked):hover{background:rgba(255,255,255,.05);color:var(--txt2)}
-.nav-tab.locked{cursor:not-allowed;opacity:.28}
-.nav-tab.locked:hover{background:none;color:var(--txt3)}
-
-/* Tooltip for locked */
-.nav-tab.locked::after{
+.nt:not([class*="on-"]):not(.lk):hover{background:rgba(255,255,255,.04);color:var(--t2)}
+.nt.lk{opacity:.25;cursor:not-allowed}
+.nt.lk:hover{background:none;color:var(--t3)}
+.nt.lk::after{
   content:'🔒 Noch nicht freigeschaltet';
-  position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);
-  background:#1a2236;border:1px solid var(--border);border-radius:8px;
-  font-size:11px;color:var(--txt2);white-space:nowrap;padding:6px 12px;
-  opacity:0;pointer-events:none;transition:opacity .2s;z-index:99;
+  position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);
+  background:#10182a;border:1px solid var(--border);border-radius:8px;
+  font-size:11px;color:var(--t2);white-space:nowrap;padding:6px 12px;
+  opacity:0;pointer-events:none;transition:opacity .15s;z-index:200;
+  text-transform:none;letter-spacing:0;font-weight:400}
+.nt.lk:hover::after{opacity:1}
+
+/* ── SECTION STRIPE ── */
+.stripe{height:3px;width:100%;position:sticky;top:60px;z-index:50}
+.sg{background:linear-gradient(90deg,#8a6500,var(--gold),var(--gold2),var(--gold))}
+.sp{background:linear-gradient(90deg,#3b0764,var(--purple),var(--purple2),var(--purple))}
+.ss{background:linear-gradient(90deg,#0c4a6e,var(--sky),var(--sky2),var(--sky))}
+.sn{background:linear-gradient(90deg,#064e3b,var(--green),var(--green2),var(--green))}
+
+/* ── PAGES ── */
+.pg{position:relative;z-index:1;display:none;padding-top:60px;min-height:100vh}
+.pg.show{display:block}
+
+/* ── SECTION INTRO (first-visit header) ── */
+.sec-intro{
+  overflow:hidden;
+  transition:max-height .6s cubic-bezier(.4,0,.2,1),opacity .4s,padding .4s,margin .4s;
+  max-height:400px;opacity:1;
 }
-.nav-tab.locked:hover::after{opacity:1}
+.sec-intro.collapsed{max-height:0 !important;opacity:0;padding:0;margin:0;pointer-events:none}
+.si-inner{text-align:center;padding:56px 24px 40px;max-width:680px;margin:0 auto}
+.si-badge{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:16px}
+.si-badge.bg{background:rgba(201,162,39,.1);color:var(--gold2);border:1px solid rgba(201,162,39,.2)}
+.si-badge.bp{background:rgba(124,58,237,.1);color:var(--purple2);border:1px solid rgba(124,58,237,.22)}
+.si-badge.bs{background:rgba(2,132,199,.1);color:var(--sky2);border:1px solid rgba(2,132,199,.22)}
+.si-badge.bn{background:rgba(5,150,105,.1);color:var(--green2);border:1px solid rgba(5,150,105,.22)}
+.si-title{font-family:var(--fd);font-size:clamp(2rem,5vw,3.4rem);font-weight:700;
+  line-height:1.1;margin-bottom:10px}
+.si-desc{font-size:14.5px;color:var(--t2);font-weight:300;line-height:1.75;max-width:520px;margin:0 auto}
 
-/* ─── PAGES ─── */
-.page{position:relative;z-index:1;display:none;padding-top:64px;min-height:100vh}
-.page.show{display:block}
+/* ── CONTENT WRAP ── */
+.cw{max-width:1120px;margin:0 auto;padding:0 20px 80px}
+.cw-narrow{max-width:740px;margin:0 auto;padding:0 20px 80px}
 
-/* Section stripe */
-.stripe{height:4px;width:100%;position:sticky;top:64px;z-index:50}
-.stripe-gold{background:linear-gradient(90deg,#b8860e,var(--gold),var(--gold2))}
-.stripe-purple{background:linear-gradient(90deg,#5b21b6,var(--purple),var(--purple2))}
-.stripe-teal{background:linear-gradient(90deg,#0369a1,var(--teal),var(--teal2))}
-.stripe-green{background:linear-gradient(90deg,#065f46,var(--green),var(--green2))}
-
-/* Mode badge */
-.mode-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  padding:6px 16px;border-radius:50px;margin-bottom:18px;
-}
-.mb-g{background:rgba(212,168,67,.1);color:var(--gold);border:1px solid rgba(212,168,67,.22)}
-.mb-p{background:rgba(139,92,246,.1);color:var(--purple2);border:1px solid rgba(139,92,246,.22)}
-.mb-t{background:rgba(14,165,233,.1);color:var(--teal2);border:1px solid rgba(14,165,233,.22)}
-.mb-green{background:rgba(16,185,129,.1);color:var(--green2);border:1px solid rgba(16,185,129,.22)}
-
-/* ─── HERO ─── */
+/* ── HERO ── */
 #pg-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;min-height:100vh;padding:80px 24px 80px}
-.h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:22px;opacity:0;animation:fu .8s .1s forwards}
-.h-title{font-family:var(--font-d);font-size:clamp(3.4rem,9vw,7rem);font-weight:700;
-  line-height:1.04;margin-bottom:22px;opacity:0;animation:fu .8s .3s forwards}
-.h-title em{background:linear-gradient(135deg,var(--gold),var(--gold2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal}
-.h-sub{font-size:17px;font-weight:300;color:var(--txt2);max-width:500px;
-  margin-bottom:44px;line-height:1.75;opacity:0;animation:fu .8s .5s forwards}
-.h-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
-  opacity:0;animation:fu .8s .7s forwards}
-.btn-hero{background:linear-gradient(135deg,var(--gold),#b8861e);color:#0a0700;
-  font-family:var(--font-b);font-size:15px;font-weight:700;border:none;
-  padding:16px 40px;border-radius:50px;cursor:pointer;letter-spacing:.04em;
-  box-shadow:0 4px 28px rgba(212,168,67,.35);transition:all .3s}
-.btn-hero:hover{transform:translateY(-3px);box-shadow:0 8px 36px rgba(212,168,67,.5)}
+.h-eyebrow{font-size:10px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;opacity:0;animation:fu .9s .1s forwards}
+.h-title{font-family:var(--fd);font-size:clamp(4rem,11vw,8.5rem);font-weight:800;
+  line-height:.96;letter-spacing:-.02em;margin-bottom:8px;
+  opacity:0;animation:fu .9s .3s forwards}
+.h-title .accent{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.h-divider{width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:20px auto;opacity:0;animation:fu .9s .5s forwards}
+.h-sub{font-size:16.5px;font-weight:300;color:var(--t2);max-width:480px;
+  line-height:1.8;margin-bottom:44px;opacity:0;animation:fu .9s .6s forwards}
+.h-btn{background:linear-gradient(135deg,var(--gold),#a07c18);color:#080500;
+  font-family:var(--fb);font-size:14px;font-weight:700;border:none;
+  padding:15px 44px;border-radius:50px;cursor:pointer;letter-spacing:.05em;
+  box-shadow:0 4px 32px rgba(201,162,39,.35),inset 0 1px 0 rgba(255,255,255,.2);
+  transition:all .3s;opacity:0;animation:fu .9s .8s forwards;position:relative;overflow:hidden}
+.h-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
+  opacity:0;transition:opacity .3s}
+.h-btn:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(201,162,39,.5),inset 0 1px 0 rgba(255,255,255,.2)}
+.h-btn:hover::before{opacity:1}
 
-.h-chips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
-  margin-top:60px;opacity:0;animation:fu .8s 1s forwards}
-.chip{background:var(--card);border:1px solid var(--border);border-radius:50px;
-  padding:10px 20px;font-size:13px;color:var(--txt2);display:flex;align-items:center;gap:8px}
-.chip strong{color:var(--txt);font-weight:600}
+/* hero stat chips */
+.h-stats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  margin-top:56px;opacity:0;animation:fu .9s 1.05s forwards}
+.h-chip{display:flex;align-items:center;gap:8px;
+  background:var(--card);border:1px solid var(--border);border-radius:50px;
+  padding:9px 18px;font-size:12.5px;color:var(--t2);transition:all .3s}
+.h-chip:hover{border-color:rgba(201,162,39,.25);color:var(--t)}
+.h-chip strong{color:var(--t);font-weight:600}
 
-.h-qblock{max-width:580px;margin:56px auto 0;padding:28px 36px;
-  background:linear-gradient(135deg,rgba(212,168,67,.05),rgba(139,92,246,.04));
-  border:1px solid rgba(212,168,67,.14);border-radius:var(--r);
-  opacity:0;animation:fu .8s 1.2s forwards;text-align:center}
-.h-qblock blockquote{font-family:var(--font-d);font-size:1.3rem;font-style:italic;
-  line-height:1.55;margin-bottom:8px;color:var(--txt)}
-.h-qblock cite{font-size:11px;color:var(--gold);letter-spacing:.15em;
-  text-transform:uppercase;font-weight:600;font-style:normal}
+/* hero scroll indicator */
+.h-scroll{display:flex;flex-direction:column;align-items:center;gap:6px;
+  margin-top:64px;opacity:0;animation:fu .9s 1.3s forwards;color:var(--t3);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.h-scroll-line{width:1px;height:36px;background:linear-gradient(180deg,transparent,var(--gold));animation:scrollPulse 2s ease infinite}
 
-/* ─── SECTION LAYOUT ─── */
-.sw{max-width:1080px;margin:0 auto;padding:56px 20px 80px}
-.sh{text-align:center;margin-bottom:48px}
-.s-title{font-family:var(--font-d);font-size:clamp(2.3rem,5vw,3.8rem);font-weight:700;line-height:1.1;margin-bottom:12px}
-.s-desc{font-size:15px;color:var(--txt2);font-weight:300;max-width:560px;margin:0 auto;line-height:1.7}
+/* large quote card on hero */
+.h-quote{
+  max-width:620px;margin:48px auto 0;
+  padding:30px 40px;
+  background:linear-gradient(135deg,rgba(201,162,39,.06),rgba(124,58,237,.04));
+  border:1px solid rgba(201,162,39,.15);border-radius:var(--r);
+  opacity:0;animation:fu .9s 1.1s forwards;text-align:center}
+.h-quote blockquote{font-family:var(--fd);font-size:1.35rem;font-style:italic;
+  line-height:1.55;color:var(--t);margin-bottom:10px}
+.h-quote cite{font-size:10px;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;
+  font-weight:700;font-style:normal}
 
-/* ─── LEARN ─── */
-.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;margin-bottom:32px}
-.lc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-  padding:24px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;
-  opacity:0;transform:translateY(18px)}
+/* ── LEARN CARDS ── */
+.learn-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+  gap:14px;margin-bottom:28px}
+
+.lc{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:0;cursor:pointer;
+  transition:all .32s cubic-bezier(.4,0,.2,1);
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateY(16px)}
 .lc.in{opacity:1;transform:translateY(0)}
-.lc::after{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;
-  pointer-events:none;border-radius:var(--r)}
-.lc:hover{transform:translateY(-4px) !important;box-shadow:0 12px 36px rgba(0,0,0,.5)}
-.lc.gc::after{background:radial-gradient(ellipse at top left,rgba(212,168,67,.08),transparent 65%)}
-.lc.pc::after{background:radial-gradient(ellipse at top left,rgba(139,92,246,.08),transparent 65%)}
-.lc.tc::after{background:radial-gradient(ellipse at top left,rgba(14,165,233,.08),transparent 65%)}
-.lc:hover::after{opacity:1}
-.lc.gc:hover{border-color:rgba(212,168,67,.28)}
-.lc.pc:hover{border-color:rgba(139,92,246,.28)}
-.lc.tc:hover{border-color:rgba(14,165,233,.28)}
 
-.li{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;
-  justify-content:center;font-size:19px;margin-bottom:14px}
-.ig{background:rgba(212,168,67,.13)}.ip{background:rgba(139,92,246,.13)}.it{background:rgba(14,165,233,.13)}
+/* gradient border on hover via pseudo */
+.lc::before{
+  content:'';position:absolute;inset:0;
+  border-radius:var(--r);opacity:0;transition:opacity .35s;pointer-events:none;z-index:0}
+.lc.gc::before{background:radial-gradient(ellipse at 0% 0%,rgba(201,162,39,.1),transparent 60%)}
+.lc.pc::before{background:radial-gradient(ellipse at 0% 0%,rgba(124,58,237,.1),transparent 60%)}
+.lc.tc::before{background:radial-gradient(ellipse at 0% 0%,rgba(2,132,199,.1),transparent 60%)}
+.lc:hover::before{opacity:1}
+.lc:hover{transform:translateY(-4px) !important;box-shadow:0 16px 40px rgba(0,0,0,.55)}
+.lc.gc:hover{border-color:rgba(201,162,39,.28)}
+.lc.pc:hover{border-color:rgba(124,58,237,.28)}
+.lc.tc:hover{border-color:rgba(2,132,199,.28)}
 
-.ln{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--txt3);margin-bottom:5px}
-.lt{font-family:var(--font-d);font-size:1.4rem;font-weight:600;margin-bottom:7px}
-.lp{font-size:13.5px;color:var(--txt2);line-height:1.65;margin-bottom:12px}
+/* top accent bar per card color */
+.lc-bar{height:3px;border-radius:var(--r) var(--r) 0 0;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));position:relative;z-index:1}
+.lc-bar.bp{background:linear-gradient(90deg,var(--purple),var(--purple2))}
+.lc-bar.bt{background:linear-gradient(90deg,var(--sky),var(--sky2))}
+.lc-inner{padding:22px 24px 20px;position:relative;z-index:1}
 
-.ls{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;
-  letter-spacing:.07em;padding:4px 10px;border-radius:50px;margin-bottom:10px;transition:all .3s}
-.ls.unread{background:rgba(255,255,255,.04);color:var(--txt3);border:1px solid var(--border)}
-.ls.read{background:rgba(16,185,129,.1);color:var(--green2);border:1px solid rgba(16,185,129,.2)}
+.lc-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.lc-icon-wrap{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;
+  justify-content:center;font-size:18px;flex-shrink:0}
+.ig{background:rgba(201,162,39,.13)}.ip{background:rgba(124,58,237,.13)}.it{background:rgba(2,132,199,.13)}
+.lc-num{font-size:10px;font-weight:700;letter-spacing:.18em;color:var(--t3)}
 
-.lb{font-size:12px;font-weight:600;letter-spacing:.05em;display:inline-flex;
+.lc-status{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;
+  letter-spacing:.07em;padding:3px 9px;border-radius:50px;transition:all .3s}
+.lc-status.unread{background:rgba(255,255,255,.04);color:var(--t3);border:1px solid var(--border)}
+.lc-status.read{background:rgba(5,150,105,.1);color:var(--green2);border:1px solid rgba(5,150,105,.2)}
+
+.lc-title{font-family:var(--fd);font-size:1.35rem;font-weight:700;margin-bottom:6px;line-height:1.2}
+.lc-preview{font-size:13px;color:var(--t2);line-height:1.65;margin-bottom:14px}
+.lc-toggler{font-size:12px;font-weight:600;letter-spacing:.05em;display:inline-flex;
   align-items:center;gap:5px;background:none;border:none;cursor:pointer;padding:0;transition:gap .2s}
-.lb.cg{color:var(--gold)}.lb.cp{color:var(--purple2)}.lb.ct{color:var(--teal2)}
-.lb:hover{gap:9px}
-.le{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
-.le.open{display:block;animation:fi .3s}
-.lbody{font-size:13.5px;color:var(--txt2);line-height:1.75;margin-bottom:12px}
-.exb{border-left:3px solid var(--gold);border-radius:0 8px 8px 0;
-  background:rgba(255,255,255,.03);padding:12px 15px;font-size:13px;color:var(--txt2)}
-.exb.ep{border-left-color:var(--purple)}.exb.et{border-left-color:var(--teal)}
-.exl{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);margin-bottom:4px}
+.cg{color:var(--gold2)}.cp{color:var(--purple2)}.ct{color:var(--sky2)}
+.lc-toggler:hover{gap:9px}
 
-/* Gate */
-.gate{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-  padding:24px 28px;display:flex;align-items:center;gap:20px;margin-top:4px}
-.gbar-w{flex:1;height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
-.gbar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));
-  border-radius:4px;transition:width .4s}
-.g-info{text-align:right;white-space:nowrap}
-.g-num{font-family:var(--font-d);font-size:1.6rem;font-weight:700;color:var(--gold)}
-.g-lbl{font-size:11px;color:var(--txt3);letter-spacing:.08em}
+/* expanded content */
+.lc-exp{display:none;padding:0 24px 22px;position:relative;z-index:1}
+.lc-exp.open{display:block;animation:fi .3s ease}
+.lc-sep{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin-bottom:16px}
+.lc-body{font-size:13.5px;color:var(--t2);line-height:1.8;margin-bottom:14px}
+.lc-body strong{color:var(--t);font-weight:600}
 
-.qbanner{max-width:660px;margin:36px auto 0;background:linear-gradient(135deg,rgba(212,168,67,.05),rgba(139,92,246,.05));
-  border:1px solid rgba(212,168,67,.14);border-radius:var(--r);padding:28px 34px;text-align:center}
-.qbanner blockquote{font-family:var(--font-d);font-size:1.3rem;font-style:italic;line-height:1.5;margin-bottom:7px}
-.qbanner cite{font-size:11px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-style:normal;font-weight:600}
+/* example box */
+.ex-box{border-radius:var(--rs);padding:14px 16px;font-size:13px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.ex-box.eg{background:rgba(201,162,39,.06);border:1px solid rgba(201,162,39,.15)}
+.ex-box.ep{background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.15)}
+.ex-box.et{background:rgba(2,132,199,.06);border:1px solid rgba(2,132,199,.15)}
+.ex-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+.eg .ex-label{color:var(--gold)}.ep .ex-label{color:var(--purple2)}.et .ex-label{color:var(--sky2)}
 
-/* Next btn */
-.sf{display:flex;justify-content:center;padding-top:44px}
-.bnn{border:1.5px solid;border-radius:50px;font-family:var(--font-b);
-  font-size:14px;font-weight:600;padding:14px 36px;cursor:pointer;
-  letter-spacing:.04em;display:inline-flex;align-items:center;gap:10px;
-  transition:all .3s;background:transparent}
-.bnn:disabled{opacity:.28;cursor:not-allowed;transform:none !important;box-shadow:none !important}
-.bnn-g{border-color:rgba(212,168,67,.38);color:var(--gold)}
-.bnn-g:not(:disabled):hover{background:rgba(212,168,67,.09);box-shadow:0 0 24px rgba(212,168,67,.15);transform:translateY(-2px)}
-.bnn-p{border-color:rgba(139,92,246,.38);color:var(--purple2)}
-.bnn-p:not(:disabled):hover{background:rgba(139,92,246,.09);transform:translateY(-2px)}
+/* fun fact box */
+.ff-box{border-radius:var(--rs);padding:12px 16px;font-size:12.5px;color:var(--t2);line-height:1.65;
+  background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.08)}
+.ff-label{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
 
-/* ─── PRACTICE ─── */
-#pg-practice{background:linear-gradient(180deg,rgba(139,92,246,.03) 0%,transparent 55%)}
-.ptrk{display:flex;background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:28px;overflow:hidden}
-.ptc{flex:1;text-align:center;padding:16px 10px;border-right:1px solid var(--border)}
+/* ── GATE ── */
+.gate-bar-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:22px 28px;display:flex;align-items:center;gap:20px}
+.gate-track{flex:1;height:7px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
+.gate-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--gold2));
+  transition:width .45s;box-shadow:0 0 10px rgba(201,162,39,.4)}
+.gate-label-wrap{text-align:right;white-space:nowrap}
+.gate-count{font-family:var(--fd);font-size:1.7rem;font-weight:700;color:var(--gold);line-height:1}
+.gate-sub{font-size:10px;color:var(--t3);letter-spacing:.08em}
+
+/* quote strip */
+.qstrip{max-width:680px;margin:28px auto 0;padding:24px 34px;text-align:center;
+  background:linear-gradient(135deg,rgba(201,162,39,.05),rgba(124,58,237,.04));
+  border:1px solid rgba(201,162,39,.13);border-radius:var(--r)}
+.qstrip blockquote{font-family:var(--fd);font-size:1.2rem;font-style:italic;
+  line-height:1.55;margin-bottom:8px;color:var(--t)}
+.qstrip cite{font-size:10px;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-weight:700;font-style:normal}
+
+/* ── NEXT BUTTONS ── */
+.sec-foot{display:flex;justify-content:center;padding:36px 0 0}
+.btn-next{border:1.5px solid;border-radius:50px;font-family:var(--fb);font-size:13.5px;
+  font-weight:600;padding:13px 34px;cursor:pointer;letter-spacing:.04em;
+  display:inline-flex;align-items:center;gap:9px;transition:all .3s;background:transparent}
+.btn-next:disabled{opacity:.22;cursor:not-allowed;transform:none !important;box-shadow:none !important}
+.bn-g{border-color:rgba(201,162,39,.35);color:var(--gold2)}
+.bn-g:not(:disabled):hover{background:rgba(201,162,39,.09);box-shadow:0 0 24px rgba(201,162,39,.15);transform:translateY(-2px)}
+.bn-p{border-color:rgba(124,58,237,.35);color:var(--purple2)}
+.bn-p:not(:disabled):hover{background:rgba(124,58,237,.09);transform:translateY(-2px)}
+
+/* ── PRACTICE ── */
+#pg-practice{background:radial-gradient(ellipse at 50% 0%,rgba(124,58,237,.06),transparent 60%)}
+.ptracker{display:flex;background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);margin-bottom:24px;overflow:hidden}
+.ptc{flex:1;text-align:center;padding:16px 8px;border-right:1px solid var(--border)}
 .ptc:last-child{border-right:none}
-.ptv{font-family:var(--font-d);font-size:1.9rem;font-weight:700}
-.ptv.vc{color:var(--purple2)}.ptv.vg{color:var(--green)}.ptv.vp{color:var(--gold)}
-.ptl{font-size:10px;color:var(--txt3);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.ptv{font-family:var(--fd);font-size:2rem;font-weight:700;line-height:1}
+.ptv.vp{color:var(--purple2)}.ptv.vg{color:var(--green2)}.ptv.va{color:var(--gold2)}
+.ptl{font-size:10px;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
 
-.scc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-  padding:30px;margin-bottom:16px;opacity:0;transform:translateY(14px);transition:all .32s}
-.scc.in{opacity:1;transform:translateY(0)}
-.scc.done{border-color:rgba(139,92,246,.14)}
-.scn{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--txt3);margin-bottom:5px}
-.scs{font-family:var(--font-d);font-size:1.35rem;font-weight:600;margin-bottom:8px;line-height:1.3}
-.sctx{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;
-  padding:11px 15px;font-size:13.5px;color:var(--txt2);margin-bottom:18px}
-.sctxl{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--teal2);margin-bottom:3px}
-.olist{display:flex;flex-direction:column;gap:8px}
-.op{background:rgba(255,255,255,.03);border:1.5px solid var(--border);border-radius:10px;
-  padding:13px 15px;color:var(--txt2);font-family:var(--font-b);font-size:13.5px;
-  cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:11px;transition:all .2s}
-.op:hover:not(:disabled){background:rgba(139,92,246,.07);border-color:rgba(139,92,246,.32);color:var(--txt)}
-.op:disabled{cursor:default}
-.ol{width:24px;height:24px;border-radius:7px;background:rgba(255,255,255,.07);
+.scard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  margin-bottom:14px;overflow:hidden;opacity:0;transform:translateY(14px);transition:all .3s}
+.scard.in{opacity:1;transform:translateY(0)}
+.scard.done{border-color:rgba(124,58,237,.16)}
+.scard-bar{height:3px;background:linear-gradient(90deg,var(--purple),var(--purple2))}
+.scard-inner{padding:26px 28px}
+.sc-num{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:5px}
+.sc-sit{font-family:var(--fd);font-size:1.3rem;font-weight:700;margin-bottom:8px;line-height:1.25;color:var(--t)}
+.sc-ctx{background:rgba(2,132,199,.05);border:1px solid rgba(2,132,199,.12);border-radius:var(--rs);
+  padding:12px 16px;font-size:13px;color:var(--t2);margin-bottom:18px;line-height:1.65}
+.sc-ctx-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sky2);margin-bottom:4px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{background:rgba(255,255,255,.03);border:1.5px solid var(--border);border-radius:var(--rs);
+  padding:13px 15px;color:var(--t2);font-family:var(--fb);font-size:13.5px;
+  cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:11px;
+  transition:all .2s;position:relative;overflow:hidden}
+.opt::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(124,58,237,.06),transparent);
+  opacity:0;transition:opacity .2s}
+.opt:hover:not(:disabled)::before{opacity:1}
+.opt:hover:not(:disabled){border-color:rgba(124,58,237,.35);color:var(--t)}
+.opt:disabled{cursor:default}
+.opt-l{width:24px;height:24px;border-radius:7px;background:rgba(255,255,255,.07);
   display:flex;align-items:center;justify-content:center;font-size:11px;
-  font-weight:700;flex-shrink:0;margin-top:1px;transition:all .2s;color:var(--txt2)}
-.op.correct{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.35);color:var(--txt)}
-.op.correct .ol{background:var(--green);color:#fff}
-.op.wrong{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.24);color:var(--txt3)}
-.op.wrong .ol{background:rgba(239,68,68,.38);color:#fff}
-.op.dimmed{opacity:.36}
-.fb{display:none;margin-top:12px;border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.6;animation:fi .3s}
+  font-weight:700;flex-shrink:0;margin-top:1px;transition:all .2s;color:var(--t2)}
+.opt.correct{background:rgba(5,150,105,.07);border-color:rgba(5,150,105,.3)}
+.opt.correct .opt-l{background:var(--green);color:#fff}
+.opt.wrong{background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.22);color:var(--t3)}
+.opt.wrong .opt-l{background:rgba(220,38,38,.4);color:#fff}
+.opt.dimmed{opacity:.32}
+.fb{display:none;margin:12px 0 0;border-radius:var(--rs);padding:12px 15px;
+  font-size:13.5px;line-height:1.65;animation:fi .3s}
 .fb.show{display:block}
-.fb.good{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:var(--green2)}
-.fb.bad{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);color:#f87171}
-.fb.ok{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);color:#fbbf24}
+.fb.good{background:rgba(5,150,105,.08);border:1px solid rgba(5,150,105,.2);color:var(--green2)}
+.fb.bad{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.16);color:#f87171}
+.fb.ok{background:rgba(234,179,8,.06);border:1px solid rgba(234,179,8,.18);color:#fbbf24}
 
-/* ─── QUIZ ─── */
-#pg-quiz{background:linear-gradient(180deg,rgba(14,165,233,.03) 0%,transparent 55%)}
-.qw{max-width:700px;margin:0 auto;padding:56px 20px 80px}
+/* ── QUIZ ── */
+#pg-quiz{background:radial-gradient(ellipse at 50% 0%,rgba(2,132,199,.06),transparent 60%)}
 .qhdr{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-  padding:18px 22px;margin-bottom:24px}
-.qhdr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.qhdr-lbl{font-size:12px;color:var(--txt3);font-weight:500}
-.qhdr-sc{font-size:13px;color:var(--teal2);font-weight:600}
-.qpb{height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
-.qpbf{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal2));
-  border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px rgba(14,165,233,.35)}
+  padding:18px 22px;margin-bottom:22px}
+.qhdr-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.qhdr-label{font-size:12px;color:var(--t3);font-weight:500}
+.qhdr-score{font-size:13px;color:var(--sky2);font-weight:600}
+.qpb{height:7px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
+.qpbf{height:100%;background:linear-gradient(90deg,var(--sky),var(--sky2));
+  border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 10px rgba(2,132,199,.4)}
 
 .qcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-  padding:38px;position:relative;overflow:hidden}
-.qcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--teal),var(--purple),var(--gold))}
-.qn{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal2);margin-bottom:8px}
-.qt{font-family:var(--font-d);font-size:1.5rem;font-weight:600;line-height:1.35;margin-bottom:8px;color:var(--txt)}
-.qpts{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;
-  color:var(--gold);background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.2);
-  border-radius:50px;padding:3px 10px;margin-bottom:22px}
+  overflow:hidden;position:relative}
+.qcard-bar{height:3px;background:linear-gradient(90deg,var(--sky),var(--purple),var(--gold))}
+.qcard-inner{padding:34px 36px}
+.q-num{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--sky2);margin-bottom:8px}
+.q-txt{font-family:var(--fd);font-size:1.45rem;font-weight:700;line-height:1.35;margin-bottom:7px;color:var(--t)}
+.q-pts-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;
+  color:var(--gold);background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.18);
+  border-radius:50px;padding:3px 10px;margin-bottom:20px}
 .qopts{display:flex;flex-direction:column;gap:8px}
-.qopt{background:rgba(255,255,255,.03);border:1.5px solid var(--border);border-radius:10px;
-  padding:14px 17px;color:var(--txt2);font-family:var(--font-b);font-size:14px;
+.qopt{background:rgba(255,255,255,.03);border:1.5px solid var(--border);border-radius:var(--rs);
+  padding:14px 17px;color:var(--t2);font-family:var(--fb);font-size:14px;
   cursor:pointer;text-align:left;display:flex;align-items:center;gap:13px;
   position:relative;overflow:hidden;transition:all .2s}
 .qopt::before{content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(14,165,233,.06),transparent);opacity:0;transition:opacity .2s}
+  background:linear-gradient(90deg,rgba(2,132,199,.07),transparent);
+  opacity:0;transition:opacity .2s}
 .qopt:hover:not(:disabled)::before{opacity:1}
-.qopt:hover:not(:disabled){border-color:rgba(14,165,233,.38);color:var(--txt)}
+.qopt:hover:not(:disabled){border-color:rgba(2,132,199,.38);color:var(--t)}
 .qopt:disabled{cursor:default}
 .ql{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.07);
   display:flex;align-items:center;justify-content:center;font-size:12px;
-  font-weight:700;flex-shrink:0;transition:all .22s;color:var(--txt2)}
-.qopt.sel{border-color:var(--teal);color:var(--txt);background:rgba(14,165,233,.07)}
-.qopt.sel .ql{background:var(--teal);color:#fff}
-.qopt.cor{border-color:var(--green);background:rgba(16,185,129,.08);color:var(--txt)}
+  font-weight:700;flex-shrink:0;transition:all .22s;color:var(--t2)}
+.qopt.sel{border-color:var(--sky);background:rgba(2,132,199,.07);color:var(--t)}
+.qopt.sel .ql{background:var(--sky);color:#fff}
+.qopt.cor{border-color:var(--green);background:rgba(5,150,105,.07)}
 .qopt.cor .ql{background:var(--green);color:#fff}
-.qopt.wrng{border-color:rgba(239,68,68,.28);background:rgba(239,68,68,.05);color:var(--txt3)}
-.qopt.wrng .ql{background:rgba(239,68,68,.35);color:#fff}
-.qopt.dim{opacity:.34}
-.qfb{display:none;margin-top:14px;padding:13px 15px;border-radius:10px;font-size:13.5px;line-height:1.6;animation:fi .3s}
+.qopt.wrng{border-color:rgba(220,38,38,.28);background:rgba(220,38,38,.05);color:var(--t3)}
+.qopt.wrng .ql{background:rgba(220,38,38,.35);color:#fff}
+.qopt.dim{opacity:.32}
+.qfb{display:none;margin:12px 0 0;border-radius:var(--rs);padding:12px 16px;
+  font-size:13.5px;line-height:1.65;animation:fi .3s}
 .qfb.show{display:block}
-.qfb.good{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:var(--green2)}
-.qfb.bad{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);color:#f87171}
+.qfb.good{background:rgba(5,150,105,.08);border:1px solid rgba(5,150,105,.2);color:var(--green2)}
+.qfb.bad{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.2);color:#f87171}
+.qfoot{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+.qf-hint{font-size:12px;color:var(--t3)}
+.btn-qn{background:linear-gradient(135deg,var(--sky),#0369a1);color:#fff;
+  font-family:var(--fb);font-size:13.5px;font-weight:600;border:none;
+  padding:12px 28px;border-radius:50px;cursor:pointer;letter-spacing:.04em;
+  transition:all .3s;box-shadow:0 4px 18px rgba(2,132,199,.3)}
+.btn-qn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 26px rgba(2,132,199,.4)}
+.btn-qn:disabled{opacity:.28;cursor:not-allowed;transform:none;box-shadow:none}
+.qso{animation:sOut .24s ease forwards}.qsi{animation:sIn .24s ease forwards}
 
-.qfoot{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
-.qf-hint{font-size:12px;color:var(--txt3)}
-.btn-qn{background:linear-gradient(135deg,var(--teal),#0369a1);color:#fff;
-  font-family:var(--font-b);font-size:14px;font-weight:600;border:none;
-  padding:13px 30px;border-radius:50px;cursor:pointer;letter-spacing:.04em;
-  transition:all .3s;box-shadow:0 4px 18px rgba(14,165,233,.3)}
-.btn-qn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 26px rgba(14,165,233,.4)}
-.btn-qn:disabled{opacity:.3;cursor:not-allowed;transform:none;box-shadow:none}
-
-.qso{animation:sOut .26s ease forwards}.qsi{animation:sIn .26s ease forwards}
-
-/* ─── RESULT ─── */
-#pg-result{background:linear-gradient(180deg,rgba(16,185,129,.03) 0%,transparent 50%)}
-.rw{max-width:700px;margin:0 auto;padding:56px 20px 100px;text-align:center}
-.rm{font-size:76px;margin-bottom:14px;animation:pulse 2.4s ease infinite;display:block}
-.rv{font-family:var(--font-d);font-size:clamp(2.5rem,7vw,4.2rem);font-weight:700;line-height:1;margin-bottom:10px}
-.rsp{display:inline-flex;align-items:center;gap:10px;background:var(--card);
+/* ── RESULT ── */
+#pg-result{background:radial-gradient(ellipse at 50% 0%,rgba(5,150,105,.06),transparent 55%)}
+.res-wrap{max-width:720px;margin:0 auto;padding:20px 20px 100px;text-align:center}
+.res-medal{font-size:80px;display:block;margin-bottom:14px;animation:pulse 2.4s ease infinite}
+.res-verdict{font-family:var(--fd);font-size:clamp(2.8rem,7vw,4.5rem);font-weight:800;
+  line-height:1;margin-bottom:10px}
+.res-pill{display:inline-flex;align-items:center;gap:10px;background:var(--card);
   border:1px solid var(--border);border-radius:50px;padding:10px 22px;
-  margin-bottom:36px;font-size:14px;color:var(--txt2)}
-.rpts{font-family:var(--font-d);font-size:2rem;font-weight:700;color:var(--gold)}
-.rpct{font-size:12px;color:var(--txt3)}
-.rrow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;text-align:left}
-.rc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
-.rcl{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
-.rcl-g{color:var(--green)}.rcl-o{color:#fb923c}
-.rcb{font-size:13.5px;color:var(--txt2);line-height:1.65}
-.rtips{background:linear-gradient(135deg,rgba(212,168,67,.05),rgba(139,92,246,.05));
-  border:1px solid rgba(212,168,67,.17);border-radius:var(--r);padding:28px;text-align:left;margin-bottom:20px}
-.rth{font-family:var(--font-d);font-size:1.3rem;font-weight:600;color:var(--gold);margin-bottom:16px}
-.tip{display:flex;gap:11px;margin-bottom:11px;font-size:13.5px;color:var(--txt2);line-height:1.5}
-.tic{font-size:15px;flex-shrink:0;margin-top:2px}
-.rbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
-.btn-rm{background:linear-gradient(135deg,var(--gold),#b8861e);color:#0a0700;
-  font-family:var(--font-b);font-size:14px;font-weight:700;border:none;
+  margin-bottom:36px;font-size:14px;color:var(--t2)}
+.res-pts-num{font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--gold);line-height:1}
+.res-pct{font-size:12px;color:var(--t3)}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;text-align:left}
+.res-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.res-card-lbl{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.rcl-g{color:var(--green2)}.rcl-o{color:#fb923c}
+.res-card-body{font-size:13.5px;color:var(--t2);line-height:1.65}
+.res-tips-card{text-align:left;background:linear-gradient(135deg,rgba(201,162,39,.05),rgba(124,58,237,.04));
+  border:1px solid rgba(201,162,39,.16);border-radius:var(--r);padding:28px;margin-bottom:20px}
+.res-tips-h{font-family:var(--fd);font-size:1.25rem;font-weight:700;color:var(--gold2);margin-bottom:16px}
+.tip-row{display:flex;gap:11px;margin-bottom:11px;font-size:13.5px;color:var(--t2);line-height:1.55}
+.tip-ic{font-size:15px;flex-shrink:0;margin-top:2px}
+.res-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.btn-res-main{background:linear-gradient(135deg,var(--gold),#9a7510);color:#0a0800;
+  font-family:var(--fb);font-size:13.5px;font-weight:700;border:none;
   padding:13px 30px;border-radius:50px;cursor:pointer;transition:all .3s;
-  box-shadow:0 4px 18px rgba(212,168,67,.3)}
-.btn-rm:hover{transform:translateY(-2px)}
-.btn-rs{background:transparent;border:1.5px solid var(--border);color:var(--txt2);
-  font-family:var(--font-b);font-size:14px;padding:12px 26px;border-radius:50px;cursor:pointer;transition:all .3s}
-.btn-rs:hover{border-color:rgba(212,168,67,.28);color:var(--txt);background:rgba(212,168,67,.05)}
+  box-shadow:0 4px 18px rgba(201,162,39,.32)}
+.btn-res-main:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,162,39,.42)}
+.btn-res-sec{background:transparent;border:1.5px solid var(--border);color:var(--t2);
+  font-family:var(--fb);font-size:13.5px;padding:12px 26px;border-radius:50px;cursor:pointer;transition:all .3s}
+.btn-res-sec:hover{border-color:rgba(201,162,39,.28);color:var(--t);background:rgba(201,162,39,.05)}
 
-/* ─── ANIMS ─── */
-@keyframes fu{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+/* ── ANIMATIONS ── */
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fi{from{opacity:0}to{opacity:1}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-@keyframes sOut{to{opacity:0;transform:translateX(-24px)}}
-@keyframes sIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
+@keyframes sOut{to{opacity:0;transform:translateX(-20px)}}
+@keyframes sIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.1)}}
 
-/* ─── MOBILE ─── */
-@media(max-width:600px){
-  .lgrid{grid-template-columns:1fr}
-  .rrow{grid-template-columns:1fr}
-  .qcard{padding:24px 16px}
-  .scc{padding:22px 16px}
-  .nav-logo{display:none}
-  .nav-tab .tl{font-size:9px}
-  .nav-tab{min-width:50px}
+/* ── RESPONSIVE ── */
+@media(max-width:620px){
+  .learn-grid{grid-template-columns:1fr}
+  .res-grid{grid-template-columns:1fr}
+  .qcard-inner{padding:24px 18px}
+  .scard-inner{padding:22px 18px}
+  .nl{display:none}
+  .nt{min-width:46px}
+  .nt label{font-size:8px}
 }
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:rgba(212,168,67,.22);border-radius:3px}
+::-webkit-scrollbar-thumb{background:rgba(201,162,39,.2);border-radius:3px}
 </style>
 </head>
 <body>
+
 <canvas id="cv"></canvas>
 
-<!-- ═══ NAV ═══ -->
-<nav id="topnav">
-  <div class="nav-logo"><span class="nl-icon">⚖</span>Stoisch Denken</div>
-  <div class="nav-tabs">
-    <button class="nav-tab" id="nt-hero" onclick="go('hero')">
-      <span class="ti">🏠</span><span class="tl">Start</span><span class="td"></span>
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <div class="nl"><span class="nl-icon">⚖</span> Stoisch Denken</div>
+  <div class="nt-wrap">
+    <button class="nt" id="nt-hero" onclick="go('hero')">
+      <span class="nt-icon">🏠</span><span>Start</span><span class="nt-dot"></span>
     </button>
-    <button class="nav-tab locked" id="nt-learn" onclick="go('learn')">
-      <span class="ti">📖</span><span class="tl">Lernen</span><span class="td"></span>
+    <button class="nt lk" id="nt-learn" onclick="go('learn')">
+      <span class="nt-icon">📖</span><span>Lernen</span><span class="nt-dot"></span>
     </button>
-    <button class="nav-tab locked" id="nt-practice" onclick="go('practice')">
-      <span class="ti">⚡</span><span class="tl">Übungen</span><span class="td"></span>
+    <button class="nt lk" id="nt-practice" onclick="go('practice')">
+      <span class="nt-icon">⚡</span><span>Übungen</span><span class="nt-dot"></span>
     </button>
-    <button class="nav-tab locked" id="nt-quiz" onclick="go('quiz')">
-      <span class="ti">🎯</span><span class="tl">Quiz</span><span class="td"></span>
+    <button class="nt lk" id="nt-quiz" onclick="go('quiz')">
+      <span class="nt-icon">🎯</span><span>Quiz</span><span class="nt-dot"></span>
     </button>
-    <button class="nav-tab locked" id="nt-result" style="display:none" onclick="go('result')">
-      <span class="ti">🏆</span><span class="tl">Ergebnis</span><span class="td"></span>
+    <button class="nt lk" id="nt-result" style="display:none" onclick="go('result')">
+      <span class="nt-icon">🏆</span><span>Ergebnis</span><span class="nt-dot"></span>
     </button>
   </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
-<div id="pg-hero" class="page show">
-  <div class="stripe stripe-gold"></div>
-  <div id="section-hero">
-    <div class="h-tag">Antike Weisheit · Modernes Denken</div>
-    <h1 class="h-title">Stoisch<br>Denken –<br><em>Dein Guide</em></h1>
-    <p class="h-sub">Lerne die Prinzipien des Stoizismus, teste dich in realen Situationen und finde heraus, wie stoisch du wirklich denkst.</p>
-    <div class="h-btns">
-      <button class="btn-hero" onclick="go('learn')">🏛 Jetzt lernen starten</button>
+<!-- ══ HERO ══ -->
+<div id="pg-hero" class="pg show">
+  <div class="stripe sg"></div>
+  <div id="sec-hero">
+    <div class="h-eyebrow">300 v. Chr. · Athen · Zeitlos</div>
+    <h1 class="h-title">Stoisch<br>Denken –<br><span class="accent">Dein Guide</span></h1>
+    <div class="h-divider"></div>
+    <p class="h-sub">Entdecke die Philosophie, die Kaiser und Sklaven gleichermassen prägte – und teste dich selbst.</p>
+    <button class="h-btn" onclick="go('learn')">🏛 Lernen beginnen</button>
+    <div class="h-stats">
+      <div class="h-chip">📖 <strong>8</strong> Kernthemen</div>
+      <div class="h-chip">⚡ <strong>8</strong> Praxis-Szenarien</div>
+      <div class="h-chip">🎯 <strong>12</strong> Quizfragen</div>
+      <div class="h-chip">🔒 Abschnitte freischalten</div>
     </div>
-    <div class="h-chips">
-      <div class="chip">📖 <strong>8</strong> Lernthemen</div>
-      <div class="chip">⚡ <strong>8</strong> Praxis-Szenarien</div>
-      <div class="chip">🎯 <strong>12</strong> Quizfragen</div>
-      <div class="chip">🔒 Abschnitte freischalten</div>
-    </div>
-    <div class="h-qblock">
+    <div class="h-quote">
       <blockquote>„Es sind nicht die Dinge, die uns beunruhigen, sondern unsere Meinungen über die Dinge."</blockquote>
-      <cite>– Epiktet, Enchiridion</cite>
+      <cite>– Epiktet, Enchiridion · ca. 108 n. Chr.</cite>
+    </div>
+    <div class="h-scroll">
+      <div class="h-scroll-line"></div>
+      <span>Scrollen</span>
     </div>
   </div>
 </div>
 
-<!-- ═══ LEARN ═══ -->
-<div id="pg-learn" class="page">
-  <div class="stripe stripe-gold"></div>
-  <div class="sw">
-    <div class="sh">
-      <div class="mode-badge mb-g">📖 Modus: Lernen</div>
-      <h2 class="s-title">Die 8 Grundpfeiler des Stoizismus</h2>
-      <p class="s-desc">Öffne jede Karte und lies sie durch. Du musst alle 8 Themen lesen, um mit den Übungen fortzufahren.</p>
+<!-- ══ LEARN ══ -->
+<div id="pg-learn" class="pg">
+  <div class="stripe sg"></div>
+  <div class="sec-intro" id="intro-learn">
+    <div class="si-inner">
+      <div class="si-badge bg">📖 Modus: Lernen</div>
+      <h2 class="si-title">Die 8 Grundpfeiler des Stoizismus</h2>
+      <p class="si-desc">Öffne jede Karte und lies sie durch. Du musst alle 8 Themen gelesen haben, um mit den Übungen fortzufahren.</p>
     </div>
-    <div class="lgrid" id="lgrid"></div>
-    <div class="gate">
+  </div>
+  <div class="cw" id="learn-content">
+    <div class="learn-grid" id="lgrid"></div>
+    <div class="gate-bar-wrap">
       <div style="flex:1">
-        <div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:8px">
-          Fortschritt: <span id="g-txt">0 von 8 Themen gelesen</span>
+        <div style="font-size:13px;font-weight:600;color:var(--t);margin-bottom:8px">
+          Fortschritt: <span id="gate-txt">0 von 8 Themen gelesen</span>
         </div>
-        <div class="gbar-w"><div class="gbar" id="gbar" style="width:0%"></div></div>
+        <div class="gate-track"><div class="gate-fill" id="gate-fill" style="width:0%"></div></div>
       </div>
-      <div class="g-info">
-        <div class="g-num" id="g-num">0/8</div>
-        <div class="g-lbl">gelesen</div>
+      <div class="gate-label-wrap">
+        <div class="gate-count" id="gate-count">0/8</div>
+        <div class="gate-sub">gelesen</div>
       </div>
     </div>
-    <div class="qbanner">
-      <blockquote>„Wer nicht weiß, wohin er will, für den ist kein Wind günstig."</blockquote>
-      <cite>– Seneca</cite>
+    <div class="qstrip" style="margin-bottom:0">
+      <blockquote>„Wer nicht weiß wohin er will, für den ist kein Wind günstig."</blockquote>
+      <cite>– Seneca · Epistulae Morales</cite>
     </div>
-    <div class="sf">
-      <button class="bnn bnn-g" id="btn-tp" onclick="go('practice')" disabled>
+    <div class="sec-foot">
+      <button class="btn-next bn-g" id="btn-to-prac" onclick="go('practice')" disabled>
         Weiter zu den Übungen →
       </button>
     </div>
   </div>
 </div>
 
-<!-- ═══ PRACTICE ═══ -->
-<div id="pg-practice" class="page">
-  <div class="stripe stripe-purple"></div>
-  <div class="sw">
-    <div class="sh">
-      <div class="mode-badge mb-p">⚡ Modus: Übungen</div>
-      <h2 class="s-title">Stoisch handeln</h2>
-      <p class="s-desc">8 echte Situationen. Wähle die stoischste Reaktion – lies die Erklärungen genau. Beantworte alle Szenarien, um das Quiz freizuschalten.</p>
+<!-- ══ PRACTICE ══ -->
+<div id="pg-practice" class="pg">
+  <div class="stripe sp"></div>
+  <div class="sec-intro" id="intro-practice">
+    <div class="si-inner">
+      <div class="si-badge bp">⚡ Modus: Übungen</div>
+      <h2 class="si-title">Stoisch handeln</h2>
+      <p class="si-desc">8 reale Situationen. Wähle die stoischste Reaktion und erfahre warum. Beantworte alle, um das Quiz freizuschalten.</p>
     </div>
-    <div class="ptrk">
-      <div class="ptc"><div class="ptv vc" id="pt-a">0</div><div class="ptl">Beantwortet</div></div>
+  </div>
+  <div class="cw-narrow" id="practice-content">
+    <div class="ptracker">
+      <div class="ptc"><div class="ptv vp" id="pt-a">0</div><div class="ptl">Beantwortet</div></div>
       <div class="ptc"><div class="ptv vg" id="pt-c">0</div><div class="ptl">Stoisch ✓</div></div>
-      <div class="ptc"><div class="ptv vp" id="pt-p">–</div><div class="ptl">Stoisch-Rate</div></div>
+      <div class="ptc"><div class="ptv va" id="pt-p">–</div><div class="ptl">Stoisch-Rate</div></div>
     </div>
     <div id="scl"></div>
-    <div class="sf">
-      <button class="bnn bnn-p" id="btn-tq" onclick="go('quiz')" disabled>
-        Weiter zum Quiz →
-      </button>
+    <div class="sec-foot">
+      <button class="btn-next bn-p" id="btn-to-quiz" onclick="go('quiz')" disabled>Weiter zum Quiz →</button>
     </div>
   </div>
 </div>
 
-<!-- ═══ QUIZ ═══ -->
-<div id="pg-quiz" class="page">
-  <div class="stripe stripe-teal"></div>
-  <div class="qw">
-    <div class="sh">
-      <div class="mode-badge mb-t">🎯 Modus: Quiz</div>
-      <h2 class="s-title">Teste dein Wissen</h2>
-      <p class="s-desc">12 Fragen – von einfach bis anspruchsvoll. Lies jede Frage sorgfältig. Du erhältst nach jeder Antwort eine Erklärung.</p>
+<!-- ══ QUIZ ══ -->
+<div id="pg-quiz" class="pg">
+  <div class="stripe ss"></div>
+  <div class="sec-intro" id="intro-quiz">
+    <div class="si-inner">
+      <div class="si-badge bs">🎯 Modus: Quiz</div>
+      <h2 class="si-title">Teste dein Wissen</h2>
+      <p class="si-desc">12 Fragen von einfach bis knifflig. Lies jede Frage genau – du bekommst nach jeder Antwort eine Erklärung.</p>
     </div>
+  </div>
+  <div class="cw-narrow" id="quiz-content">
     <div class="qhdr">
-      <div class="qhdr-top">
-        <span class="qhdr-lbl" id="ql-lbl">Frage 1 von 12</span>
-        <span class="qhdr-sc">Punkte: <strong id="q-sc" style="color:var(--gold)">0</strong></span>
+      <div class="qhdr-row">
+        <span class="qhdr-label" id="q-lbl">Frage 1 von 12</span>
+        <span class="qhdr-score">Punkte: <strong id="q-sc" style="color:var(--gold)">0</strong></span>
       </div>
       <div class="qpb"><div class="qpbf" id="qpbf" style="width:0%"></div></div>
     </div>
-    <div class="qcard" id="qcard"></div>
+    <div class="qcard">
+      <div class="qcard-bar"></div>
+      <div class="qcard-inner" id="qcard-inner"></div>
+    </div>
     <div class="qfoot">
       <span class="qf-hint" id="qhint">Wähle eine Antwort</span>
       <button class="btn-qn" id="btn-qn" onclick="nextQ()" disabled>Weiter →</button>
@@ -494,254 +566,331 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font-b);overflow-x:
   </div>
 </div>
 
-<!-- ═══ RESULT ═══ -->
-<div id="pg-result" class="page">
-  <div class="stripe stripe-green"></div>
-  <div class="rw" id="ri"></div>
+<!-- ══ RESULT ══ -->
+<div id="pg-result" class="pg">
+  <div class="stripe sn"></div>
+  <div class="sec-intro" id="intro-result">
+    <div class="si-inner">
+      <div class="si-badge bn">🏆 Dein Ergebnis</div>
+      <h2 class="si-title">Wie stoisch bist du?</h2>
+    </div>
+  </div>
+  <div class="res-wrap" id="res-inner"></div>
 </div>
 
 <script>
-/* ─── CANVAS ─── */
+/* ── STARFIELD ── */
 (()=>{
   const c=document.getElementById('cv'),x=c.getContext('2d');
   const rs=()=>{c.width=innerWidth;c.height=innerHeight};rs();
   addEventListener('resize',rs);
-  const S=Array.from({length:130},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.1+.2,a:Math.random()*6.28,s:Math.random()*.003+.001}));
-  const d=()=>{x.clearRect(0,0,c.width,c.height);S.forEach(s=>{s.a+=s.s;const al=(Math.sin(s.a)+1)/2*.42+.05;x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fillStyle=`rgba(212,168,67,${al})`;x.fill();});requestAnimationFrame(d);};d();
+  const S=Array.from({length:150},()=>({
+    x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+    r:Math.random()*.9+.15,a:Math.random()*6.28,s:Math.random()*.0025+.0008
+  }));
+  const d=()=>{
+    x.clearRect(0,0,c.width,c.height);
+    S.forEach(s=>{
+      s.a+=s.s;
+      const al=(Math.sin(s.a)+1)/2*.45+.04;
+      x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);
+      x.fillStyle=`rgba(201,162,39,${al})`;x.fill();
+    });
+    requestAnimationFrame(d);
+  };d();
 })();
 
-/* ─── STATE ─── */
-let curPage='hero';
-const unlocked=new Set(['hero']);
+/* ── STATE ── */
+const unlocked=new Set(['hero','learn']);
+const visited=new Set(); // track first-visit per section
 let learnRead=new Set();
 let pracDone=new Set(),pracOK=0;
 let qIdx=0,qSc=0;
-const TOTAL_LEARN=8,TOTAL_PRAC=8;
+const TOTAL_L=8,TOTAL_P=8;
 
-/* ─── NAV ─── */
+/* ── NAVIGATION ── */
 function go(id){
   if(!unlocked.has(id))return;
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+  // hide all
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('show'));
   document.getElementById('pg-'+id).classList.add('show');
-  curPage=id;
-  window.scrollTo({top:0,behavior:'smooth'});
-  updateNav();
-  if(id==='learn')revealLearn();
-  if(id==='practice')revealPrac();
-  if(id==='quiz')renderQ();
-}
-function updateNav(){
-  document.querySelectorAll('.nav-tab').forEach(t=>{
-    const tid=t.id.replace('nt-','');
-    t.className='nav-tab'+(unlocked.has(tid)?'':' locked')+(tid===curPage?' act-'+tid:'');
-  });
-}
-function unlock(id){
-  unlocked.add(id);
-  updateNav();
+
+  // header logic: collapse if already visited
+  const intro=document.getElementById('intro-'+id);
+  if(intro){
+    if(visited.has(id)){
+      intro.classList.add('collapsed');
+      // scroll to content
+      setTimeout(()=>{
+        const content=document.getElementById(id+'-content') || document.getElementById('res-inner');
+        if(content) content.scrollIntoView({behavior:'smooth',block:'start'});
+      },80);
+    } else {
+      intro.classList.remove('collapsed');
+      visited.add(id);
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  } else {
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  updateNav(id);
+  if(id==='learn') revealLearnCards();
+  if(id==='practice') revealPracCards();
+  if(id==='quiz') renderQ();
 }
 
-/* ─── LEARN DATA ─── */
+function updateNav(id){
+  document.querySelectorAll('.nt').forEach(t=>{
+    const tid=t.id.replace('nt-','');
+    t.className='nt'+(unlocked.has(tid)?'':' lk')+(tid===id?' on-'+id:'');
+  });
+}
+
+function unlock(id){
+  unlocked.add(id);
+  const t=document.getElementById('nt-'+id);
+  if(t)t.classList.remove('lk');
+}
+
+/* ── LEARN DATA ── */
 const topics=[
-  {col:'gc',ico:'ig',icon:'🏛',btn:'cg',exC:'',num:'01',
+  {col:'gc',bar:'',ico:'ig',icon:'🏛',btn:'cg',ex:'eg',num:'01',
    title:'Was ist Stoizismus?',
-   preview:'Eine Philosophie aus der Antike, die lehrt, ruhig und vernünftig zu denken – besonders wenn es schwierig wird.',
-   body:'Stoizismus entstand um 300 v. Chr. in Athen, gegründet von Zenon von Kition. Der Name kommt von „Stoa Poikile" – einer bemalten Säulenhalle, wo Zenon lehrte. Später prägten Römer wie der Kaiser Marc Aurel, der Philosoph Seneca und der Sklave Epiktet diese Philosophie weiter. Ihr Kern: Nicht äußere Umstände bestimmen unser Glück, sondern wie wir mit ihnen umgehen. Stoizismus ist keine passive Philosophie des Ertragens, sondern eine aktive Praxis des vernünftigen, tugendhaften Lebens. Noch heute inspiriert sie Millionen Menschen – von Managern bis zu Sportlern.',
-   exLabel:'📚 Historischer Kontext',
-   ex:'Marc Aurel war der mächtigste Mann der Welt – römischer Kaiser. Trotzdem schrieb er täglich in ein Tagebuch über Bescheidenheit, Geduld und Selbstkritik. Seine „Selbstbetrachtungen" sind bis heute eines der meistgelesenen Bücher der Weltgeschichte.'
+   preview:'Eine Philosophie aus dem antiken Athen, die lehrt: Nicht was passiert bestimmt dein Glück – sondern wie du darauf reagierst.',
+   body:'Stoizismus entstand um <strong>300 v. Chr.</strong> in Athen. Zenon von Kition gründete die Schule auf der „Stoa Poikile" – einer bemalten Säulenhalle, von der der Name stammt. Später prägten Römer wie <strong>Marc Aurel</strong> (Kaiser), <strong>Seneca</strong> (Schriftsteller) und <strong>Epiktet</strong> (ehemaliger Sklave) diese Philosophie weiter. Was sie verbindet: Die Überzeugung, dass nicht äußere Umstände über unser Wohlbefinden entscheiden, sondern unsere innere Haltung dazu. Stoizismus ist keine passive Duldsamkeit – er ist eine <strong>aktive Praxis des vernünftigen Lebens</strong>.',
+   exLabel:'📚 Warum heute noch relevant?',
+   ex:'US-Admiral James Stockdale überlebte 7,5 Jahre vietnamesische Kriegsgefangenschaft. Er kreditierte sein Überleben direkt Epiktets Lehren: Fokus auf das Kontrollierbare, Akzeptanz des Unkontrollierbaren. Heute nutzen Spitzensportler, CEOs und Therapeuten Stoizismus täglich.',
+   ff:'Fun Fact: Marc Aurel schrieb seine „Selbstbetrachtungen" nie zur Veröffentlichung. Sie waren ein privates Tagebuch – und wurden trotzdem zu einem der einflussreichsten Bücher der Geschichte.'
   },
-  {col:'pc',ico:'ip',icon:'🎮',btn:'cp',exC:'ep',num:'02',
+  {col:'pc',bar:'bp',ico:'ip',icon:'🎮',btn:'cp',ex:'ep',num:'02',
    title:'Die Dichotomie der Kontrolle',
-   preview:'Das wichtigste Konzept: Manche Dinge hängen von dir ab – andere nicht. Dieser Unterschied ändert alles.',
-   body:'Epiktet formulierte es präzise: „Von den Dingen sind die einen in unserer Macht, die anderen nicht." In unserer Macht: Meinungen, Absichten, Reaktionen, Entscheidungen. Nicht in unserer Macht: Körper, Ruf, Besitz, Wetter, das Verhalten anderer. Das klingt einfach – ist aber eine der härtesten Übungen im Alltag. Die meisten Menschen verschwenden ihre Energie damit, das Unkontrollierbare zu kontrollieren: Was denken andere über mich? Warum war das Wetter schlecht? Stoiker stellen eine simple Frage: „Liegt das in meiner Macht?" Wenn nein: loslassen. Wenn ja: handeln.',
-   exLabel:'📱 Social Media',
-   ex:'Jemand schreibt einen gemeinen Kommentar unter deinen Post. Du kannst nicht kontrollieren, was andere schreiben – das liegt außerhalb deiner Macht. Was in deiner Macht liegt: ob du antwortest, wie du antwortest, und ob dein Selbstwertgefühl von fremden Meinungen abhängt.'
+   preview:'Manche Dinge hängen von dir ab, andere nicht. Diesen Unterschied zu kennen – und zu akzeptieren – ist der Kern allen stoischen Denkens.',
+   body:'Epiktet formulierte es in seinem Hauptwerk <em>Enchiridion</em>: <strong>„Von den Dingen sind die einen in unserer Macht, die anderen nicht."</strong> In unserer Macht: Meinungen, Absichten, Wünsche, Reaktionen. Nicht in unserer Macht: Körper, Ruf, äußerer Besitz, das Verhalten anderer. Die meisten Menschen verschwenden enorme Energie damit, Unkontrollierbares zu kontrollieren – Was denken andere über mich? Warum läuft das schlecht? Stoiker stellen eine einzige Frage: <strong>„Liegt das in meiner Macht?"</strong> Wenn nein → loslassen. Wenn ja → handeln.',
+   exLabel:'📱 Social Media & Kontrolle',
+   ex:'Jemand schreibt einen gemeinen Kommentar unter deinen Post. Du kannst nicht kontrollieren, was andere schreiben. Was du kontrollieren kannst: ob du antwortest, wie du antwortest, und ob du dein Selbstwertgefühl von Likes und Kommentaren abhängig machst.',
+   ff:'Fun Fact: Die kognitive Verhaltenstherapie (CBT), eine der wirksamsten psychologischen Methoden, basiert direkt auf Epiktets Konzept. Therapeuten nennen es „kognitive Umstrukturierung".'
   },
-  {col:'tc',ico:'it',icon:'⚖',btn:'ct',exC:'et',num:'03',
+  {col:'tc',bar:'bt',ico:'it',icon:'⚖',btn:'ct',ex:'et',num:'03',
    title:'Die vier Kardinaltugenden',
-   preview:'Für Stoiker ist Tugend das einzige wirkliche Gut. Vier Tugenden bilden den Kern eines guten Charakters.',
-   body:'Die vier stoischen Kardinaltugenden: (1) Weisheit – die Fähigkeit, richtig zu urteilen und klug zu handeln. (2) Gerechtigkeit – anderen gegenüber fair, ehrlich und wohlwollend zu sein. (3) Mut – nicht nur physischer Mut, sondern der Mut, das Richtige zu tun, wenn es unbequem ist. (4) Besonnenheit – Selbstkontrolle, Maß halten, impulsive Reaktionen zügeln. Diese vier Tugenden sind laut Stoikern wertvoller als jeder äußere Erfolg. Man kann sie nicht kaufen, nicht geschenkt bekommen – man muss sie täglich üben.',
-   exLabel:'🏫 Schule',
-   ex:'Wenn du siehst, dass jemand in der Klasse gemobbt wird und du eingreifst – auch wenn du riskierst, selbst zum Ziel zu werden – zeigst du Mut (Tugend Nr. 3). Niemand sieht es, du wirst nicht belohnt. Es zählt trotzdem.'
+   preview:'Für Stoiker ist Tugend das einzige wahre Gut. Nicht Reichtum, nicht Status – sondern wer du als Mensch bist.',
+   body:'Die vier stoischen Kardinaltugenden bilden den Kern des guten Charakters:<br><br>① <strong>Weisheit</strong> (Sophia) – Richtig urteilen, klar denken, weise Entscheidungen treffen.<br>② <strong>Gerechtigkeit</strong> (Dikaiosyne) – Ehrlich und fair gegenüber anderen handeln, das Gemeinwohl im Blick.<br>③ <strong>Mut</strong> (Andreia) – Nicht nur physischer Mut, sondern der Mut, das Richtige zu tun wenn es unbequem ist.<br>④ <strong>Besonnenheit</strong> (Sophrosyne) – Selbstkontrolle, Maß halten, impulsive Reaktionen zügeln.<br><br>Diese Tugenden sind untrennbar verbunden: Wer wirklich weise ist, handelt auch gerecht.',
+   exLabel:'🏫 Alltag in der Schule',
+   ex:'Du siehst, wie jemand in der Klasse gemobbt wird. Einzugreifen erfordert Mut (Tugend 3), auch wenn du selbst zum Ziel werden könntest. Niemand sieht es, du wirst nicht belohnt. Für Stoiker ist das trotzdem die richtige Handlung – weil sie tugendhaft ist.',
+   ff:'Fun Fact: Die vier Kardinaltugenden wurden ursprünglich von Platon beschrieben. Die Stoiker übernahmen sie, betonten aber stärker, dass Tugend nicht nur Wissen ist – sondern tägliche Übung.'
   },
-  {col:'gc',ico:'ig',icon:'🧠',btn:'cg',exC:'',num:'04',
+  {col:'gc',bar:'',ico:'ig',icon:'🧠',btn:'cg',ex:'eg',num:'04',
    title:'Emotionen & Vernunft',
-   preview:'Stoiker sind keine Roboter. Sie haben Gefühle – aber sie lassen sich nicht von ihnen überwältigen.',
-   body:'Ein häufiges Missverständnis: Stoiker haben keine Emotionen. Falsch! Sie empfinden Freude, Trauer, Wut und Angst wie alle Menschen. Der Unterschied liegt im Umgang. Stoiker unterscheiden zwischen „erster Bewegung" (automatische Reaktion, z. B. Erschrecken) und „Urteil" (die bewusste Entscheidung, wie man damit umgeht). Die erste Bewegung ist unvermeidlich. Das Urteil – ob man sich von der Emotion mitreißen lässt – liegt in unserer Kontrolle. Viktor Frankl nannte das den „Raum zwischen Reiz und Reaktion". Diesen Raum kann man vergrößern – durch Übung.',
-   exLabel:'😤 Stresssituation',
-   ex:'Dein Lehrer kritisiert dich laut vor der Klasse. Erste Bewegung: Puls steigt, Scham, Röte im Gesicht – automatisch, unvermeidlich. Stoische Reaktion: Eine kurze Pause. Tief atmen. Frage: „Ist die Kritik berechtigt?" Das ist der trainierbare Unterschied.'
+   preview:'Stoiker unterdrücken keine Gefühle. Sie trainieren die Lücke zwischen Reiz und Reaktion – das ist echter emotionaler Reife.',
+   body:'Ein hartnäckiges Missverständnis: Stoiker haben keine Gefühle. Falsch. Sie empfinden Freude, Trauer, Wut und Angst – wie alle Menschen. Der Unterschied liegt in der Verarbeitung. Stoiker unterscheiden zwischen:<br><br><strong>Erste Bewegung</strong> – Die automatische, unwillkürliche körperliche Reaktion. Puls steigt, Röte im Gesicht, Schreck. Diese ist unvermeidlich und kein Versagen.<br><strong>Urteil</strong> – Die bewusste Entscheidung, wie man mit der Reaktion umgeht. Dieser Schritt liegt vollständig in unserer Kontrolle.<br><br>Viktor Frankl, Holocaust-Überlebender und Psychiater, nannte denselben Raum „die letzte menschliche Freiheit". Diesen Raum zu vergrößern ist das Ziel der stoischen Praxis.',
+   exLabel:'😤 Konkrete Situation',
+   ex:'Dein Lehrer kritisiert deinen Aufsatz laut vor der Klasse. Erste Bewegung: Puls steigt, Scham, Anspannung (unvermeidlich). Stoische Reaktion: kurze Pause, tief atmen, Frage an dich selbst: „Ist die Kritik berechtigt? Was kann ich daraus lernen?" Das ist die trainierbare Lücke.',
+   ff:'Fun Fact: Neurowissenschaftler nennen das "pause and plan"-System. Es aktiviert den präfrontalen Kortex gegenüber der Amygdala – genau das, was Stoiker seit 2300 Jahren üben, wurde erst jüngst wissenschaftlich bestätigt.'
   },
-  {col:'pc',ico:'ip',icon:'🌊',btn:'cp',exC:'ep',num:'05',
+  {col:'pc',bar:'bp',ico:'ip',icon:'🌊',btn:'cp',ex:'ep',num:'05',
    title:'Innerer Friede vs. Äußerer Erfolg',
-   preview:'Was macht uns wirklich glücklich? Die Antwort der Stoiker ist überraschend – und bis heute revolutionär.',
-   body:'Stoiker unterscheiden zwischen „inneren Gütern" (Tugend, Weisheit, Charakter) und „äußeren Gütern" (Geld, Ruhm, Status). Äußere Güter sind „bevorzugte Gleichgültigkeiten" – schön, wenn man sie hat, aber keine Grundlage für Glück. Der Begriff dafür ist Eudaimonia – inneres Gedeihen durch ein vernünftiges, tugendhaftes Leben. Das klingt abstrakt, aber es bedeutet: Dein Wohlbefinden darf nicht davon abhängen, was andere über dich denken, wie viele Likes du bekommst oder welche Note im Zeugnis steht. Das ist echte Freiheit.',
+   preview:'Was macht uns wirklich glücklich? Die stoische Antwort überrascht – und befreit.',
+   body:'Stoiker unterscheiden zwischen zwei Kategorien von Gütern:<br><br><strong>Äußere Güter</strong> (Geld, Ruhm, Schönheit, Status) – angenehm zu haben, aber keine Garantie für Glück.<br><strong>Innere Güter</strong> (Tugend, Weisheit, Charakter) – das einzig wahre Fundament für Wohlbefinden.<br><br>Äußere Güter nennen Stoiker „bevorzugte Gleichgültigkeiten" – gut wenn vorhanden, aber nicht notwendig. Der Begriff <strong>Eudaimonia</strong> (wörtl. „guter Geist") beschreibt das stoische Ziel: ein blühendes, innerlich stimmiges Leben, das nicht von äußeren Umständen abhängt. Das klingt abstrakt – aber es bedeutet: Dein Wohlbefinden darf nicht von Noten, Likes oder fremden Meinungen abhängen.',
    exLabel:'🎭 Zwei Schüler',
-   ex:'Schüler A: Top-Noten, beliebt, Klassensprecher – aber innerlich voller Angst, das alles zu verlieren. Schüler B: mittelmäßige Noten, hilft anderen, handelt fair, kennt seine Werte. Wer lebt laut Stoizismus das bessere Leben?'
+   ex:'Schüler A: Beste Noten, beliebt, Klassensprecher – aber innerlich ständig in Angst, das alles zu verlieren. Schüler B: Mittelmäßige Noten, aber hilft anderen, handelt fair, kennt seine Werte – und ist davon unabhängig. Wer lebt laut Stoizismus das bessere Leben?',
+   ff:'Fun Fact: Moderne Glücksforschung (Positive Psychologie) bestätigt: Menschen überschätzen durchgehend, wie viel Geld und Status ihr Glück steigern – und unterschätzen Faktoren wie Sinn, Charakter und Beziehungen.'
   },
-  {col:'tc',ico:'it',icon:'🔥',btn:'ct',exC:'et',num:'06',
+  {col:'tc',bar:'bt',ico:'it',icon:'🔥',btn:'ct',ex:'et',num:'06',
    title:'Negative Visualisierung',
-   preview:'Stelle dir vor, was schiefgehen könnte – nicht aus Pessimismus, sondern um innerlich stärker zu werden.',
-   body:'„Premeditatio Malorum" bedeutet „Vorbetrachtung der Übel". Die Stoiker empfehlen, sich täglich vorzustellen: Was könnte ich verlieren? Was könnte schiefgehen? Wie würde ich damit umgehen? Das klingt negativ – ist aber das Gegenteil. Wer sich vorstellt, was er verlieren könnte, schätzt es mehr. Wer sich vorstellt, wie er mit Rückschlägen umgehen würde, ist weniger erschüttert, wenn sie eintreten. Marc Aurel tat dies täglich. Seneca schrieb: „Überlege dir jeden Abend, was du tun würdest, wenn das Schlimmste eintrifft – dann wirst du es nicht fürchten."',
-   exLabel:'🧘 Prüfungsübung',
-   ex:'Vor einer wichtigen Prüfung: Stell dir vor, du hast versagt. Wie würdest du reagieren? Was wäre der nächste Schritt? Was würdest du lernen? Diese Übung reduziert Prüfungsangst – weil du weißt, dass du damit umgehen könntest.'
+   preview:'Stell dir das Schlimmste vor – nicht aus Pessimismus, sondern um innerlich unerschütterlich zu werden.',
+   body:'<strong>Premeditatio Malorum</strong> bedeutet „Vorbetrachtung der Übel". Stoiker empfehlen, sich täglich vorzustellen: Was könnte ich verlieren? Was könnte schiefgehen? Wie würde ich reagieren?<br><br>Das klingt negativ – ist aber das Gegenteil von Pessimismus. Effekte dieser Übung:<br><br>① Mehr Dankbarkeit: Wer sich vorstellt, Dinge zu verlieren, schätzt sie mehr.<br>② Weniger Schock: Rückschläge treffen weniger hart, wenn man mental darauf vorbereitet ist.<br>③ Mehr Mut: Die Dinge, die man fürchtet, erscheinen kleiner wenn man sie durchdenkt.<br><br>Seneca: „Überlege dir, was passiert wenn das Schlimmste eintrifft – dann wirst du es nicht fürchten."',
+   exLabel:'🧘 Vor der Prüfung',
+   ex:'Stelle dir vor, du hast die Prüfung verpatzt. Wie würdest du reagieren? Was wäre der nächste Schritt? Was könntest du lernen? Diese kurze Übung (5 Minuten) reduziert Prüfungsangst – weil du weißt: Du könntest damit umgehen.',
+   ff:'Fun Fact: Die Methode „Stress-Inoculation Training" der US-Armee basiert auf demselben Prinzip. Soldaten trainieren Katastrophenszenarien mental durch – um im echten Einsatz ruhiger zu bleiben.'
   },
-  {col:'gc',ico:'ig',icon:'⏳',btn:'cg',exC:'',num:'07',
+  {col:'gc',bar:'',ico:'ig',icon:'⏳',btn:'cg',ex:'eg',num:'07',
    title:'Memento Mori',
-   preview:'„Bedenke, dass du sterblich bist." Für Stoiker ist das keine Morbidität, sondern die kraftvollste Motivation.',
-   body:'„Memento Mori" heißt wörtlich: „Bedenke, dass du sterblich bist." Das ist keine depressive Obsession, sondern eine Einladung: Wenn alles endlich ist – was ist dann wirklich wichtig? Marc Aurel erinnerte sich täglich an seine Vergänglichkeit – nicht aus Trauer, sondern um im Jetzt präsent zu bleiben und sein Leben nicht zu verschwenden. Stoiker glaubten: Wer den Tod nicht fürchtet, fürchtet nichts. Wer weiß, dass die Zeit begrenzt ist, handelt mit mehr Absicht und weniger Prokrastination.',
-   exLabel:'💭 Denkanstoß',
-   ex:'Stell dir vor, du hast noch genau einen Monat zu leben. Welche Streitigkeiten würden plötzlich unwichtig wirken? Mit wem würdest du deine Zeit verbringen? Wem würdest du danken? Diese Fragen helfen, heute klarer zu priorisieren.'
+   preview:'„Bedenke, dass du sterblich bist." Für Stoiker ist das die kraftvollste Motivation – nicht Morbidität.',
+   body:'<strong>Memento Mori</strong> – lateinisch: „Erinnere dich, dass du sterben wirst." Diese Praxis war im alten Rom verbreitet: Wenn ein General im Triumphzug durch Rom fuhr, flüsterte ihm ein Sklave hinter sich „Memento Mori" – eine Erinnerung: Du bist kein Gott.<br><br>Für Stoiker ist diese Erinnerung kein Aufruf zu Trauer, sondern zu <strong>Präsenz und Intention</strong>. Wer weiß, dass die Zeit begrenzt ist:<br>• Handelt mit mehr Absicht<br>• Prokrastiniert weniger<br>• Schätzt Momente mehr<br>• Fürchtet Fehler weniger<br><br>Marc Aurel: „Bald wirst du alles vergessen haben und bald wird man alles vergessen haben, was du getan hast."',
+   exLabel:'💭 Denkübung für heute',
+   ex:'Stell dir vor, du hast noch genau einen Monat zu leben. Welche Streitigkeiten würden plötzlich unwichtig wirken? Mit wem würdest du deine Zeit verbringen? Wofür würdest du dich entschuldigen? Wem würdest du danken? Diese Fragen helfen dir, heute klarer zu priorisieren.',
+   ff:'Fun Fact: Das berühmte Gemälde „Et in Arcadia ego" (Nicolas Poussin, 1637) zeigt glückliche Schäfer, die auf einer Grabinschrift lesen: „Auch ich war in Arkadien." Der Tod ist überall. Das ist kein nihilistischer Gedanke – sondern eine Einladung, wirklich zu leben.'
   },
-  {col:'pc',ico:'ip',icon:'🌐',btn:'cp',exC:'ep',num:'08',
+  {col:'pc',bar:'bp',ico:'ip',icon:'🌐',btn:'cp',ex:'ep',num:'08',
    title:'Kosmopolitismus & Mitgefühl',
-   preview:'Stoiker erfanden den Begriff „Weltbürger". Was das bedeutet, ist heute aktueller denn je.',
-   body:'Die Stoiker prägten den Begriff „Kosmopolit" – Weltbürger. Sie glaubten: Alle Menschen teilen die gleiche Vernunft (Logos) und sind dadurch verbunden. Daraus folgt eine radikale Schlussfolgerung: Du schuldest jedem Menschen Mitgefühl und Gerechtigkeit – nicht nur deiner Familie, nicht nur deiner Gruppe, sondern allen. Epiktet, selbst ein Sklave, lehrte: Die Seele des anderen ist genauso wertvoll wie deine. Diese Haltung widerspricht jeder Form von Diskriminierung und ist bis heute ein moralischer Kompass.',
-   exLabel:'🏫 Alltagsbeispiel',
-   ex:'Wenn du in der Klasse jemanden siehst, der ausgeschlossen wird – jemanden, der vielleicht nicht in deine Gruppe passt – dann ist die stoische Antwort klar: Auch dieser Mensch verdient Würde. Nicht weil es cool ist, sondern weil es richtig ist.'
+   preview:'Stoiker erfanden das Konzept des Weltbürgers. Was das bedeutet, ist heute politisch relevanter denn je.',
+   body:'Die Stoiker prägten den Begriff <strong>„Kosmopolit"</strong> – Bürger der Welt (griech. kosmos = Welt, polites = Bürger). Sie glaubten: Alle Menschen teilen die gleiche Vernunft (<em>Logos</em>) und sind dadurch fundamental verbunden – unabhängig von Herkunft, Nationalität, Status oder Klasse.<br><br>Epiktet – selbst ein Sklave, am unteren Ende der römischen Gesellschaft – lehrte: Die Seele eines anderen Menschen ist genauso wertvoll wie deine. Daraus folgt eine klare moralische Haltung: Du schuldest jedem Menschen Würde und Gerechtigkeit. Nicht weil es gesellschaftlich erwartet wird, sondern weil es vernünftig und tugendhaft ist.',
+   exLabel:'🏫 Schule & Ausgrenzung',
+   ex:'Wenn du siehst, dass jemand in der Klasse ausgeschlossen wird – jemand, der vielleicht nicht in deine Gruppe gehört – dann ist die stoische Antwort klar: Dieser Mensch verdient dieselbe Würde wie alle anderen. Das ist keine Sentimentalität. Das ist Kosmopolitismus in der Praxis.',
+   ff:'Fun Fact: Die UN-Menschenrechtserklärung (1948) basiert philosophisch stark auf stoischem Denken. Die Idee universeller Menschenwürde ist direkt von stoischen Denkern wie Cicero beeinflusst.'
   },
 ];
 
-function buildLearn(){
+function buildLearnCards(){
   const g=document.getElementById('lgrid');
   topics.forEach((t,i)=>{
-    g.innerHTML+=`<div class="lc ${t.col}" id="lc-${i}" style="transition-delay:${i*.06}s">
-      <div class="li ${t.ico}">${t.icon}</div>
-      <div class="ln">Thema ${t.num}</div>
-      <div class="lt">${t.title}</div>
-      <div class="lp">${t.preview}</div>
-      <div class="ls unread" id="ls-${i}">○ Noch nicht gelesen</div>
-      <button class="lb ${t.btn}" onclick="toggleLearn(${i})">
-        <span id="lb-${i}">Thema öffnen</span> <span id="la-${i}">↓</span>
-      </button>
-      <div class="le" id="le-${i}">
-        <div class="lbody">${t.body}</div>
-        <div class="exb ${t.exC}"><div class="exl">${t.exLabel}</div>${t.ex}</div>
+    g.innerHTML+=`
+    <div class="lc ${t.col}" id="lc-${i}" style="transition-delay:${i*.055}s">
+      <div class="lc-bar ${t.bar}"></div>
+      <div class="lc-inner">
+        <div class="lc-head">
+          <div class="lc-icon-wrap ${t.ico}">${t.icon}</div>
+          <div class="lc-num">Thema ${t.num}</div>
+        </div>
+        <div class="lc-status unread" id="ls-${i}">○ Noch nicht gelesen</div>
+        <div class="lc-title">${t.title}</div>
+        <div class="lc-preview">${t.preview}</div>
+        <button class="lc-toggler ${t.btn}" onclick="toggleLearn(${i})">
+          <span id="lt-${i}">Öffnen</span> <span id="la-${i}">↓</span>
+        </button>
+      </div>
+      <div class="lc-exp" id="le-${i}">
+        <div class="lc-sep"></div>
+        <div style="padding:0 24px 20px">
+          <div class="lc-body">${t.body}</div>
+          <div class="ex-box ${t.ex}" style="margin-bottom:10px">
+            <div class="ex-label">${t.exLabel}</div>
+            ${t.ex}
+          </div>
+          <div class="ff-box">
+            <div class="ff-label">💡 Wusstest du?</div>
+            ${t.ff}
+          </div>
+        </div>
       </div>
     </div>`;
   });
 }
 
 function toggleLearn(i){
-  const exp=document.getElementById('le-'+i);
+  const ex=document.getElementById('le-'+i);
   const st=document.getElementById('ls-'+i);
-  const open=exp.classList.toggle('open');
-  document.getElementById('lb-'+i).textContent=open?'Schließen':'Thema öffnen';
+  const open=ex.classList.toggle('open');
+  document.getElementById('lt-'+i).textContent=open?'Schließen':'Öffnen';
   document.getElementById('la-'+i).textContent=open?'↑':'↓';
-  if(open&&!learnRead.has(i)){
+  if(open && !learnRead.has(i)){
     learnRead.add(i);
-    st.className='ls read';st.textContent='✓ Gelesen';
+    st.className='lc-status read';st.textContent='✓ Gelesen';
     updateGate();
   }
 }
 
 function updateGate(){
-  const n=learnRead.size,pct=Math.round(n/TOTAL_LEARN*100);
-  document.getElementById('gbar').style.width=pct+'%';
-  document.getElementById('g-num').textContent=n+'/'+TOTAL_LEARN;
-  document.getElementById('g-txt').textContent=n+' von '+TOTAL_LEARN+' Themen gelesen';
-  if(n>=TOTAL_LEARN){
-    document.getElementById('btn-tp').disabled=false;
+  const n=learnRead.size,pct=Math.round(n/TOTAL_L*100);
+  document.getElementById('gate-fill').style.width=pct+'%';
+  document.getElementById('gate-count').textContent=n+'/'+TOTAL_L;
+  document.getElementById('gate-txt').textContent=n+' von '+TOTAL_L+' Themen gelesen';
+  if(n>=TOTAL_L){
+    document.getElementById('btn-to-prac').disabled=false;
     unlock('practice');
   }
 }
 
-function revealLearn(){
+function revealLearnCards(){
   setTimeout(()=>document.querySelectorAll('.lc').forEach(c=>c.classList.add('in')),80);
 }
 
-/* ─── SCENARIOS ─── */
+/* ── SCENARIOS ── */
 const scenarios=[
-  {num:'01',sit:'Schlechte Note bekommen',ctx:'Du bekommst eine 5 in Deutsch. Du hast gelernt, aber nicht den richtigen Stoff wiederholt.',
-   opts:['Wütend werden und den Lehrer beschuldigen','Kurz enttäuscht sein, dann analysieren was du besser machen kannst','So tun, als wäre es egal, und das Heft wegwerfen','Allen erzählen, dass die Prüfung unfair war'],
+  {num:'01',sit:'Schlechte Note bekommen',
+   ctx:'Du bekommst eine 5 in Deutsch. Du hast gelernt, aber nicht den richtigen Stoff wiederholt.',
+   opts:['Wütend werden und den Lehrer beschuldigen','Kurz enttäuscht sein, dann analysieren was du besser machen kannst','So tun als wäre es egal und das Heft wegwerfen','Allen erzählen, dass die Prüfung unfair war'],
    cor:1,fbs:[
-     {t:'bad',tx:'😤 Nicht stoisch. Du machst jemand anderen für etwas verantwortlich, das du beeinflussen kannst. Die Note ist passiert – was zählt jetzt ist, was du daraus machst.'},
-     {t:'good',tx:'✅ Perfekt stoisch! Kurze Enttäuschung ist menschlich (erste Bewegung). Du fokussierst dich dann auf das, was in deiner Macht liegt: deine Vorbereitung beim nächsten Mal.'},
-     {t:'bad',tx:'😐 Ignorieren ist kein Fortschritt. Ein Stoiker schaut der Wahrheit ins Gesicht, auch wenn sie unangenehm ist.'},
-     {t:'bad',tx:'😬 Das ist Rationalisierung. Du schützt dein Ego, anstatt ehrlich mit der Situation umzugehen.'},
+     {t:'bad',tx:'😤 Nicht stoisch. Die Note kannst du jetzt nicht mehr ändern – sie liegt außerhalb deiner Kontrolle. Was du kontrollieren kannst: deine Vorbereitung beim nächsten Mal. Wut auf den Lehrer ändert nichts.'},
+     {t:'good',tx:'✅ Perfekt stoisch! Kurze Enttäuschung ist menschlich (erste Bewegung – unvermeidlich). Dann richtest du den Fokus auf das, was in deiner Macht liegt: wie du dich das nächste Mal vorbereitest.'},
+     {t:'bad',tx:'😐 Ignorieren ist kein Fortschritt. Stoiker schauen der Realität ins Gesicht – auch wenn sie unangenehm ist. Das ist Weisheit, nicht Selbstschutz.'},
+     {t:'bad',tx:'😬 Das ist Rationalisierung: Du schützt dein Ego durch Abwertung der Situation. Stoiker stehen zur Wahrheit, auch wenn sie wehtut.'},
    ]},
-  {num:'02',sit:'Ausschluss aus der Gruppe',ctx:'Deine Freunde haben ohne dich etwas geplant. Du siehst es auf Instagram – niemand hat dich eingeladen.',
+  {num:'02',sit:'Ausschluss aus der Gruppe',
+   ctx:'Deine Freunde haben ohne dich etwas geplant. Du siehst es auf Instagram – niemand hat dich eingeladen.',
    opts:['Ihnen böse sein und die Freundschaft innerlich beenden','Ihnen öffentlich auf Social Media zeigen, wie verletzt du bist','Ruhig bleiben, vielleicht nachfragen – dein Wohlbefinden nicht davon abhängig machen','Stundenlang grübeln und das Schlimmste annehmen'],
    cor:2,fbs:[
-     {t:'bad',tx:'😔 Eine extreme Reaktion auf ein Ereignis, dessen Hintergründe du nicht kennst.'},
-     {t:'bad',tx:'😬 Social-Media-Drama eskaliert fast immer. Ein Stoiker fragt: "Bringt meine Reaktion eine Verbesserung?"'},
-     {t:'good',tx:'✅ Stoisch! Du nimmst das Gefühl wahr, lässt dich aber nicht davon überwältigen. Dein Wohlbefinden hängt nicht an der Entscheidung anderer.'},
-     {t:'bad',tx:'😓 Endloses Grübeln ohne Handlung ist Energieverschwendung. Stoiker denken kurz nach – und lassen dann los.'},
+     {t:'bad',tx:'😔 Eine extreme Reaktion auf etwas, das du nicht vollständig verstehst. Stoiker handeln nicht aus dem ersten Impuls heraus – und sicher nicht auf Basis einer Instagram-Story.'},
+     {t:'bad',tx:'😬 Public Drama löst das Grundproblem nicht und eskaliert fast immer. Ein Stoiker fragt: „Bringt meine Reaktion etwas Positives?" Wenn nicht – zurückhalten.'},
+     {t:'good',tx:'✅ Stoisch! Du nimmst das Gefühl wahr (völlig menschlich), lässt dich aber nicht davon überwältigen. Dein Wohlbefinden hängt nicht an der Entscheidung anderer – das liegt in deiner Kontrolle.'},
+     {t:'bad',tx:'😓 Endloses Grübeln ohne Handlung ist pure Energieverschwendung. Stoiker unterscheiden: kurzes Nachdenken (hilfreich) vs. Rumination ohne Ausweg (schädlich).'},
    ]},
-  {num:'03',sit:'Öffentliche Kritik vor der Klasse',ctx:'Dein Lehrer korrigiert deinen Aufsatz laut vor der Klasse und nennt ihn "oberflächlich". Alle schauen dich an.',
-   opts:['Sofort laut zurückargumentieren','Verlegen werden, aber die Kritik innerlich abwägen','Tief durchatmen, die Kritik annehmen und fragen: Was kann ich daraus lernen?','Den Lehrer nie wieder mögen und innerlich abschalten'],
+  {num:'03',sit:'Öffentliche Kritik vor der Klasse',
+   ctx:'Dein Lehrer korrigiert deinen Aufsatz laut vor der Klasse und nennt ihn „oberflächlich". Alle schauen dich an.',
+   opts:['Sofort laut zurückargumentieren','Verlegen werden, aber die Kritik innerlich abwägen','Tief durchatmen, die Kritik sachlich annehmen und fragen: Was kann ich lernen?','Den Lehrer nie wieder mögen und innerlich abschalten'],
    cor:2,fbs:[
-     {t:'ok',tx:'🤔 Manchmal berechtigt – aber impulsiv zu reagieren schadet meist der Situation.'},
-     {t:'ok',tx:'😌 Schon gut! Aber du könntest weitergehen: die Kritik als Wachstumschance aktiv nutzen.'},
-     {t:'good',tx:'✅ Sehr stoisch! Du kontrollierst deine Reaktion, nimmst Kritik konstruktiv an und zeigst echten Mut.'},
-     {t:'bad',tx:'😔 Passiver Rückzug und Verbitterung lösen nichts – und schaden nur dir.'},
+     {t:'ok',tx:'🤔 Manchmal ist Klarstellung berechtigt – aber impulsiv zu reagieren schadet meist dir selbst und wirkt unreif. Wenn, dann mit kühlem Kopf und später.'},
+     {t:'ok',tx:'😌 Schon ein guter Ansatz! Aber du könntest einen Schritt weitergehen: die Kritik aktiv als Verbesserungschance nutzen statt nur auszuhalten.'},
+     {t:'good',tx:'✅ Sehr stoisch! Du kontrollierst deine Reaktion (Besonnenheit), nutzt Kritik konstruktiv (Weisheit) und zeigst echten Mut. Das braucht innere Stärke.'},
+     {t:'bad',tx:'😔 Passiver Rückzug und stille Verbitterung schaden nur dir. Stoiker sehen Herausforderungen als Training, nicht als Urteile über ihren Wert.'},
    ]},
-  {num:'04',sit:'Sportteam-Tryout gescheitert',ctx:'Du hast dich für das Schulbasketball-Team beworben. Dein Freund wurde aufgenommen, du nicht.',
-   opts:['Eifersüchtig auf den Freund sein und Abstand halten','Behaupten, das Team sei sowieso nichts wert','Dem Freund ehrlich gratulieren und selbst weiter trainieren','Das Training aufgeben – "es reicht einfach nicht"'],
+  {num:'04',sit:'Sportteam-Tryout gescheitert',
+   ctx:'Du hast dich für das Schulbasketball-Team beworben. Dein Freund wurde aufgenommen, du nicht.',
+   opts:['Eifersüchtig auf den Freund sein und Abstand halten','Behaupten, das Team sei sowieso nichts wert','Dem Freund ehrlich gratulieren und selbst weiter trainieren','Das Training aufgeben – es reicht einfach nicht'],
    cor:2,fbs:[
-     {t:'bad',tx:'😔 Das Glück anderer nimmt dir nichts weg. Eifersucht schadet nur dir.'},
-     {t:'bad',tx:'😏 Rationalisierung – du schützt dein Ego durch Abwertung. Ehrliche Auseinandersetzung ist stoischer.'},
-     {t:'good',tx:'✅ Sehr stoisch! Du freust dich für andere (Gerechtigkeit) und nimmst deine Entwicklung selbst in die Hand. Beides liegt in deiner Kontrolle.'},
-     {t:'bad',tx:'😞 Aufgeben nach einem Rückschlag ist das Gegenteil von Stoizismus. Epiktet wurde als Sklave geboren – er gab nie auf.'},
+     {t:'bad',tx:'😔 Das Glück deines Freundes nimmt dir nichts weg. Eifersucht entsteht, wenn man äußere Erfolge anderer mit dem eigenen vergleicht – das ist genau das, was Stoiker vermeiden.'},
+     {t:'bad',tx:'😏 Abwertung als Selbstschutz ist Rationalisierung. Du weißt selbst, dass das nicht ehrlich ist. Stoiker stehen zur Realität.'},
+     {t:'good',tx:'✅ Sehr stoisch! Du freust dich für andere (Gerechtigkeit und Großzügigkeit) und nimmst deine Entwicklung selbst in die Hand (Kontrolle). Beides liegt vollständig in deiner Macht.'},
+     {t:'bad',tx:'😞 Aufgeben nach einem ersten Rückschlag ist das unstoischste, was man tun kann. Epiktet wurde als Sklave geboren und hörte nie auf zu lernen und zu lehren.'},
    ]},
-  {num:'05',sit:'Prüfungsangst die Nacht davor',ctx:'Morgen ist eine wichtige Prüfung. Du hast ausreichend gelernt, bist aber sehr nervös und schläfst schlecht.',
-   opts:['Die ganze Nacht durch lernen, um die Angst zu beruhigen','Akzeptieren, dass Nervosität normal ist – bewusst abschalten und schlafen','Davon ausgehen, dass du scheitern wirst, und nichts mehr tun','Andere um Rat bitten, damit sie entscheiden'],
+  {num:'05',sit:'Prüfungsangst die Nacht davor',
+   ctx:'Morgen ist eine wichtige Prüfung. Du hast ausreichend gelernt, aber bist sehr nervös und schläfst schlecht.',
+   opts:['Die ganze Nacht durch lernen um die Angst zu betäuben','Akzeptieren, dass Nervosität normal ist – bewusst abschalten und schlafen','Davon ausgehen, dass du scheitern wirst, und nichts mehr tun','Andere fragen was du noch tun sollst'],
    cor:1,fbs:[
-     {t:'bad',tx:'😓 Schlafentzug + mehr Stress = weniger Leistung. Du hast getan, was du konntest.'},
-     {t:'good',tx:'✅ Stoisch und weise! Du hast gelernt (in deiner Kontrolle). Jetzt loszulassen ist keine Schwäche – es ist Vernunft.'},
-     {t:'bad',tx:'😔 Pessimismus ohne Grundlage ist kein Stoizismus. Stoiker denken realistisch, nicht negativ.'},
-     {t:'bad',tx:'🤷 Eigenverantwortung ist ein stoisches Kernprinzip. Damit gibst du Kontrolle ab, die du hast.'},
+     {t:'bad',tx:'😓 Schlafentzug + mehr Stress = deutlich schlechtere Leistung. Du hast getan, was du konntest. Stoiker wissen: übermäßige Kontrolle an einem Punkt, wo nichts mehr zu kontrollieren ist, schadet.'},
+     {t:'good',tx:'✅ Stoisch und weise! Du hast gelernt (in deiner Kontrolle). Jetzt loszulassen und den Körper zu erholen ist keine Schwäche – es ist Vernunft und Besonnenheit.'},
+     {t:'bad',tx:'😔 Pessimismus ohne Grundlage. Das ist nicht Stoizismus – das ist Katastrophendenken. Stoiker denken realistisch, nicht negativ ohne Anlass.'},
+     {t:'bad',tx:'🤷 Die Entscheidung an andere abzugeben bedeutet, Kontrolle abzugeben, die du hast. Eigenverantwortung ist ein stoisches Kernprinzip.'},
    ]},
-  {num:'06',sit:'Ungerechter Vorwurf',ctx:'Vor deiner gesamten Klasse beschuldigt dich jemand, geschummelt zu haben. Das stimmt nicht. Mehrere glauben der Person.',
-   opts:['Sofort wütend und laut protestieren','Ruhig und klar erklären, was wirklich passiert ist','Nichts sagen und hoffen, es löst sich von selbst','Die Person zur Vergeltung vor allen bloßstellen'],
+  {num:'06',sit:'Ungerechter Vorwurf vor der Klasse',
+   ctx:'Jemand beschuldigt dich laut, bei einer Prüfung geschummelt zu haben. Das stimmt nicht – aber mehrere glauben der Person.',
+   opts:['Sofort wütend und laut protestieren','Ruhig und klar erklären, was wirklich passiert ist','Nichts sagen und hoffen, es löst sich von selbst','Die Person später zur Vergeltung bloßstellen'],
    cor:1,fbs:[
-     {t:'bad',tx:'😤 Wut mindert deine Glaubwürdigkeit. Stoiker handeln mit kühlem Kopf – besonders wenn es wichtig ist.'},
-     {t:'good',tx:'✅ Perfekt stoisch! Vernunft statt Emotion, Klarheit statt Aggression. Deine Reaktion liegt in deiner Kontrolle.'},
-     {t:'ok',tx:'😕 Manchmal löst sich nichts. Passivität kann als Schuldgeständnis wirken.'},
-     {t:'bad',tx:'😠 Vergeltung widerspricht Gerechtigkeit. Aggression erzeugt mehr Aggression.'},
+     {t:'bad',tx:'😤 Wut mindert deine Glaubwürdigkeit sofort. Wer schreit, wirkt schuldig. Stoiker handeln mit kühlem Kopf – besonders wenn es darauf ankommt.'},
+     {t:'good',tx:'✅ Perfekt stoisch! Vernunft statt Emotion, Klarheit statt Aggression. Was andere denken liegt nicht in deiner Kontrolle – wie du reagierst, schon.'},
+     {t:'ok',tx:'😕 Manchmal löst sich nichts von selbst. Passivität kann als stillschweigende Zustimmung wirken. Stoiker handeln, wenn Handlung nötig ist.'},
+     {t:'bad',tx:'😠 Vergeltung widerspricht der Tugend der Gerechtigkeit direkt. Aggression erzeugt mehr Aggression – und löst das eigentliche Problem nicht.'},
    ]},
-  {num:'07',sit:'Freund sagt etwas sehr Verletzendes',ctx:'Dein bester Freund sagt etwas sehr Verletzendes über dich, scheinbar aus dem Nichts. Du bist wütend und verletzt.',
-   opts:['Sofort mit Gleichem zurückzahlen','Schweigen und innerlich die Freundschaft beenden','Abstand nehmen, ruhig werden, dann offen das Gespräch suchen','Allen anderen davon erzählen um Mitgefühl zu sammeln'],
+  {num:'07',sit:'Freund sagt etwas Verletzendes',
+   ctx:'Dein bester Freund sagt etwas sehr Verletzendes, scheinbar aus dem Nichts. Du bist wütend und verletzt.',
+   opts:['Sofort mit Gleichem zurückzahlen – ebenfalls etwas Verletzendes sagen','Schweigen und innerlich die Freundschaft beenden','Abstand nehmen, ruhig werden, dann das Gespräch suchen','Allen anderen davon erzählen um Mitgefühl und Bestätigung zu bekommen'],
    cor:2,fbs:[
-     {t:'bad',tx:'⚡ Verletzung mit Verletzung zu beantworten eskaliert. Zwei falsche Reaktionen ergeben keine richtige.'},
-     {t:'bad',tx:'😶 Stille Verbitterung zerstört die Freundschaft langsam – keine innere Stärke, sondern vermiedene Kommunikation.'},
-     {t:'good',tx:'✅ Stoisch und mutig! Du nimmst dir Zeit (zwischen Reiz und Reaktion) und suchst echte Klärung.'},
-     {t:'bad',tx:'🗣️ Das ist soziales Drama. Stoiker suchen echte Lösungen, keine Zustimmung von außen.'},
+     {t:'bad',tx:'⚡ Zwei Verletzungen ergeben keine Lösung. Das eskaliert und beschädigt die Freundschaft dauerhaft. Impulsiv zu reagieren ist das Gegenteil von Besonnenheit.'},
+     {t:'bad',tx:'😶 Stille Verbitterung ist keine innere Stärke – es ist vermiedene Kommunikation. Die Freundschaft stirbt langsam daran.'},
+     {t:'good',tx:'✅ Stoisch und mutig! Du nimmst dir Zeit (trainierst die Lücke zwischen Reiz und Reaktion), bleibst vernünftig und suchst echte Klärung. Das braucht echten Mut.'},
+     {t:'bad',tx:'🗣️ Andere um Bestätigung zu bitten löst das eigentliche Problem nicht. Stoiker suchen echte Lösungen – keine externe Validation.'},
    ]},
-  {num:'08',sit:'Kompletter Misserfolg bei etwas Wichtigem',ctx:'Du hast monatelang an einem Schulprojekt gearbeitet. Die Präsentation läuft katastrophal schief.',
-   opts:['Alles hinwerfen – "Ich bin einfach nicht gut genug"','Alle Schuld auf externe Faktoren schieben','Den Schmerz anerkennen, analysieren was schiefging, und weitermachen','So tun als wäre es kein Problem – nach innen aber zerbrechen'],
+  {num:'08',sit:'Vollständiges Scheitern bei etwas Wichtigem',
+   ctx:'Du hast monatelang an einem Schulprojekt gearbeitet. Die Präsentation läuft katastrophal schief – Technikproblem, Blackout, alles.',
+   opts:['Alles hinwerfen – „Ich bin einfach nicht gut genug"','Alle Schuld auf äußere Faktoren schieben (Technik, Tagesform)','Den Schmerz anerkennen, analysieren was schiefging, und weitermachen','So tun als wäre alles gut – nach innen aber zusammenbrechen'],
    cor:2,fbs:[
-     {t:'bad',tx:'😔 Ein Misserfolg definiert dich nicht. Marc Aurel scheiterte oft – er hörte nie auf.'},
-     {t:'bad',tx:'🙄 Reine externe Attribution ist eine Schutzstrategie. Was lag wirklich in deiner Kontrolle?'},
-     {t:'good',tx:'✅ Echte stoische Stärke. Du erlaubst dir den Schmerz, bleibst aber handlungsfähig. Seneca: Scheitern ist Lehrerin, nicht Richterin.'},
-     {t:'bad',tx:'🎭 Oberflächliche Coolness bei innerem Zusammenbruch ist das Gegenteil von stoischer Authentizität.'},
+     {t:'bad',tx:'😔 Ein Misserfolg definiert nicht deinen Charakter oder Wert. Stoiker trennen scharf zwischen Ereignis und Identität. Marc Aurel scheiterte oft – er hörte nie auf.'},
+     {t:'bad',tx:'🙄 Reine externe Attribution verhindert Wachstum. Was lag wirklich in deiner Kontrolle? Ehrlichkeit mit sich selbst ist die Voraussetzung für Verbesserung.'},
+     {t:'good',tx:'✅ Echte stoische Stärke. Du erlaubst dir den Schmerz (menschlich und ehrlich), ohne dich davon definieren zu lassen. Dann handelst du. Seneca: „Scheitern ist Lehrerin, nicht Richterin."'},
+     {t:'bad',tx:'🎭 Oberflächliche Coolness bei innerem Zusammenbruch ist das Gegenteil stoischer Authentizität. Stoiker sind ehrlich mit sich selbst.'},
    ]},
 ];
 
-function buildPrac(){
+let pracDoneSet=new Set();
+
+function buildPracCards(){
   const l=document.getElementById('scl');
   scenarios.forEach((sc,si)=>{
     const opts=sc.opts.map((o,oi)=>`
-      <button class="op" id="s${si}o${oi}" onclick="pickOpt(${si},${oi})">
-        <span class="ol">${['A','B','C','D'][oi]}</span><span>${o}</span>
+      <button class="opt" id="s${si}o${oi}" onclick="pickOpt(${si},${oi})">
+        <span class="opt-l">${['A','B','C','D'][oi]}</span><span>${o}</span>
       </button>`).join('');
-    l.innerHTML+=`<div class="scc" id="sc-${si}">
-      <div class="scn">Szenario ${sc.num}</div>
-      <div class="scs">${sc.sit}</div>
-      <div class="sctx"><div class="sctxl">📍 Situation</div>${sc.ctx}</div>
-      <div class="olist">${opts}</div>
-      <div class="fb" id="fb-${si}"></div>
+    l.innerHTML+=`
+    <div class="scard" id="sc-${si}">
+      <div class="scard-bar"></div>
+      <div class="scard-inner">
+        <div class="sc-num">Szenario ${sc.num}</div>
+        <div class="sc-sit">${sc.sit}</div>
+        <div class="sc-ctx"><div class="sc-ctx-label">📍 Situation</div>${sc.ctx}</div>
+        <div class="opts">${opts}</div>
+        <div class="fb" id="fb-${si}"></div>
+      </div>
     </div>`;
   });
 }
 
 function pickOpt(si,oi){
-  if(pracDone.has(si))return;
-  pracDone.add(si);
+  if(pracDoneSet.has(si))return;
+  pracDoneSet.add(si);
   const sc=scenarios[si];
   if(oi===sc.cor)pracOK++;
   for(let j=0;j<sc.opts.length;j++){
-    const b=document.getElementById(`s${si}o${j}`);
-    b.disabled=true;
+    const b=document.getElementById(`s${si}o${j}`);b.disabled=true;
     if(j===sc.cor)b.classList.add('correct');
     else if(j===oi)b.classList.add('wrong');
     else b.classList.add('dimmed');
@@ -750,83 +899,85 @@ function pickOpt(si,oi){
   const f=sc.fbs[oi];
   const fb=document.getElementById('fb-'+si);
   fb.className='fb show '+f.t;fb.innerHTML=f.tx;
-  document.getElementById('pt-a').textContent=pracDone.size;
+  document.getElementById('pt-a').textContent=pracDoneSet.size;
   document.getElementById('pt-c').textContent=pracOK;
-  document.getElementById('pt-p').textContent=Math.round(pracOK/pracDone.size*100)+'%';
-  if(pracDone.size>=TOTAL_PRAC){
-    document.getElementById('btn-tq').disabled=false;
+  document.getElementById('pt-p').textContent=Math.round(pracOK/pracDoneSet.size*100)+'%';
+  if(pracDoneSet.size>=TOTAL_P){
+    document.getElementById('btn-to-quiz').disabled=false;
     unlock('quiz');
   }
 }
 
-function revealPrac(){
-  setTimeout(()=>document.querySelectorAll('.scc').forEach((c,i)=>setTimeout(()=>c.classList.add('in'),i*70)),80);
+function revealPracCards(){
+  setTimeout(()=>document.querySelectorAll('.scard').forEach((c,i)=>setTimeout(()=>c.classList.add('in'),i*65)),80);
 }
 
-/* ─── QUIZ ─── */
+/* ── QUIZ ── */
 const qs=[
-  {q:'Was liegt laut Epiktet in unserer Macht?',
-   opts:['Unsere Gesundheit und unser Körper','Unsere Meinungen und Reaktionen','Was andere über uns denken','Das Wetter und äußere Umstände'],cor:1,pts:2,
-   fbs:['❌ Körper und Gesundheit können durch äußere Einflüsse beeinträchtigt werden.','✅ Richtig! Meinungen, Urteile und Reaktionen gehören zur ersten Gruppe – das ist der Kern der Dichotomie.','❌ Was andere denken liegt ausdrücklich nicht in unserer Macht.','❌ Äußere Umstände sind das klassische Beispiel für Dinge außerhalb unserer Kontrolle.']},
-  {q:'Welche vier Tugenden bilden die stoischen Kardinaltugenden?',
-   opts:['Liebe, Hoffnung, Glaube und Geduld','Weisheit, Gerechtigkeit, Mut und Besonnenheit','Ehrlichkeit, Fleiß, Bescheidenheit und Treue','Stärke, Ausdauer, Intelligenz und Erfolg'],cor:1,pts:2,
-   fbs:['❌ Das sind christliche Tugenden, nicht stoische.','✅ Korrekt! Weisheit, Gerechtigkeit, Mut und Besonnenheit – die vier Bausteine eines guten Charakters.','❌ Diese Eigenschaften sind positiv, aber nicht die vier stoischen Kardinaltugenden.','❌ Erfolg ist für Stoiker kein Ziel, sondern höchstens ein Nebenprodukt.']},
+  {q:'Was liegt laut Epiktet ausschließlich in unserer Macht?',
+   opts:['Unsere Gesundheit und körperliche Verfassung','Unsere Urteile, Absichten und Reaktionen','Was andere über uns denken und sagen','Äußere Umstände wie Wetter und Timing'],
+   cor:1,pts:2,fbs:['❌ Körper und Gesundheit können durch äußere Einflüsse beeinträchtigt werden – sie liegen nicht vollständig in unserer Macht.','✅ Richtig! Epiktet: Meinungen, Urteile, Wünsche, Reaktionen – das sind die Dinge, die von uns abhängen.','❌ Was andere denken ist das klassischste Beispiel für etwas Unkontrollierbares.','❌ Äußere Umstände sind per Definition außerhalb unserer Kontrolle.']},
+  {q:'Wie lautet der vollständige Satz Epiktets zur Dichotomie der Kontrolle?',
+   opts:['„Ertrage alles mit Würde – das ist Stoizismus."','„Von den Dingen sind die einen in unserer Macht, die anderen nicht."','„Wer nicht kämpft, hat schon verloren."','„Glück ist, was übrig bleibt, wenn man aufgehört hat zu suchen."'],
+   cor:1,pts:1,fbs:['❌ Das ist keine stoische Formulierung.','✅ Korrekt! Das ist der Eröffnungssatz des Enchiridion von Epiktet – und das Fundament des gesamten Stoizismus.','❌ Das ist kein stoisches Zitat.','❌ Das ist auch kein stoisches Zitat.']},
+  {q:'Welche vier Kardinaltugenden lehrten die Stoiker?',
+   opts:['Liebe, Hoffnung, Glaube und Geduld','Weisheit, Gerechtigkeit, Mut und Besonnenheit','Ehrlichkeit, Fleiß, Bescheidenheit und Treue','Stärke, Ausdauer, Intelligenz und Erfolg'],
+   cor:1,pts:2,fbs:['❌ Das sind christliche Tugenden, nicht stoische.','✅ Korrekt! Die vier stoischen Kardinaltugenden: Weisheit, Gerechtigkeit, Mut und Besonnenheit.','❌ Positiv – aber nicht die vier stoischen Kardinaltugenden.','❌ Für Stoiker ist Erfolg kein Ziel, sondern bestenfalls ein Nebenprodukt.']},
   {q:'Was bedeutet „Premeditatio Malorum"?',
-   opts:['Im Alltag Freude finden und dankbar sein','Vergangene Fehler ehrlich analysieren','Das mögliche Schlimmste vorstellen – um mental vorbereitet zu sein','Anderen vergeben und inneren Frieden finden'],cor:2,pts:2,
-   fbs:['❌ Das beschreibt eher Dankbarkeitspraxis – ein anderes Konzept.','❌ Vergangenheitsanalyse ist hilfreich, aber das ist nicht Premeditatio Malorum.','✅ Richtig! „Vorbetrachtung der Übel" – nicht aus Pessimismus, sondern um mental unerschütterlich zu werden.','❌ Vergeben ist wichtig, aber eine andere Praxis.']},
-  {q:'Wer war Marc Aurel und welche stoische Verbindung hat er?',
-   opts:['Ein griechischer Sklave der den Stoizismus gründete','Ein römischer Kaiser der täglich stoische Tagebücher schrieb','Ein mittelalterlicher Mönch der Epiktet übersetzte','Ein moderner Psychologe der Stoizismus und CBT verband'],cor:1,pts:1,
-   fbs:['❌ Epiktet war ein Sklave. Marc Aurel war Kaiser.','✅ Korrekt! Römischer Kaiser (161–180 n. Chr.) und Autor der „Selbstbetrachtungen" – bis heute eines der meistgelesenen Bücher der Welt.','❌ Marc Aurel lebte in der Antike, nicht im Mittelalter.','❌ Kognitive Verhaltenstherapie wurde im 20. Jahrhundert entwickelt.']},
-  {q:'Was ist Eudaimonia im stoischen Sinne?',
-   opts:['Äußeres Glück durch Erfolg und Reichtum','Das Streben nach Unsterblichkeit und Ruhm','Inneres Gedeihen durch Tugend und ein vernünftiges Leben','Zufriedenheit durch Vermeidung aller Probleme'],cor:2,pts:2,
-   fbs:['❌ Äußerer Erfolg ist für Stoiker gerade nicht Eudaimonia.','❌ Unsterblichkeit war kein stoisches Ziel – sie akzeptierten den Tod.','✅ Richtig! Eudaimonia – inneres Gedeihen durch Tugend und Vernunft, unabhängig von äußeren Umständen.','❌ Stoiker vermeiden keine Probleme – sie begegnen ihnen mit Vernunft und Mut.']},
+   opts:['Im Alltag Dankbarkeit üben und Positives sehen','Vergangene Fehler ehrlich analysieren und dokumentieren','Das mögliche Schlimmste vorstellen – um mental vorbereitet zu sein','Anderen vergeben, um inneren Frieden zu finden'],
+   cor:2,pts:2,fbs:['❌ Dankbarkeit ist wertvoll, aber das ist nicht Premeditatio Malorum.','❌ Vergangenheitsanalyse ist sinnvoll, aber ein anderes Konzept.','✅ Richtig! „Vorbetrachtung der Übel" – man stellt sich vor, was schiefgehen könnte, um unerschütterlich zu werden.','❌ Vergeben ist wichtig, aber eine andere Praxis.']},
+  {q:'Marc Aurel war Stoiker. Womit war er in der Geschichte sonst bekannt?',
+   opts:['Er war ein griechischer Sklave, der Philosophie lehrte','Er war römischer Kaiser und Feldherr','Er war ein mittelalterlicher Kirchenphilosoph','Er war ein griechischer Kaufmann und Dramatiker'],
+   cor:1,pts:1,fbs:['❌ Das beschreibt Epiktet.','✅ Korrekt! Marc Aurel regierte das Römische Reich von 161–180 n. Chr. und schrieb dabei täglich seine „Selbstbetrachtungen".','❌ Marc Aurel lebte in der Antike, nicht im Mittelalter.','❌ Seneca war Schriftsteller – Marc Aurel war Kaiser.']},
+  {q:'Was ist „Eudaimonia" im stoischen Sinne?',
+   opts:['Äußeres Glück durch Reichtum und gesellschaftlichen Erfolg','Inneres Gedeihen durch ein tugendhaftes, vernünftiges Leben','Das Streben nach maximalem Vergnügen (Hedonismus)','Spirituelle Erleuchtung durch Meditation'],
+   cor:1,pts:2,fbs:['❌ Äußerer Erfolg ist für Stoiker gerade keine Grundlage für Eudaimonia.','✅ Richtig! Eudaimonia (wörtl. „guter Geist") = inneres Gedeihen durch Tugend und Vernunft – unabhängig von äußeren Umständen.','❌ Hedonismus ist Epikureismus – fast das Gegenteil des Stoizismus.','❌ Meditation ist wertvoll, aber nicht die stoische Definition.']},
   {q:'Epiktet: „Menschen werden nicht durch Dinge beunruhigt, sondern durch ihre _______ über die Dinge."',
-   opts:['Gefühle und Emotionen','Meinungen und Urteile','Erfahrungen aus der Vergangenheit','Erwartungen an die Zukunft'],cor:1,pts:2,
-   fbs:['❌ Gefühle sind ein Resultat. Ursache sind nach Epiktet unsere Urteile und Bewertungen.','✅ Korrekt! Eines der bekanntesten Zitate des Stoizismus. Unsere Reaktion hängt von unseren Urteilen ab – und die können trainiert werden.','❌ Erfahrungen formen uns, sind aber nicht das, was Epiktet hier meint.','❌ Erwartungen sind ein Teil, aber das vollständige Zitat dreht sich um Meinungen und Urteile.']},
-  {q:'Was bedeutet „Memento Mori" und warum empfahlen es die Stoiker?',
-   opts:['„Erinnere dich an Siege" – um motiviert zu bleiben','„Bedenke, dass du sterblich bist" – um im Jetzt präsent zu bleiben','„Erinnere dich an Fehler" – um sie nicht zu wiederholen','„Gedenke der Götter" – als spirituelles Gebet'],cor:1,pts:2,
-   fbs:['❌ Stoiker betonten Bescheidenheit, nicht Triumphdenken.','✅ Richtig! Memento Mori erinnert uns an die eigene Vergänglichkeit – nicht aus Morbidität, sondern damit wir die begrenzte Zeit sinnvoll nutzen.','❌ Das beschreibt Reflexion über Fehler – ein anderes Konzept.','❌ Stoiker glaubten nicht an traditionelle Götter im Sinne von Gebeten.']},
-  {q:'Du hörst, wie Freunde schlecht über eine andere Person reden. Was ist die stoischste Reaktion?',
-   opts:['Mitmachen um dazuzugehören','Schweigen und innerlich zustimmen','Ruhig eine andere Perspektive einbringen oder das Thema wechseln','Alle laut konfrontieren und einen Streit verursachen'],cor:2,pts:2,
-   fbs:['❌ Mitmachen obwohl du es falsch findest verletzt Gerechtigkeit und deine eigene Integrität.','❌ Stille Zustimmung macht dich zum Mitläufer. Stoiker handeln nach ihren Werten – auch wenn es unbequem ist.','✅ Stoisch! Du handelst mutig und gerecht, ohne unnötig zu eskalieren. Ruhige Intervention ist echte Stärke.','❌ Eskalation ist impulsiv – das Gegenteil von stoischer Besonnenheit.']},
-  {q:'Welche Aussage beschreibt die stoische Haltung zu Emotionen am besten?',
-   opts:['Stoiker unterdrücken alle Emotionen komplett','Emotionen sind schwach – ein starker Mensch hat keine','Automatische Reaktionen sind unvermeidlich, aber bewusste Urteile können trainiert werden','Man sollte alle Gefühle sofort und ungefiltert ausdrücken'],cor:2,pts:2,
-   fbs:['❌ Stoiker unterdrücken keine Gefühle. Das ist eines der häufigsten Missverständnisse.','❌ Emotionen zu haben ist menschlich und unvermeidlich.','✅ Exakt! Stoiker unterscheiden zwischen erster Bewegung (automatisch) und Urteil (trainierbar). Die Lücke zwischen Reiz und Reaktion ist der Übungsraum.','❌ Ungefilterte Emotionsäußerung ist impulsiv – das Gegenteil von stoischer Besonnenheit.']},
-  {q:'Was beschreibt stoischen Kosmopolitismus?',
-   opts:['Reisen und die Welt kennenlernen','Alle Menschen als gleichwertig durch gemeinsame Vernunft betrachten','Die eigene Kultur als die beste ansehen','Sich aus allen politischen Angelegenheiten heraushalten'],cor:1,pts:2,
-   fbs:['❌ Reisen ist schön, aber nicht das stoische Konzept des Kosmopolitismus.','✅ Richtig! Stoiker glaubten, alle Menschen teilen den Logos (Vernunft) und verdienen daher gleiche Würde und Mitgefühl.','❌ Das Gegenteil. Stoiker lehnten Ethnozentrismus ab.','❌ Marc Aurel war Kaiser. Stoiker engagierten sich aktiv für das Gemeinwohl.']},
-  {q:'Dein Projekt scheitert trotz monatelanger Arbeit vollständig. Was wäre eine stoische Reaktion?',
-   opts:['„Ich bin ein Versager – das beweist es."','„Das ist alles die Schuld von Umständen und anderen."','„Ich bin enttäuscht, aber was liegt jetzt in meiner Macht?"','„Das war sowieso kein wichtiges Projekt."'],cor:2,pts:2,
-   fbs:['❌ Ein Misserfolg definiert nicht deinen Charakter. Stoiker trennen Ereignis von Identität.','❌ Reine externe Attribution verhindert Wachstum.','✅ Stoisch! Du erlaubst dir den Schmerz, ohne dich davon definieren zu lassen. Dann richtest du den Blick nach vorne.','❌ Selbstschutz durch Abwertung – keine ehrliche Auseinandersetzung mit der Realität.']},
-  {q:'Welcher der folgenden Denker war KEIN Stoiker?',
-   opts:['Epiktet','Marc Aurel','Seneca','Epikur'],cor:3,pts:1,
-   fbs:['❌ Epiktet war ein bedeutender stoischer Philosoph (ca. 50–135 n. Chr.).','❌ Marc Aurel war Kaiser und bekennender Stoiker.','❌ Seneca war einer der einflussreichsten Stoiker Roms.','✅ Korrekt! Epikur war Begründer des Epikureismus – einer Schule, die Lust als höchstes Gut sah. Fast das Gegenteil des Stoizismus!']},
+   opts:['Gefühle und Emotionen','Meinungen und Urteile','Erfahrungen aus der Vergangenheit','Erwartungen für die Zukunft'],
+   cor:1,pts:2,fbs:['❌ Gefühle sind das Ergebnis – die Ursache sind nach Epiktet unsere Urteile.','✅ Korrekt! Eines der bekanntesten Zitate des Stoizismus. Unsere Bewertungen erzeugen unsere Reaktionen.','❌ Erfahrungen formen uns, aber das meint Epiktet hier nicht.','❌ Zukunftserwartungen spielen eine Rolle, aber das vollständige Zitat dreht sich um Meinungen und Urteile.']},
+  {q:'Was empfahlen Stoiker beim Umgang mit Emotionen?',
+   opts:['Alle Emotionen vollständig unterdrücken und verbergen','Emotionen sofort und ungefiltert ausdrücken','Zwischen unvermeidlichen Reaktionen und trainierbaren Urteilen unterscheiden','Emotionen ignorieren bis sie von selbst verschwinden'],
+   cor:2,pts:2,fbs:['❌ Das ist das häufigste Missverständnis über Stoiker. Sie unterdrücken keine Gefühle.','❌ Ungefilterte Emotionsäußerung ist impulsiv – das Gegenteil von Besonnenheit.','✅ Exakt! Erste Bewegung (automatisch, unvermeidlich) vs. Urteil (bewusst, trainierbar). Die Lücke dazwischen ist der Übungsraum.','❌ Ignorieren löst nichts und ist keine stoische Methode.']},
+  {q:'Was ist stoischer Kosmopolitismus?',
+   opts:['Viel reisen und andere Kulturen kennenlernen','Alle Menschen als gleichwertig durch gemeinsame Vernunft betrachten','Die eigene Kultur als moralisch überlegen ansehen','Sich aus Politik und Gesellschaft vollständig heraushalten'],
+   cor:1,pts:2,fbs:['❌ Reisen ist schön, aber das ist nicht das Konzept.','✅ Richtig! Stoiker glaubten: Alle Menschen teilen den Logos (Vernunft) und verdienen daher gleiche Würde – unabhängig von Herkunft oder Status.','❌ Das Gegenteil. Stoiker lehnten jede Form von Ethnozentrismus ab.','❌ Marc Aurel war Kaiser. Stoiker engagierten sich aktiv für das Gemeinwohl.']},
+  {q:'Welcher Denker war KEIN Stoiker?',
+   opts:['Epiktet (50–135 n. Chr.)','Marc Aurel (121–180 n. Chr.)','Seneca (4 v. Chr.–65 n. Chr.)','Epikur (341–270 v. Chr.)'],
+   cor:3,pts:1,fbs:['❌ Epiktet war ein zentraler stoischer Philosoph.','❌ Marc Aurel war Stoiker und Kaiser.','❌ Seneca war einer der einflussreichsten Stoiker Roms.','✅ Korrekt! Epikur war Begründer des Epikureismus – einer Schule, die Lust (Hedone) als höchstes Gut sah. Fast das Gegenteil des Stoizismus!']},
+  {q:'Dein Projekt scheitert nach monatelanger Arbeit vollständig. Was ist die stoischste Reaktion?',
+   opts:['„Ich bin ein Versager – dieses Scheitern beweist es."','„Das ist alles die Schuld der Technik und anderer."','„Ich bin enttäuscht. Was liegt jetzt in meiner Macht?"','„Das Projekt war sowieso nicht so wichtig."'],
+   cor:2,pts:2,fbs:['❌ Ein Misserfolg definiert nicht deinen Charakter. Stoiker trennen Ereignis von Identität.','❌ Reine externe Attribution verhindert Wachstum. Was lag wirklich in deiner Kontrolle?','✅ Stoisch! Du erlaubst dir den Schmerz, ohne dich davon definieren zu lassen. Dann richtest du den Fokus auf das Machbare.','❌ Abwertung als Selbstschutz – keine ehrliche Auseinandersetzung.']},
+  {q:'Welches moderne Konzept basiert direkt auf stoischem Gedankengut?',
+   opts:['Psychoanalyse (Sigmund Freud)','Kognitive Verhaltenstherapie / CBT (Aaron Beck)','Positive Psychologie (Martin Seligman) ausschließlich','Behaviorismus (B.F. Skinner)'],
+   cor:1,pts:2,fbs:['❌ Freud basierte auf Unbewusstem und Triebtheorie – sehr anders als Stoizismus.','✅ Richtig! CBT basiert direkt auf Epiktets Konzept: „Nicht die Dinge beunruhigen uns, sondern unsere Urteile über sie." Therapeuten nennen es kognitive Umstrukturierung.','❌ Positive Psychologie hat Überschneidungen, aber ist nicht direkt auf Stoizismus zurückzuführen.','❌ Behaviorismus fokussiert auf äußeres Verhalten, nicht auf innere Urteile.']},
 ];
 const MAX_SC=qs.reduce((a,q)=>a+q.pts,0);
 
 function renderQ(){
   if(qIdx>=qs.length){showResult();return}
   const q=qs[qIdx];
-  const pct=Math.round(qIdx/qs.length*100);
-  document.getElementById('qpbf').style.width=pct+'%';
-  document.getElementById('ql-lbl').textContent=`Frage ${qIdx+1} von ${qs.length}`;
+  document.getElementById('qpbf').style.width=Math.round(qIdx/qs.length*100)+'%';
+  document.getElementById('q-lbl').textContent=`Frage ${qIdx+1} von ${qs.length}`;
   document.getElementById('q-sc').textContent=qSc;
   document.getElementById('btn-qn').disabled=true;
   document.getElementById('qhint').textContent='Wähle eine Antwort';
   const letters=['A','B','C','D'];
-  const opts=q.opts.map((o,i)=>`<button class="qopt" id="qo-${i}" onclick="pickQ(${i})"><span class="ql">${letters[i]}</span><span>${o}</span></button>`).join('');
-  const box=document.getElementById('qcard');
-  box.classList.add('qso');
+  const opts=q.opts.map((o,i)=>`
+    <button class="qopt" id="qo-${i}" onclick="pickQ(${i})">
+      <span class="ql">${letters[i]}</span><span>${o}</span>
+    </button>`).join('');
+  const inner=document.getElementById('qcard-inner');
+  inner.classList.add('qso');
   setTimeout(()=>{
-    box.classList.remove('qso');
-    box.innerHTML=`<div class="qn">Frage ${qIdx+1} · ${q.pts} Punkt${q.pts>1?'e':''}</div>
-      <div class="qt">${q.q}</div>
-      <div class="qpts">⭐ ${q.pts} ${q.pts>1?'Punkte':'Punkt'}</div>
+    inner.classList.remove('qso');
+    inner.innerHTML=`<div class="q-num">Frage ${qIdx+1} · ${q.pts} Punkt${q.pts>1?'e':''}</div>
+      <div class="q-txt">${q.q}</div>
+      <div class="q-pts-tag">⭐ ${q.pts} ${q.pts>1?'Punkte':'Punkt'}</div>
       <div class="qopts">${opts}</div>
       <div class="qfb" id="qfb"></div>`;
-    box.classList.add('qsi');
-    setTimeout(()=>box.classList.remove('qsi'),280);
-  },260);
+    inner.classList.add('qsi');
+    setTimeout(()=>inner.classList.remove('qsi'),260);
+  },250);
 }
 
 function pickQ(i){
@@ -844,77 +995,79 @@ function pickQ(i){
   if(ok)qSc+=q.pts;
   document.getElementById('q-sc').textContent=qSc;
   document.getElementById('btn-qn').disabled=false;
-  document.getElementById('qhint').textContent=ok?'Richtig! Weiter →':'Nicht ganz. Weiter →';
+  document.getElementById('qhint').textContent=ok?'Richtig! →':'Nicht ganz. →';
 }
 
-function nextQ(){
-  qIdx++;
-  if(qIdx>=qs.length)showResult();
-  else renderQ();
-}
+function nextQ(){qIdx++;if(qIdx>=qs.length)showResult();else renderQ()}
 
-/* ─── RESULT ─── */
+/* ── RESULT ── */
 function showResult(){
   unlock('result');
-  const rn=document.getElementById('nt-result');rn.style.display='';
+  document.getElementById('nt-result').style.display='';
   go('result');
   const pct=Math.round(qSc/MAX_SC*100);
   let medal,verdict,vc,strength,improve,tips;
   if(pct>=75){
-    medal='🏛';verdict='Sehr Stoisch';vc='var(--gold)';
-    strength='Du hast die Kernprinzipien wirklich verinnerlicht. Du erkennst den Unterschied zwischen Kontrollierbarem und Unkontrollierbarem und weißt, dass Tugend wichtiger ist als äußerer Erfolg.';
-    improve='Die echte Herausforderung: Lebst du diese Prinzipien auch unter Druck? Theorie ist der erste Schritt – Praxis unter Stress ist die eigentliche Arbeit des Stoikers.';
-    tips=[{i:'📖',t:'Lies täglich ein kurzes Stück aus Marc Aurels Selbstbetrachtungen. Selbst eine Seite am Tag verändert die Denkweise.'},
-          {i:'✍️',t:'Führe ein stoisches Abendjournal: Was ist heute passiert? Was lag in meiner Kontrolle? Wie habe ich reagiert?'},
-          {i:'🧘',t:'Übe Premeditatio Malorum: Stelle dir morgens vor, was heute schiefgehen könnte. Dein Geist wird unerschütterbar.'},
-          {i:'🌐',t:'Versuche eine Woche, zuerst die Perspektive anderer zu verstehen, bevor du urteilst – kosmopolitisches Denken in Aktion.'}];
+    medal='🏛';verdict='Sehr Stoisch';vc='var(--gold2)';
+    strength='Du hast die Kernprinzipien wirklich durchdrungen. Du erkennst den Unterschied zwischen Kontrollierbarem und Unkontrollierbarem und weißt, dass Tugend wichtiger ist als äußerer Erfolg.';
+    improve='Die eigentliche Arbeit: Lebst du diese Prinzipien auch unter echtem Druck – in einem Streit, bei Versagen, wenn es wehtut? Theorie und Praxis klaffen oft weit auseinander.';
+    tips=[{i:'📖',t:'Lies täglich ein kurzes Stück aus Marc Aurels Selbstbetrachtungen. Eine Seite täglich verändert die Denkweise über Monate.'},
+          {i:'✍️',t:'Führe ein stoisches Abendjournal: Was ist heute passiert? Was lag in meiner Kontrolle? Wie habe ich reagiert? Was würde ich anders machen?'},
+          {i:'🧘',t:'Übe Premeditatio Malorum morgens: 5 Minuten – was könnte heute schiefgehen, und wie würdest du damit umgehen?'},
+          {i:'🌐',t:'Versuche eine Woche lang, die Perspektive anderer zu verstehen, bevor du urteilst. Kosmopolitismus in der Praxis.'}];
   } else if(pct>=45){
     medal='⚖';verdict='Auf dem Weg';vc='var(--purple2)';
     strength='Du hast ein solides Grundverständnis und erkennst mehrere stoische Prinzipien. Besonders in praktischen Szenarien zeigen sich gute Instinkte.';
-    improve='Vertiefe die Dichotomie der Kontrolle und das Konzept Emotionen & Vernunft. Diese bilden das Fundament – alles andere folgt daraus.';
-    tips=[{i:'🔄',t:'Wenn du frustriert bist: Halte inne und frage laut: „Liegt das in meiner Kontrolle?" Beantworte die Frage ehrlich.'},
-          {i:'📚',t:'Gehe nochmal zu Thema 2 und 4 zurück und öffne die Beispiele. Erkennst du dich darin wieder?'},
-          {i:'⏸️',t:'Trainiere die Pause: Warte 10 Sekunden bevor du auf eine provozierende Nachricht antwortest.'},
+    improve='Vertiefe die Dichotomie der Kontrolle (Thema 2) und Emotionen & Vernunft (Thema 4). Diese zwei Konzepte bilden das Fundament.';
+    tips=[{i:'🔄',t:'Wenn du das nächste Mal frustriert bist: Halte an und frage laut: „Liegt das in meiner Kontrolle?" Beantworte die Frage ehrlich.'},
+          {i:'📚',t:'Gehe zu Thema 2 und 4 zurück und öffne die Beispiele. Erkennst du dich in den Situationen wieder?'},
+          {i:'⏸️',t:'Trainiere die Pause: Warte 10 Sekunden bevor du auf eine provozierende Nachricht antwortest. Nur 10 Sekunden verändern viel.'},
           {i:'🗣️',t:'Erkläre einem Freund, was Stoizismus ist. Wenn du es klar erklären kannst, hast du es wirklich verstanden.'}];
   } else {
-    medal='🌱';verdict='Noch nicht Stoisch';vc='var(--teal2)';
-    strength='Du hast die Reise begonnen – das ist der wichtigste Schritt. Jeder Philosoph fing bei null an.';
-    improve='Konzentriere dich zunächst auf nur ein Konzept: Die Dichotomie der Kontrolle. Dieses eine Prinzip, wirklich verstanden, verändert bereits viel.';
-    tips=[{i:'🔁',t:'Gehe zurück zur Lernsektion und lies alle 8 Themen durch – diesmal bewusst und ohne Eile.'},
-          {i:'🎯',t:'Merke dir diesen einen Satz: „Manche Dinge hängen von mir ab – andere nicht. Ich fokussiere mich auf das Erstere."'},
+    medal='🌱';verdict='Noch nicht Stoisch';vc='var(--sky2)';
+    strength='Du hast die Reise begonnen – das ist der wichtigste Schritt. Jeder Stoiker fing einmal bei null an. Epiktet selbst wurde als Sklave geboren.';
+    improve='Konzentriere dich zunächst auf ein einziges Konzept: Die Dichotomie der Kontrolle. Dieses eine Prinzip, wirklich gelebt, verändert bereits viel.';
+    tips=[{i:'🔁',t:'Gehe zur Lernsektion zurück und lies alle 8 Themen durch – diesmal bewusst und ohne Eile.'},
+          {i:'🎯',t:'Merke dir einen Satz: „Manche Dinge hängen von mir ab – andere nicht. Ich fokussiere mich auf das Erstere."'},
           {i:'📝',t:'Schreibe heute Abend auf: Was hat mich gestört? War es in meiner Kontrolle? Was hätte ein Stoiker getan?'},
-          {i:'🌱',t:'Philosophie ist wie ein Muskel. Du brauchst kein perfektes Verständnis – tägliches Üben reicht.'}];
+          {i:'🌱',t:'Philosophie ist wie ein Muskel. Du brauchst kein perfektes Verständnis – tägliches Üben im Kleinen reicht.'}];
   }
-  const inner=document.getElementById('ri');
-  inner.innerHTML=`<span class="rm">${medal}</span>
-    <div class="rv" style="color:${vc}">${verdict}</div>
-    <div class="rsp">Quiz-Score: <span class="rpts" id="r-pts-c">0</span><span style="color:var(--txt3)">/ ${MAX_SC}</span><span class="rpct">${pct}%</span></div>
-    <div class="rrow">
-      <div class="rc"><div class="rcl rcl-g">✅ Stärken</div><div class="rcb">${strength}</div></div>
-      <div class="rc"><div class="rcl rcl-o">🎯 Wachstum</div><div class="rcb">${improve}</div></div>
+  const ri=document.getElementById('res-inner');
+  ri.innerHTML=`
+    <span class="res-medal">${medal}</span>
+    <div class="res-verdict" style="color:${vc}">${verdict}</div>
+    <div class="res-pill">
+      Quiz-Score: <span class="res-pts-num" id="r-n">0</span>
+      <span style="color:var(--t3)">/ ${MAX_SC}</span>
+      <span class="res-pct">${pct}%</span>
     </div>
-    <div class="rtips"><div class="rth">📜 Deine persönlichen Stoizismus-Übungen</div>
-      ${tips.map(t=>`<div class="tip"><span class="tic">${t.i}</span><span>${t.t}</span></div>`).join('')}
+    <div class="res-grid">
+      <div class="res-card"><div class="res-card-lbl rcl-g">✅ Stärken</div><div class="res-card-body">${strength}</div></div>
+      <div class="res-card"><div class="res-card-lbl rcl-o">🎯 Wachstum</div><div class="res-card-body">${improve}</div></div>
     </div>
-    <div class="qbanner" style="margin-bottom:20px">
-      <blockquote>„Sorge dich nicht um das, was du nicht kontrollieren kannst."</blockquote>
+    <div class="res-tips-card">
+      <div class="res-tips-h">📜 Deine persönlichen Stoizismus-Übungen</div>
+      ${tips.map(t=>`<div class="tip-row"><span class="tip-ic">${t.i}</span><span>${t.t}</span></div>`).join('')}
+    </div>
+    <div class="qstrip">
+      <blockquote>„Sorge dich nicht um das, was du nicht kontrollieren kannst. Das wäre Zeitverschwendung."</blockquote>
       <cite>– Epiktet</cite>
     </div>
-    <div class="rbtns">
-      <button class="btn-rm" onclick="go('learn')">📖 Nochmal lernen</button>
-      <button class="btn-rs" onclick="retake()">🔄 Quiz wiederholen</button>
+    <div class="res-btns">
+      <button class="btn-res-main" onclick="go('learn')">📖 Nochmal lernen</button>
+      <button class="btn-res-sec" onclick="retakeQuiz()">🔄 Quiz wiederholen</button>
     </div>`;
-  const el=document.getElementById('r-pts-c');
-  let c=0;const iv=setInterval(()=>{c=Math.min(c+1,qSc);el.textContent=c;if(c>=qSc)clearInterval(iv)},55);
+  let c=0;const iv=setInterval(()=>{c=Math.min(c+1,qSc);document.getElementById('r-n').textContent=c;if(c>=qSc)clearInterval(iv)},50);
 }
 
-function retake(){qIdx=0;qSc=0;document.getElementById('q-sc').textContent=0;go('quiz')}
+function retakeQuiz(){qIdx=0;qSc=0;document.getElementById('q-sc').textContent=0;go('quiz')}
 
-/* ─── INIT ─── */
-buildLearn();
-buildPrac();
+/* ── INIT ── */
+buildLearnCards();
+buildPracCards();
 unlock('learn');
-updateNav();
+visited.add('hero'); // hero doesn't have a collapsible header
+updateNav('hero');
 </script>
 </body>
 </html>
